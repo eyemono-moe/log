@@ -1,11 +1,21 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const postEntries = await getCollection("posts", ({ data }) => {
+  // Only return published posts in production
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
 ---
 
 <Layout>
-	<Welcome />
+  <ul>
+    {
+      postEntries.map((post) => (
+        <li>
+          <a href={`posts/${post.slug}`}>{post.data.title}</a>
+        </li>
+      ))
+    }
+  </ul>
 </Layout>
