@@ -32,8 +32,8 @@ export const GET: APIRoute<{ entry: CollectionEntry<"posts"> }> = async ({
 	}
 
 	// see: https://og-playground.vercel.app/?share=lZMxb5tAFMe_ytNlsStTG-JYMootxVJbdemULXg44AGXHHfoOIoRYnCGqkOnLh2rTt3ypVClfowekMZO6w5lgLvjvR___3uPmgQyROKS0RhWa6g9ARBIkWvQTHOEFXhkw1GEqNr9wxuUKWpVvTM5ebv_vlGUiehFcNfef_7x8PXnt0_t_kt7_7Hdf_CIJzqYQl0oAaPLkL0HXa48UlpRwTkkwyPiuIPMmoPGnbZuziilW4ik0JYvedhRwFzTKeS64mjSfRrcxUoWInyb0hhdzgRSZcWKhgyFHtnnFyHGEzhbLuezzcYsFrY9X9jj36wBVNfwJ8lY_Q8YNE3HWw_Qg73eUHezAsmhx2NoOeDHxp3jOFt4XoBsZy0gq6y5Rx5Zf9H60iyP3gNghakU8mUqEW4Ox5d5RsWQ-VjPq6vXG2e-fZYMYLomj7KmXdpRwPZJyNQoOSHruHlMY5pbgSkXqkGqfXHo4HBSJibKaKj7qWr-he15t0WuWVRZZuhOOV8_eecyPqXzsB5WY080ZEJkppkZbOLWpGShTohrO7PZhCTI4kQTd3FuNiH6RUzciPIcJ8R85pZdV1n3f-iy3xlQZ-1V6mNIXK0KbCZEU99EXFPGS2ZEj3CXoWKpqQjlY9L8Ag
-	const out = html`<div tw="w-full h-full flex p-4 text-[#aaa] font-bold" style="backgroundImage:linear-gradient(135deg, #9940BB, #611461)">
-    <div tw="flex flex-col rounded-2 bg-[#222] w-full h-full px-6 py-4">
+	const out = html`<div tw="w-full h-full flex p-38px text-[#aaa] font-bold" style="backgroundImage:linear-gradient(135deg, #9940BB, #611461)">
+    <div tw="flex flex-col rounded-4 bg-[#222] w-full h-full px-6 py-4">
       <div tw="flex text-9">
         eyemono.moe [
         <span tw="text-[#AAFB24]">

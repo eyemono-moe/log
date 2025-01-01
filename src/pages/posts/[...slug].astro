@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import PostLayout from "../../layouts/PostLayout.astro";
+import { ogImageUrl } from "../../utils/ogImageUrl";
 
 export async function getStaticPaths() {
 	const blogEntries = await getCollection("posts");
@@ -22,8 +23,7 @@ const description =
   headings={headings}
   description={description}
   lastmod={remarkPluginFrontmatter.lastModified}
-  imageUrl={entry.data.imageUrl ??
-    new URL(`/og/${entry.slug}.png`, Astro.url.origin).toString()}
+  imageUrl={ogImageUrl(entry, Astro.url.origin)}
 >
   <Content />
 </PostLayout>

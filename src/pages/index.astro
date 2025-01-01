@@ -1,21 +1,54 @@
 ---
 import { getCollection } from "astro:content";
+import PostItem from "../components/PostItem.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getArticles } from "../utils/getArticles";
+import { ogImageUrl } from "../utils/ogImageUrl";
 
 const postEntries = await getCollection("posts", ({ data }) => {
 	// Only return published posts in production
 	return import.meta.env.PROD ? data.draft !== true : true;
 });
+
+const postsWithLstMod = await Promise.all(
+	postEntries.map(async (post) => {
+		return {
+			source: "eyemono.log" as const,
+			slug: post.slug,
+			title: post.data.title,
+			imageUrl: ogImageUrl(post, Astro.url.origin),
+			postedAt: new Date(
+				(await post.render()).remarkPluginFrontmatter.lastModified,
+			),
+		};
+	}),
+);
+
+const thirdPartyPosts = await getArticles();
+console.log(thirdPartyPosts);
+const allPosts = [...postsWithLstMod, ...thirdPartyPosts];
+const sortedPosts = allPosts.sort(
+	(a, b) => b.postedAt.getTime() - a.postedAt.getTime(),
+);
 ---
 
 <BaseLayout>
-  <ul>
-    {
-      postEntries.map((post) => (
-        <li>
-          <a href={`posts/${post.slug}`}>{post.data.title}</a>
-        </li>
-      ))
-    }
-  </ul>
+  <div class="max-w-1200px mx-auto px-4 md:px-8">
+    <h2>ls logs</h2>
+    <div class="grid grid-cols-minmax-250px gap-x-4 gap-y-8">
+      {
+        sortedPosts.map((post) => (
+          <PostItem
+            href={
+              post.source === "eyemono.log" ? `/posts/${post.slug}` : post.url
+            }
+            source={post.source}
+            title={post.title}
+            imageUrl={post.imageUrl}
+            lastmod={post.postedAt}
+          />
+        ))
+      }
+    </div>
+  </div>
 </BaseLayout>
