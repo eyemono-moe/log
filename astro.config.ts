@@ -1,3 +1,4 @@
+import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import rehypeExternalLinks, { type Options } from "rehype-external-links";
 import UnoCSS from "unocss/astro";
@@ -5,10 +6,12 @@ import { remarkModifiedTime } from "./src/plugins/remark-modified-time";
 
 // https://astro.build/config
 export default defineConfig({
+	site: "https://log.eyemono.moe",
 	integrations: [
 		UnoCSS({
 			injectReset: true,
 		}),
+		sitemap(),
 	],
 	markdown: {
 		remarkPlugins: [remarkModifiedTime],
