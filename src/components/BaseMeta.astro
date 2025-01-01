@@ -17,6 +17,10 @@ const ogUrl = currentUrl.href;
 const isArticle = currentUrl.pathname.startsWith("/posts");
 const ogType = isArticle ? "article" : "website";
 const twCardType = isArticle ? "summary_large_image" : "summary";
+
+const fontUrl = new URL(
+	"https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap",
+).toString();
 ---
 
 <meta charset="UTF-8" />
@@ -25,6 +29,11 @@ const twCardType = isArticle ? "summary_large_image" : "summary";
 <meta name="robots" content="index, follow" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<!-- font -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="style" fetchpriority="high" href={fontUrl} />
+<link rel="stylesheet" href={fontUrl} media="print" onload='this.media="all"' />
 <title>{title}</title>
 <meta name="description" content={description} />
 <!-- Facebook Meta Tags -->
