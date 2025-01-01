@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import PostLayout from "../../layouts/PostLayout.astro";
+import { extractText } from "../../utils/extractText";
 import { ogImageUrl } from "../../utils/ogImageUrl";
-
 export async function getStaticPaths() {
 	const blogEntries = await getCollection("posts");
 	return blogEntries.map((entry) => ({
@@ -15,7 +15,10 @@ const { entry } = Astro.props;
 const { Content, headings, remarkPluginFrontmatter } = await entry.render();
 
 const description =
-	entry.data.summary || entry.body.substring(0, 140).replace(/\n/g, "");
+	entry.data.summary ||
+	(entry.rendered?.html &&
+		extractText(entry.rendered.html).substring(0, 140).replace(/\n/g, " ")) ||
+	entry.body.substring(0, 140).replace(/\n/g, "");
 ---
 
 <PostLayout
