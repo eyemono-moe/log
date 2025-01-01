@@ -1,3 +1,4 @@
+import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import rehypeExternalLinks, { type Options } from "rehype-external-links";
@@ -12,6 +13,11 @@ export default defineConfig({
 			injectReset: true,
 		}),
 		sitemap(),
+		partytown({
+			config: {
+				forward: ["dataLayer.push"],
+			},
+		}),
 	],
 	markdown: {
 		remarkPlugins: [remarkModifiedTime],
@@ -20,9 +26,14 @@ export default defineConfig({
 				rehypeExternalLinks,
 				{
 					content: {
-						type: "raw",
-						// @unocss-include
-						value: `<div class="inline-block h-0.5lh w-auto aspect-square i-material-symbols:open-in-new-rounded"></div>`,
+						type: "element",
+						tagName: "div",
+						properties: {
+							// @unocss-include
+							class:
+								"inline-block h-0.5lh w-auto aspect-square i-material-symbols:open-in-new-rounded",
+						},
+						children: [],
 					},
 				} satisfies Options,
 			],
