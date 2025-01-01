@@ -25,7 +25,6 @@ apiUrl.search = searchParams.toString();
 
 const getPosts = async (apiKey: string) => {
 	const token = await sign(apiKey);
-	console.log(token);
 	const headers = { Authorization: `Ghost ${token}` };
 	const res = await fetch(apiUrl, { headers });
 	if (!res.ok) {
