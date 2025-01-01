@@ -10,10 +10,10 @@ export type Article = {
 };
 
 export const getArticles = async () => {
-	const ghostApiKey = import.meta.env.GHOST_API_KEY;
+	const ghostApiKey = import.meta.env.PUBLIC_GHOST_API_KEY;
 
 	if (!ghostApiKey) {
-		throw new Error("GHOST_API_KEY is not set");
+		throw new Error("PUBLIC_GHOST_API_KEY is not set");
 	}
 
 	const articles = await Promise.all([
