@@ -8,16 +8,22 @@ type Props = {
 	title?: string;
 	description?: string;
 	headings?: MarkdownHeading[];
+	imageUrl?: string;
 };
 
-const { headings, title, description } = Astro.props;
+const { headings, title, description, imageUrl } = Astro.props;
 const currentUrl = Astro.url;
 ---
 
 <!doctype html>
 <html lang="ja">
   <head>
-    <BaseMeta title={title} currentUrl={currentUrl} description={description} />
+    <BaseMeta
+      title={title}
+      currentUrl={currentUrl}
+      description={description}
+      imageUrl={imageUrl}
+    />
   </head>
   <body
     class="font-sans prose prose-zinc dark:prose-invert max-w-unset! bg-primary"

@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content, headings } = await entry.render();
+const { Content, headings, remarkPluginFrontmatter } = await entry.render();
 
 const description =
 	entry.data.summary || entry.body.substring(0, 140).replace(/\n/g, "");
@@ -21,6 +21,9 @@ const description =
   title={entry.data.title}
   headings={headings}
   description={description}
+  lastmod={remarkPluginFrontmatter.lastModified}
+  imageUrl={entry.data.imageUrl ??
+    new URL(`/og/${entry.slug}.png`, Astro.url.origin).toString()}
 >
   <Content />
 </PostLayout>

@@ -3,12 +3,14 @@ type Props = {
 	title?: string;
 	description?: string;
 	currentUrl: URL;
+	imageUrl?: string;
 };
 
 const {
 	title = "eyemono.log",
 	description = "eyemono.moeのlog置き場",
 	currentUrl,
+	imageUrl = new URL("ogp.webp", Astro.url.origin).toString(),
 } = Astro.props;
 
 const ogUrl = currentUrl.href;
@@ -28,7 +30,7 @@ const twCardType = isArticle ? "summary_large_image" : "summary";
 <!-- Facebook Meta Tags -->
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<!-- <meta property="og:image" content="" /> -->
+<meta property="og:image" content={imageUrl} />
 <meta property="og:url" content={ogUrl} />
 <meta property="og:site_name" content="eyemono.log" />
 <meta property="og:type" content={ogType} />
@@ -36,4 +38,4 @@ const twCardType = isArticle ? "summary_large_image" : "summary";
 <meta name="twitter:card" content={twCardType} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<!-- <meta name="twitter:image" content="" /> -->
+<meta name="twitter:image" content={imageUrl} />
