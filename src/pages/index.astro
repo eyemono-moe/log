@@ -25,7 +25,6 @@ const postsWithLstMod = await Promise.all(
 );
 
 const thirdPartyPosts = await getArticles();
-console.log(thirdPartyPosts);
 const allPosts = [...postsWithLstMod, ...thirdPartyPosts];
 const sortedPosts = allPosts.sort(
 	(a, b) => b.postedAt.getTime() - a.postedAt.getTime(),
