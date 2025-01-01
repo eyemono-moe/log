@@ -44,6 +44,9 @@ for (const color of Object.values(colors)) {
 }
 
 export default defineConfig({
+	content: {
+		filesystem: ["astro.config.ts"],
+	},
 	presets: [
 		presetUno(),
 		presetIcons({
