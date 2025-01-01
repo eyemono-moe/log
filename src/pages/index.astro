@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../layouts/Layout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const postEntries = await getCollection("posts", ({ data }) => {
 	// Only return published posts in production
@@ -8,7 +8,7 @@ const postEntries = await getCollection("posts", ({ data }) => {
 });
 ---
 
-<Layout>
+<BaseLayout>
   <ul>
     {
       postEntries.map((post) => (
@@ -18,4 +18,4 @@ const postEntries = await getCollection("posts", ({ data }) => {
       ))
     }
   </ul>
-</Layout>
+</BaseLayout>

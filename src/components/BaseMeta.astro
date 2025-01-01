@@ -1,0 +1,39 @@
+---
+type Props = {
+	title?: string;
+	description?: string;
+	currentUrl: URL;
+};
+
+const {
+	title = "eyemono.log",
+	description = "eyemono.moeのlog置き場",
+	currentUrl,
+} = Astro.props;
+
+const ogUrl = currentUrl.href;
+const isArticle = currentUrl.pathname.startsWith("/posts");
+const ogType = isArticle ? "article" : "website";
+const twCardType = isArticle ? "summary_large_image" : "summary";
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="generator" content={Astro.generator} />
+<meta name="robots" content="index, follow" />
+<!-- TODO: site-map -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<!-- Facebook Meta Tags -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<!-- <meta property="og:image" content="" /> -->
+<meta property="og:url" content={ogUrl} />
+<meta property="og:site_name" content="eyemono.log" />
+<meta property="og:type" content={ogType} />
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content={twCardType} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<!-- <meta name="twitter:image" content="" /> -->

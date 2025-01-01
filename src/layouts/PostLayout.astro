@@ -1,0 +1,39 @@
+---
+import type { MarkdownHeading } from "astro";
+import Toc from "../components/Toc.astro";
+import BaseLayout from "./BaseLayout.astro";
+
+type Props = {
+	title: string;
+	description?: string;
+	headings: MarkdownHeading[];
+};
+
+const { headings, title, description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} headings={headings}>
+  <article>
+    <header>
+      <h1 class="max-w-800px mx-auto text-left w-fit">
+        <span>
+          {title}
+        </span>
+      </h1>
+    </header>
+    <div
+      class="max-w-1200px mx-auto px-8 lg:(grid grid-cols-[minmax(0,1fr)_16rem] justify-center gap-4)"
+    >
+      <section class="all-[a]:text-link">
+        <slot />
+      </section>
+      <aside class="hidden lg:block">
+        <div class="sticky top-[calc(3.5rem)]">
+          <div class="max-h-[calc(100vh-3.5rem)] flex">
+            <Toc headings={headings} />
+          </div>
+        </div>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
