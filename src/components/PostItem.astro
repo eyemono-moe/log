@@ -27,7 +27,14 @@ const { source, title, imageUrl, lastmod, href } = Astro.props;
     />
   </div>
   <div>
-    <h2 class="font-bold">{title}</h2>
+    <h2 class="font-bold">
+      {title}
+      {
+        source !== "eyemono.log" && (
+          <div class="inline-block h-0.6lh w-auto aspect-square i-material-symbols:open-in-new-rounded" />
+        )
+      }
+    </h2>
     <div class="text-sm">
       {
         lastmod && (
