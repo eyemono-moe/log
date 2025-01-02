@@ -26,6 +26,7 @@
 		"rehype-external-links": "3.0.0",
 		"satori": "0.12.0",
 		"satori-html": "0.3.2",
+		"sharp": "^0.33.5",
 		"unocss": "0.65.3",
 		"valibot": "1.0.0-beta.9",
 		"zx": "8.3.0"
