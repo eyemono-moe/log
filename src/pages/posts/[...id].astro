@@ -1,9 +1,9 @@
 ---
 import { render } from "astro:content";
 import PostLayout from "../../layouts/PostLayout.astro";
-import { extractText } from "../../utils/extractText";
-import { getPosts } from "../../utils/getPost";
-import { postImageUrl } from "../../utils/ogImageUrl";
+import { extractText } from "../../libs/extractText";
+import { getPosts } from "../../libs/getPost";
+import { postImageUrl } from "../../libs/ogImageUrl";
 
 export async function getStaticPaths() {
 	const blogEntries = await getPosts();

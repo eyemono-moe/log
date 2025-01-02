@@ -3,8 +3,8 @@ import { Resvg } from "@resvg/resvg-js";
 import type { APIRoute } from "astro";
 import satori from "satori";
 import { html } from "satori-html";
-import { fetchGoogleFont } from "../../utils/fetchGoogleFont";
-import { getPosts } from "../../utils/getPost";
+import { fetchGoogleFont } from "../../libs/fetchGoogleFont";
+import { getPosts } from "../../libs/getPost";
 
 export async function getStaticPaths() {
 	const blogEntries = await getPosts();

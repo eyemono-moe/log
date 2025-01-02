@@ -2,9 +2,9 @@
 import { render } from "astro:content";
 import PostItem from "../components/PostItem.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getArticles } from "../utils/getArticles";
-import { getPosts } from "../utils/getPost";
-import { postImageUrl } from "../utils/ogImageUrl";
+import { getArticles } from "../libs/getArticles";
+import { getPosts } from "../libs/getPost";
+import { postImageUrl } from "../libs/ogImageUrl";
 
 const postEntries = await getPosts();
 
