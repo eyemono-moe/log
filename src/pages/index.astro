@@ -1,24 +1,22 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import PostItem from "../components/PostItem.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getArticles } from "../utils/getArticles";
-import { ogImageUrl } from "../utils/ogImageUrl";
+import { getPosts } from "../utils/getPost";
+import { postImageUrl } from "../utils/ogImageUrl";
 
-const postEntries = await getCollection("posts", ({ data }) => {
-	// Only return published posts in production
-	return import.meta.env.PROD ? data.draft !== true : true;
-});
+const postEntries = await getPosts();
 
 const postsWithLstMod = await Promise.all(
 	postEntries.map(async (post) => {
 		return {
 			source: "eyemono.log" as const,
-			slug: post.slug,
+			id: post.id,
 			title: post.data.title,
-			imageUrl: ogImageUrl(post, Astro.url.origin),
+			imageUrl: postImageUrl(post, Astro.url.origin),
 			postedAt: new Date(
-				(await post.render()).remarkPluginFrontmatter.lastModified,
+				(await render(post)).remarkPluginFrontmatter.lastModified,
 			),
 		};
 	}),
@@ -39,7 +37,7 @@ const sortedPosts = allPosts.sort(
         sortedPosts.map((post) => (
           <PostItem
             href={
-              post.source === "eyemono.log" ? `/posts/${post.slug}` : post.url
+              post.source === "eyemono.log" ? `/posts/${post.id}` : post.url
             }
             source={post.source}
             title={post.title}

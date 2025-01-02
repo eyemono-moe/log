@@ -4,11 +4,12 @@ import type { APIRoute } from "astro";
 import satori from "satori";
 import { html } from "satori-html";
 import { fetchGoogleFont } from "../../utils/fetchGoogleFont";
+import { getPosts } from "../../utils/getPost";
 
 export async function getStaticPaths() {
-	const blogEntries = await getCollection("posts");
+	const blogEntries = await getPosts();
 	return blogEntries.map((entry) => ({
-		params: { slug: entry.slug },
+		params: { id: entry.id },
 		props: { entry },
 	}));
 }
@@ -20,13 +21,14 @@ export const GET: APIRoute<{ entry: CollectionEntry<"posts"> }> = async ({
 	params,
 	props,
 }) => {
-	const { slug } = params;
-	if (!slug) {
+	console.log(params);
+	const { id } = params;
+	if (!id) {
 		return new Response("Not Found", { status: 404 });
 	}
 	const { entry } = props;
 
-	const post = await getEntry(entry.collection, slug);
+	const post = await getEntry(entry.collection, id);
 	if (!post) {
 		return new Response("Not Found", { status: 404 });
 	}

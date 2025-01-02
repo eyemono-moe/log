@@ -1,28 +1,26 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import PostLayout from "../../layouts/PostLayout.astro";
 import { extractText } from "../../utils/extractText";
-import { ogImageUrl } from "../../utils/ogImageUrl";
+import { getPosts } from "../../utils/getPost";
+import { postImageUrl } from "../../utils/ogImageUrl";
 
 export async function getStaticPaths() {
-	const blogEntries = await getCollection("posts", ({ data }) => {
-		// Only return published posts in production
-		return import.meta.env.PROD ? data.draft !== true : true;
-	});
+	const blogEntries = await getPosts();
 	return blogEntries.map((entry) => ({
-		params: { slug: entry.slug },
+		params: { id: entry.id },
 		props: { entry },
 	}));
 }
 
 const { entry } = Astro.props;
-const { Content, headings, remarkPluginFrontmatter } = await entry.render();
+const { Content, headings, remarkPluginFrontmatter } = await render(entry);
 
 const description =
 	entry.data.summary ||
 	(entry.rendered?.html &&
 		extractText(entry.rendered.html).substring(0, 140).replace(/\n/g, " ")) ||
-	entry.body.substring(0, 140).replace(/\n/g, "");
+	entry.body?.substring(0, 140).replace(/\n/g, "");
 ---
 
 <PostLayout
@@ -30,7 +28,7 @@ const description =
   headings={headings}
   description={description}
   lastmod={remarkPluginFrontmatter.lastModified}
-  imageUrl={ogImageUrl(entry, Astro.url.origin)}
+  imageUrl={postImageUrl(entry, Astro.url.origin)}
 >
   <Content />
 </PostLayout>
