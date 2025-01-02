@@ -3,8 +3,12 @@ import { getCollection } from "astro:content";
 import PostLayout from "../../layouts/PostLayout.astro";
 import { extractText } from "../../utils/extractText";
 import { ogImageUrl } from "../../utils/ogImageUrl";
+
 export async function getStaticPaths() {
-	const blogEntries = await getCollection("posts");
+	const blogEntries = await getCollection("posts", ({ data }) => {
+		// Only return published posts in production
+		return import.meta.env.PROD ? data.draft !== true : true;
+	});
 	return blogEntries.map((entry) => ({
 		params: { slug: entry.slug },
 		props: { entry },
