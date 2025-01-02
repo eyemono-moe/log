@@ -8,6 +8,9 @@ import { remarkModifiedTime } from "./src/plugins/remark-modified-time";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://log.eyemono.moe",
+	image: {
+		remotePatterns: [{ protocol: "https" }],
+	},
 	integrations: [
 		UnoCSS({
 			injectReset: true,

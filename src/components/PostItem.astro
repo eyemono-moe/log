@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { format } from "date-fns";
 import type { Article } from "../utils/getArticles";
 
@@ -20,11 +21,17 @@ const { source, title, imageUrl, lastmod, href } = Astro.props;
   target={source === "eyemono.log" ? "_self" : "_blank"}
 >
   <div class="overflow-hidden rounded">
-    <img
-      src={imageUrl}
-      alt={title}
-      class="aspect-[1200/630] w-full object-cover group-hover:scale-105 transition-transform"
-    />
+    {
+      imageUrl && (
+        <Image
+          src={imageUrl}
+          alt={title}
+          width={500}
+          height={500 * (630 / 1200)}
+          class="aspect-[1200/630] w-full object-cover group-hover:scale-105 transition-transform"
+        />
+      )
+    }
   </div>
   <div>
     <h2 class="font-bold">
