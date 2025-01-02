@@ -1,0 +1,14 @@
+---
+import Editor from "../../components/solid/Editor.tsx";
+import Preview from "../../components/solid/Preview.tsx";
+import PostLayout from "../../layouts/PostLayout.astro";
+---
+
+<div class="grid grid-cols-2 h-screen">
+  <Editor client:load />
+  <div class="h-full">
+    <PostLayout title="test" headings={[]}>
+      <Preview client:load />
+    </PostLayout>
+  </div>
+</div>
