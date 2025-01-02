@@ -1,6 +1,6 @@
 import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import rehypeAutolinkHeadings, {
 	type Options as AutoLinkOptions,
 } from "rehype-autolink-headings";
@@ -28,6 +28,15 @@ export default defineConfig({
 			},
 		}),
 	],
+	env: {
+		schema: {
+			GHOST_API_KEY: envField.string({
+				context: "server",
+				access: "secret",
+				optional: false,
+			}),
+		},
+	},
 	markdown: {
 		remarkPlugins: [remarkModifiedTime],
 		rehypePlugins: [

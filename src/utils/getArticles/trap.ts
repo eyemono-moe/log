@@ -13,19 +13,20 @@ const getPostsResponseSchema = v.object({
 	),
 });
 
-const searchParams = new URLSearchParams({
-	includes: "authors",
-	fields: "title,url,published_at,feature_image",
-	filter: "authors.name:d_etteiu8383+status:published+visibility:public",
-	limit: "all",
-	order: "published_at desc",
-});
-const apiUrl = new URL("https://blog-admin.trap.jp/ghost/api/admin/posts");
-apiUrl.search = searchParams.toString();
-
 const getPosts = async (apiKey: string) => {
 	const token = await sign(apiKey);
 	const headers = { Authorization: `Ghost ${token}` };
+
+	const searchParams = new URLSearchParams({
+		includes: "authors",
+		fields: "title,url,published_at,feature_image",
+		filter: "authors.name:d_etteiu8383+status:published+visibility:public",
+		limit: "all",
+		order: "published_at desc",
+	});
+	const apiUrl = new URL("https://blog-admin.trap.jp/ghost/api/admin/posts");
+	apiUrl.search = searchParams.toString();
+
 	const res = await fetch(apiUrl, { headers });
 	if (!res.ok) {
 		throw new Error(`Failed to fetch: ${res.statusText}`);
