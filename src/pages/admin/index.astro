@@ -1,0 +1,37 @@
+---
+export const prerender = false;
+
+import { SignIn, SignOut } from "auth-astro/components";
+import { getSession } from "auth-astro/server";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+// import { getToken } from "@auth/core/jwt";
+// import { AUTH_SECRET } from "astro:env/server";
+
+const session = await getSession(Astro.request);
+// console.log(
+//   (
+//     await getToken({
+//       req: Astro.request,
+//       secret: AUTH_SECRET,
+//     })
+//   )?.accessToken
+// );
+---
+
+<BaseLayout>
+  <div class="w-full max-w-1200px mx-auto px-4 md:px-8">
+    {session ? <p>logged in as {session.user?.name}</p> : <p>未ログイン</p>}
+    <div class="flex gap-2">
+      <SignIn
+        provider="contentful"
+        options={{
+          callbackUrl: "/admin",
+        }}
+        class="button"
+      >
+        ログイン
+      </SignIn>
+      <SignOut class="button"> ログアウト </SignOut>
+    </div>
+  </div>
+</BaseLayout>

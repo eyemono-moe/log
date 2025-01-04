@@ -60,6 +60,8 @@ export default defineConfig({
 			"bg-primary": "bg-white dark:bg-zinc-900",
 			"text-link":
 				"text-blue-7 visited:text-blue-9 dark:text-blue-4 dark:visited:text-blue-3 hover:underline",
+			button:
+				"rounded-2 px-2 py-1 bg-accent-6 not-active:hover:bg-accent-7 active:bg-accent-8 disabled:op-50 text-white font-bold",
 		},
 	],
 	theme: {

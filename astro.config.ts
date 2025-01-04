@@ -1,14 +1,9 @@
 import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
 import solidJs from "@astrojs/solid-js";
+import vercel from "@astrojs/vercel";
 import { defineConfig, envField } from "astro/config";
-import rehypeAutolinkHeadings, {
-	type Options as AutoLinkOptions,
-} from "rehype-autolink-headings";
-import rehypeExternalLinks, {
-	type Options as ExternalLinkOptions,
-} from "rehype-external-links";
-import rehypeSlug from "rehype-slug";
+import auth from "auth-astro";
 import UnoCSS from "unocss/astro";
 import { rehypePlugins } from "./src/plugins/rehypePlugins";
 import { remarkModifiedTime } from "./src/plugins/remark-modified-time";
@@ -30,13 +25,33 @@ export default defineConfig({
 			},
 		}),
 		solidJs(),
+		auth(),
 	],
 	env: {
 		schema: {
 			GHOST_API_KEY: envField.string({
 				context: "server",
 				access: "secret",
-				optional: false,
+			}),
+			CONTENTFUL_SPACE_ID: envField.string({
+				context: "server",
+				access: "public",
+			}),
+			AUTH_SECRET: envField.string({
+				context: "server",
+				access: "secret",
+			}),
+			CONTENTFUL_CLIENT_ID: envField.string({
+				context: "server",
+				access: "secret",
+			}),
+			CONTENTFUL_CLIENT_SECRET: envField.string({
+				context: "server",
+				access: "secret",
+			}),
+			CONTENTFUL_REDIRECT_URI: envField.string({
+				context: "server",
+				access: "public",
 			}),
 		},
 	},
@@ -44,4 +59,5 @@ export default defineConfig({
 		remarkPlugins: [remarkModifiedTime],
 		rehypePlugins: rehypePlugins,
 	},
+	adapter: vercel(),
 });
