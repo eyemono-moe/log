@@ -64,7 +64,7 @@ export default defineConfig({
 					rel: ["noopener", "noreferrer"],
 					content: {
 						type: "element",
-						tagName: "div",
+						tagName: "span",
 						properties: {
 							// @unocss-include
 							class:
