@@ -32,7 +32,7 @@ export const rehypePlugins: RehypePlugins = [
 			rel: ["noopener", "noreferrer"],
 			content: {
 				type: "element",
-				tagName: "div",
+				tagName: "span",
 				properties: {
 					// @unocss-include
 					class:
