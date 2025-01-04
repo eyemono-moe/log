@@ -28,9 +28,11 @@ const currentUrl = Astro.url;
   <body
     class="font-sans prose prose-zinc dark:prose-invert max-w-unset! bg-primary min-h-screen"
   >
-    <div class="grid grid-rows-[auto_minmax(0,1fr)_auto]">
+    <div class="grid grid-rows-[auto_minmax(0,1fr)_auto] min-h-screen">
       <Header headings={headings} />
-      <slot />
+      <div>
+        <slot />
+      </div>
       <Footer />
     </div>
   </body>
