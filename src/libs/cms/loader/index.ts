@@ -1,3 +1,4 @@
+import { z } from "astro:content";
 import type { Loader } from "astro/loaders";
 import type { CMSClient } from "..";
 import { cleanupEntries } from "./cleanupEntries";
@@ -28,5 +29,12 @@ export const CMSLoader = (options: Options): Loader => {
 			// Set the last modified date to the current date
 			ctx.meta.set("lastModified", new Date().toISOString());
 		},
+		schema: z.object({
+			title: z.string().nonempty(),
+			summary: z.string().optional(),
+			tags: z.array(z.string()).optional(),
+			draft: z.boolean().optional(),
+			imageUrl: z.string().url().optional(),
+		}),
 	};
 };
