@@ -1,4 +1,4 @@
-type Post = {
+export type Post = {
 	slug: string;
 	content: string;
 	createdAt: string;
@@ -7,7 +7,10 @@ type Post = {
 
 export interface CMSClient {
 	getPost: (slug: string) => Promise<Post>;
-	getPosts: () => Promise<Post[]>;
+	getPosts: (filter: {
+		// filter posts created/modified after this date
+		after?: Date;
+	}) => Promise<Post[]>;
 	updatePost: (slug: string, content: string) => Promise<Post>;
 	/** create empty post */
 	createPost: (slug: string) => Promise<Post>;

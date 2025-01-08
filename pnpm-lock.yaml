@@ -20,6 +20,9 @@ importers:
       auth-astro:
         specifier: 4.2.0
         version: 4.2.0(@auth/core@0.37.4)(astro@5.1.1(@types/node@22.10.3)(jiti@2.4.2)(rollup@4.29.1)(sass-embedded@1.83.0)(sass@1.83.0)(tsx@4.19.2)(typescript@5.7.2))
+      p-limit:
+        specifier: 6.2.0
+        version: 6.2.0
       rehype-stringify:
         specifier: 10.0.1
         version: 10.0.1
@@ -36,6 +39,9 @@ importers:
         specifier: 11.0.5
         version: 11.0.5
     devDependencies:
+      '@astrojs/markdown-remark':
+        specifier: 6.0.1
+        version: 6.0.1
       '@astrojs/partytown':
         specifier: 2.1.2
         version: 2.1.2
