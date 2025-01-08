@@ -1,4 +1,6 @@
 ---
+import Favicon from "./Favicon.astro";
+
 type Props = {
 	title?: string;
 	description?: string;
@@ -24,7 +26,7 @@ const twCardType = isArticle ? "summary_large_image" : "summary";
 <meta name="generator" content={Astro.generator} />
 <meta name="robots" content="index, follow" />
 <link rel="sitemap" href="/sitemap-index.xml" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<Favicon />
 <title>{title}</title>
 <meta name="description" content={description} />
 <!-- Facebook Meta Tags -->
