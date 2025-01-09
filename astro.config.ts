@@ -2,8 +2,8 @@ import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
 import solidJs from "@astrojs/solid-js";
 import vercel from "@astrojs/vercel";
+import clerk from "@clerk/astro";
 import { defineConfig, envField } from "astro/config";
-import auth from "auth-astro";
 import UnoCSS from "unocss/astro";
 import { rehypePlugins } from "./src/plugins/rehypePlugins";
 import { remarkModifiedTime } from "./src/plugins/remark-modified-time";
@@ -15,6 +15,7 @@ export default defineConfig({
 		remotePatterns: [{ protocol: "https" }],
 	},
 	integrations: [
+		solidJs(),
 		UnoCSS({
 			injectReset: true,
 		}),
@@ -24,8 +25,7 @@ export default defineConfig({
 				forward: ["dataLayer.push"],
 			},
 		}),
-		solidJs(),
-		auth(),
+		clerk(),
 	],
 	env: {
 		schema: {
@@ -37,21 +37,21 @@ export default defineConfig({
 				context: "server",
 				access: "public",
 			}),
-			AUTH_SECRET: envField.string({
-				context: "server",
-				access: "secret",
-			}),
-			CONTENTFUL_CLIENT_ID: envField.string({
-				context: "server",
-				access: "secret",
-			}),
-			CONTENTFUL_CLIENT_SECRET: envField.string({
-				context: "server",
-				access: "secret",
-			}),
-			CONTENTFUL_REDIRECT_URI: envField.string({
+			CONTENTFUL_ENVIRONMENT_ID: envField.string({
 				context: "server",
 				access: "public",
+			}),
+			CONTENTFUL_CMA_TOKEN: envField.string({
+				context: "server",
+				access: "secret",
+			}),
+			PUBLIC_CLERK_PUBLISHABLE_KEY: envField.string({
+				context: "client",
+				access: "public",
+			}),
+			CLERK_SECRET_KEY: envField.string({
+				context: "server",
+				access: "secret",
 			}),
 		},
 	},
@@ -60,4 +60,9 @@ export default defineConfig({
 		rehypePlugins: rehypePlugins,
 	},
 	adapter: vercel(),
+	vite: {
+		optimizeDeps: {
+			include: ["monaco-editor"],
+		},
+	},
 });

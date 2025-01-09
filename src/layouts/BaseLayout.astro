@@ -3,6 +3,7 @@ import type { MarkdownHeading } from "astro";
 import BaseMeta from "../components/BaseMeta.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import BaseHtml from "./BaseHtml.astro";
 
 type Props = {
 	title?: string;
@@ -15,45 +16,20 @@ const { headings, title, description, imageUrl } = Astro.props;
 const currentUrl = Astro.url;
 ---
 
-<!doctype html>
-<html lang="ja">
-  <head>
-    <BaseMeta
-      title={title}
-      currentUrl={currentUrl}
-      description={description}
-      imageUrl={imageUrl}
-    />
-  </head>
-  <body
-    class="font-sans prose prose-zinc dark:prose-invert max-w-unset! bg-primary min-h-screen"
-  >
-    <div class="grid grid-rows-[auto_minmax(0,1fr)_auto] min-h-screen">
-      <Header headings={headings} />
-      <div>
-        <slot />
-      </div>
-      <Footer />
+<BaseHtml>
+  <BaseMeta
+    title={title}
+    currentUrl={currentUrl}
+    description={description}
+    imageUrl={imageUrl}
+    slot="head"
+  />
+
+  <div class="grid grid-rows-[auto_minmax(0,1fr)_auto] min-h-screen">
+    <Header headings={headings} />
+    <div>
+      <slot />
     </div>
-  </body>
-</html>
-
-<script is:inline>
-  const COLOR_SCHEME_QUERY = "(prefers-color-scheme: dark)";
-
-  const getPreferredColorScheme = () => {
-    if (typeof window === "undefined") {
-      return "light";
-    }
-
-    return window.matchMedia(COLOR_SCHEME_QUERY).matches ? "dark" : "light";
-  };
-
-  const onChange = () => {
-    const theme = getPreferredColorScheme();
-    document.documentElement.classList.toggle("dark", theme === "dark");
-  };
-
-  window.matchMedia(COLOR_SCHEME_QUERY).addEventListener("change", onChange);
-  onChange();
-</script>
+    <Footer />
+  </div>
+</BaseHtml>

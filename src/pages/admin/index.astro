@@ -1,37 +1,19 @@
 ---
 export const prerender = false;
 
-import { SignIn, SignOut } from "auth-astro/components";
-import { getSession } from "auth-astro/server";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-// import { getToken } from "@auth/core/jwt";
-// import { AUTH_SECRET } from "astro:env/server";
-
-const session = await getSession(Astro.request);
-// console.log(
-//   (
-//     await getToken({
-//       req: Astro.request,
-//       secret: AUTH_SECRET,
-//     })
-//   )?.accessToken
-// );
+import Post from "../../components/Post.astro";
+import Preview from "../../components/solid/Preview";
+import SolidEditor from "../../components/solid/SolidEditor";
+import AdminLayout from "../../layouts/AdminLayout.astro";
 ---
 
-<BaseLayout>
-  <div class="w-full max-w-1200px mx-auto px-4 md:px-8">
-    {session ? <p>logged in as {session.user?.name}</p> : <p>未ログイン</p>}
-    <div class="flex gap-2">
-      <SignIn
-        provider="contentful"
-        options={{
-          callbackUrl: "/admin",
-        }}
-        class="button"
-      >
-        ログイン
-      </SignIn>
-      <SignOut class="button"> ログアウト </SignOut>
+<AdminLayout>
+  <div class="grid grid-cols-[auto_minmax(0,1fr)_minmax(0,1fr)] h-full">
+    <SolidEditor client:only />
+    <div class="grid-col-start-3 overflow-y-auto h-full">
+      <Post title="" headings={[]}>
+        <Preview client:only />
+      </Post>
     </div>
   </div>
-</BaseLayout>
+</AdminLayout>

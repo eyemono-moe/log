@@ -7,7 +7,7 @@ export type Post = {
 
 export interface CMSClient {
 	getPost: (slug: string) => Promise<Post>;
-	getPosts: (filter: {
+	getPosts: (filter?: {
 		// filter posts created/modified after this date
 		after?: Date;
 	}) => Promise<Post[]>;

@@ -37,13 +37,18 @@
 	"dependencies": {
 		"@astrojs/solid-js": "5.0.1",
 		"@astrojs/vercel": "8.0.1",
-		"@auth/core": "0.37.4",
-		"auth-astro": "4.2.0",
+		"@clerk/astro": "^2.1.5",
+		"@tanstack/solid-query": "5.62.16",
+		"contentful-management": "11.40.4",
+		"monaco-editor": "0.52.2",
 		"p-limit": "6.2.0",
 		"rehype-stringify": "10.0.1",
+		"remark-extract-frontmatter": "3.2.0",
+		"remark-frontmatter": "5.0.0",
 		"remark-parse": "11.0.0",
 		"remark-rehype": "11.1.1",
 		"solid-js": "1.9.3",
-		"unified": "11.0.5"
+		"unified": "11.0.5",
+		"yaml": "2.7.0"
 	}
 }

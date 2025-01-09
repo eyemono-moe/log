@@ -1,0 +1,24 @@
+---
+import { SignedIn, UserButton } from "@clerk/astro/components";
+import BaseHtml from "./BaseHtml.astro";
+---
+
+<BaseHtml>
+  <Fragment slot="head">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </Fragment>
+  <SignedIn isStatic={false}>
+    <div class="grid grid-rows-[auto_minmax(0,1fr)] h-screen">
+      <div class="flex items-center gap-2 py-1 px-2">
+        <a class="mr-auto" href="/">sudo eyemono.log</a>
+        <UserButton />
+      </div>
+      <div>
+        <slot />
+      </div>
+    </div>
+  </SignedIn>
+</BaseHtml>
