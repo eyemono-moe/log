@@ -11,12 +11,20 @@ import {
 	clientUploadFile,
 } from "./api";
 
+const postQuery = (slug: string) => ["posts", slug];
 export const createQueryGetPost = (slug: () => string | undefined) =>
 	createQuery(() => ({
-		queryKey: ["posts", slug()],
+		queryKey: postQuery(slug() ?? ""),
 		queryFn: () => clientGetPost(slug() ?? ""),
 		enabled: !!slug(),
 	}));
+export const fetchPost = (slug: string) => {
+	const queryClient = useQueryClient();
+	return queryClient.fetchQuery({
+		queryKey: postQuery(slug),
+		queryFn: () => clientGetPost(slug),
+	});
+};
 
 export const createQueryGetPosts = () =>
 	createQuery(() => ({

@@ -17,6 +17,9 @@ importers:
       '@clerk/astro':
         specifier: ^2.1.5
         version: 2.1.5(astro@5.1.1(@types/node@22.10.3)(jiti@2.4.2)(rollup@4.29.1)(sass-embedded@1.83.0)(sass@1.83.0)(tsx@4.19.2)(typescript@5.7.2)(yaml@2.7.0))(react@19.0.0)
+      '@solid-primitives/map':
+        specifier: 0.5.0
+        version: 0.5.0(solid-js@1.9.3)
       '@tanstack/solid-query':
         specifier: 5.62.16
         version: 5.62.16(solid-js@1.9.3)
@@ -1222,6 +1225,21 @@ packages:
     resolution: {integrity: sha512-3NgmNyH3l/Hv6EvsWJbsvpcpUba6R8IREQ83nH83cyakCw7uM1arZKNfHwv1Wz6jgqrF/j4x5ELvR6PnK9nTcA==}
     engines: {node: '>= 8.0.0'}
     hasBin: true
+
+  '@solid-primitives/map@0.5.0':
+    resolution: {integrity: sha512-m8hGPvqCNMfefcXKRVdwFQmpC6vNkYD77GoZuFiQLDP9f1XF+tY+4fjCmiuWsK+j7cNZ2jk9r2hzd4DEf2Driw==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
+  '@solid-primitives/trigger@1.1.0':
+    resolution: {integrity: sha512-00BbAiXV66WwjHuKZc3wr0+GLb9C24mMUmi3JdTpNFgHBbrQGrIHubmZDg36c5/7wH+E0GQtOOanwQS063PO+A==}
+    peerDependencies:
+      solid-js: ^1.6.12
+
+  '@solid-primitives/utils@6.2.3':
+    resolution: {integrity: sha512-CqAwKb2T5Vi72+rhebSsqNZ9o67buYRdEJrIFzRXz3U59QqezuuxPsyzTSVCacwS5Pf109VRsgCJQoxKRoECZQ==}
+    peerDependencies:
+      solid-js: ^1.6.12
 
   '@tanstack/query-core@5.62.16':
     resolution: {integrity: sha512-9Sgft7Qavcd+sN0V25xVyo0nfmcZXBuODy3FVG7BMWTg1HMLm8wwG5tNlLlmSic1u7l1v786oavn+STiFaPH2g==}
@@ -4363,6 +4381,20 @@ snapshots:
     dependencies:
       fflate: 0.7.4
       string.prototype.codepointat: 0.2.1
+
+  '@solid-primitives/map@0.5.0(solid-js@1.9.3)':
+    dependencies:
+      '@solid-primitives/trigger': 1.1.0(solid-js@1.9.3)
+      solid-js: 1.9.3
+
+  '@solid-primitives/trigger@1.1.0(solid-js@1.9.3)':
+    dependencies:
+      '@solid-primitives/utils': 6.2.3(solid-js@1.9.3)
+      solid-js: 1.9.3
+
+  '@solid-primitives/utils@6.2.3(solid-js@1.9.3)':
+    dependencies:
+      solid-js: 1.9.3
 
   '@tanstack/query-core@5.62.16': {}
 

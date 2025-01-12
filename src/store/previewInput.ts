@@ -3,14 +3,12 @@ import remarkExtractFrontmatter from "remark-extract-frontmatter";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
-import { createSignal } from "solid-js";
 import { unified } from "unified";
 import yaml from "yaml";
 import { rehypePlugins } from "../plugins/rehypePlugins";
+import { previewRawValue } from "./openedContents";
 
-export const previewInputSignal = createSignal<string>("");
-
-export const parseResult = () => {
+export const previewParseResult = () => {
 	const result = unified()
 		.use(remarkParse)
 		.use(remarkFrontmatter, {
@@ -25,7 +23,7 @@ export const parseResult = () => {
 		// @ts-ignore: unifiedとastroの型が合わない
 		.use(rehypePlugins)
 		.use(rehypeStringify)
-		.processSync(previewInputSignal[0]());
+		.processSync(previewRawValue());
 
 	return result;
 };

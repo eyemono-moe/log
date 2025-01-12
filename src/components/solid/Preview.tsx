@@ -1,8 +1,8 @@
 import type { Component } from "solid-js";
-import { parseResult } from "../../store/previewInput";
+import { previewParseResult } from "../../store/previewInput";
 const Preview: Component = () => {
 	// TODO: debounce preview
-	const preview = () => parseResult().toString();
+	const preview = () => previewParseResult().toString();
 
 	return <div innerHTML={preview()} />;
 };

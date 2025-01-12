@@ -8,23 +8,21 @@ import {
 } from "solid-js";
 import "../../worker";
 import * as monaco from "monaco-editor";
-import { previewInputSignal } from "../../store/previewInput";
+import { addActions } from "../../libs/monacoActions";
 
-const MonacoEditor: Component = () => {
+const MonacoEditor: Component<{
+	openedModel?: monaco.editor.ITextModel;
+}> = (props) => {
 	const [container, setContainer] = createSignal<HTMLDivElement>();
-	const [previewInput, setPreviewInput] = previewInputSignal;
 
 	let editor: import("monaco-editor").editor.IStandaloneCodeEditor | null =
 		null;
-
-	let triggerByInput = false;
 
 	onMount(() => {
 		const _container = container();
 		if (!_container) return;
 
 		editor = monaco.editor.create(_container, {
-			value: "# Hello, world!",
 			language: "markdown",
 			theme: "vs-dark",
 			automaticLayout: true,
@@ -35,16 +33,12 @@ const MonacoEditor: Component = () => {
 				top: 16,
 			},
 			lineNumbersMinChars: 2,
+			wordWrap: "on",
 		});
 
-		editor.onDidChangeModelContent;
+		editor.setModel(props.openedModel ?? null);
 
-		editor.onDidChangeModelContent(() => {
-			// editor.setValue() で値を変更すると、このイベントが発火してしまうので、ループを防ぐ
-			triggerByInput = true;
-			setPreviewInput(editor?.getValue() ?? "");
-			triggerByInput = false;
-		});
+		addActions(editor);
 	});
 
 	onCleanup(() => {
@@ -52,10 +46,12 @@ const MonacoEditor: Component = () => {
 	});
 
 	createEffect(
-		on(previewInput, (newValue) => {
-			if (triggerByInput) return;
-			editor?.setValue(newValue);
-		}),
+		on(
+			() => props.openedModel,
+			(newModel) => {
+				editor?.setModel(newModel ?? null);
+			},
+		),
 	);
 
 	return <div class="w-full h-full" ref={setContainer} />;
