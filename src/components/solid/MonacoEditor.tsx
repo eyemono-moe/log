@@ -54,7 +54,7 @@ const MonacoEditor: Component<{
 		),
 	);
 
-	return <div class="w-full h-full" ref={setContainer} />;
+	return <div class="w-full h-full overflow-hidden" ref={setContainer} />;
 };
 
 export default MonacoEditor;

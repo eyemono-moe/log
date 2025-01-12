@@ -1,5 +1,7 @@
 import type { Post } from "./cms";
 
+// TODO: validate
+
 export const clientGetPosts = async () => {
 	const response = await fetch("/api/posts");
 	const data = await response.json();
@@ -21,7 +23,7 @@ export const clientUpdatePost = async (slug: string, content: string) => {
 		body: JSON.stringify({ content }),
 	});
 	const data = await response.json();
-	return data;
+	return data as Post;
 };
 
 export const clientCreatePost = async (slug: string) => {

@@ -1,10 +1,14 @@
 import * as monaco from "monaco-editor";
-import { type Component, For, createEffect } from "solid-js";
-import { fetchPost } from "../../libs/query";
+import { type Component, For, Show, createEffect } from "solid-js";
+import { createMutationUpdatePost, fetchPost } from "../../libs/query";
 import {
+	createModel,
+	hasChanged,
+	initialValues,
 	loadedModels,
 	openedEntrySignal,
 	openedModel,
+	resetInput,
 } from "../../store/openedContents";
 import Entries from "./Entries";
 import MonacoEditor from "./MonacoEditor";
@@ -17,31 +21,53 @@ const EntryEditor: Component = () => {
 		if (!slug || loadedModels.has(slug)) return;
 		const post = await fetchPost(slug);
 
-		const model = monaco.editor.createModel(
-			post.content ?? "",
-			"markdown",
-			monaco.Uri.from({ scheme: "inmemory", path: slug }),
-		);
-		loadedModels.set(slug, model);
+		createModel(slug, post.content ?? "");
 	});
+
+	const updatePost = createMutationUpdatePost();
+	const handleSave = async () => {
+		const slug = openedEntry();
+		const model = openedModel();
+		if (!slug || !model) return;
+		const content = model.getValue();
+		try {
+			const updated = await updatePost.mutateAsync({ slug, content });
+			initialValues.set(slug, updated.content);
+			// TODO: use toast
+			alert("保存しました");
+		} catch (e) {
+			console.error(e);
+		}
+	};
 
 	return (
 		<div class="grid grid-cols-subgrid grid-col-span-2 h-full">
 			<Entries handleSelectEntry={(slug) => setOpenedEntry(slug)} />
-			<div class="grid grid-rows-[auto_minmax(0,1fr)] w-full overflow-hidden">
-				<div class="flex overflow-x-auto w-full">
-					<For each={Array.from(loadedModels.keys())}>
-						{(slug) => (
+			<div class="grid grid-rows-[auto_minmax(0,1fr)]">
+				<div class="grid grid-cols-[minmax(0,1fr)_auto]">
+					<div class="truncate">{openedEntry()}</div>
+					<div class="flex gap-1 items-center">
+						<Show when={openedEntry()}>
 							<button
-								class="text-start text-sm w-full max-w-40 rounded-t px-2 py-1 hover:(bg-zinc-2/50 dark:bg-zinc-8/50) data-[opened]:(bg-zinc-2/50 dark:bg-zinc-8/50)"
 								type="button"
-								onClick={() => setOpenedEntry(slug)}
-								data-opened={slug === openedEntry() ? "" : undefined}
+								class="button"
+								onClick={() => {
+									confirm("reset?") && resetInput();
+								}}
+								disabled={updatePost.isPending || !hasChanged()}
 							>
-								<div class="truncate">{slug}</div>
+								reset
 							</button>
-						)}
-					</For>
+							<button
+								type="button"
+								class="button"
+								onClick={handleSave}
+								disabled={updatePost.isPending || !hasChanged()}
+							>
+								save
+							</button>
+						</Show>
+					</div>
 				</div>
 				<MonacoEditor openedModel={openedModel()} />
 			</div>

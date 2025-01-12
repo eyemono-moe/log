@@ -109,7 +109,7 @@ export const createContentfulClient = (): CMSClient => {
 			const entry = await client.entry.getMany({
 				query: {
 					content_type: CONTENT_TYPE_ID,
-					select: "sys.id",
+					select: "sys",
 					"fields.slug": slug,
 					limit: 1,
 				},
@@ -118,20 +118,25 @@ export const createContentfulClient = (): CMSClient => {
 				throw new Error("Post not found");
 			}
 
-			await client.entry.update<ContentfulEntryFields>(
-				{ entryId: entry.items[0].sys.id },
-				{
-					fields: {
-						slug: {
-							ja: slug,
+			try {
+				await client.entry.update<ContentfulEntryFields>(
+					{ entryId: entry.items[0].sys.id },
+					{
+						fields: {
+							slug: {
+								ja: slug,
+							},
+							postContent: {
+								ja: content,
+							},
 						},
-						postContent: {
-							ja: content,
-						},
+						sys: entry.items[0].sys,
 					},
-					sys: entry.items[0].sys,
-				},
-			);
+				);
+			} catch (e) {
+				console.error("failed to update", e);
+				throw e;
+			}
 
 			return {
 				slug,
