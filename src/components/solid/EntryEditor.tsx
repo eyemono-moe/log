@@ -1,8 +1,9 @@
 import { type Component, Show, createEffect } from "solid-js";
 import { createMutationUpdatePost, fetchPost } from "../../libs/query";
 import {
+	closeModel,
 	createModel,
-	hasChanged,
+	hasChangedMap,
 	initialValues,
 	loadedModels,
 	openedEntrySignal,
@@ -13,10 +14,10 @@ import Entries from "./Entries";
 import MonacoEditor from "./MonacoEditor";
 
 const EntryEditor: Component = () => {
-	const [openedEntry, setOpenedEntry] = openedEntrySignal;
+	const [openedEntrySlug, setOpenedEntrySlug] = openedEntrySignal;
 
 	createEffect(async () => {
-		const slug = openedEntry();
+		const slug = openedEntrySlug();
 		if (!slug || loadedModels.has(slug)) return;
 		const post = await fetchPost(slug);
 
@@ -25,7 +26,7 @@ const EntryEditor: Component = () => {
 
 	const updatePost = createMutationUpdatePost();
 	const handleSave = async () => {
-		const slug = openedEntry();
+		const slug = openedEntrySlug();
 		const model = openedModel();
 		if (!slug || !model) return;
 		const content = model.getValue();
@@ -42,21 +43,38 @@ const EntryEditor: Component = () => {
 	return (
 		<div class="grid grid-cols-subgrid grid-col-span-2 h-full">
 			<Entries
-				handleSelectEntry={(slug) => setOpenedEntry(slug)}
-				openedSlug={openedEntry()}
+				handleSelectEntry={(slug) => setOpenedEntrySlug(slug)}
+				openedSlug={openedEntrySlug()}
 			/>
 			<div class="grid grid-rows-[auto_minmax(0,1fr)]">
 				<div class="grid grid-cols-[minmax(0,1fr)_auto]">
-					<div class="truncate">{openedEntry()}</div>
+					<div class="truncate">{openedEntrySlug()}</div>
 					<div class="flex gap-1 items-center">
-						<Show when={openedEntry()}>
+						<Show when={openedEntrySlug()}>
 							<button
 								type="button"
 								class="button"
 								onClick={() => {
-									confirm("reset?") && resetInput();
+									const slug = openedEntrySlug();
+									if (!slug) return;
+									(hasChangedMap.has(slug)
+										? confirm("content has changed. close?")
+										: true) && closeModel(slug);
 								}}
-								disabled={updatePost.isPending || !hasChanged()}
+								disabled={updatePost.isPending}
+							>
+								close
+							</button>
+							<button
+								type="button"
+								class="button"
+								onClick={() => {
+									confirm("reset?") && resetInput(openedEntrySlug() ?? "");
+								}}
+								disabled={
+									updatePost.isPending ||
+									!hasChangedMap.get(openedEntrySlug() ?? "")
+								}
 							>
 								reset
 							</button>
@@ -64,7 +82,10 @@ const EntryEditor: Component = () => {
 								type="button"
 								class="button"
 								onClick={handleSave}
-								disabled={updatePost.isPending || !hasChanged()}
+								disabled={
+									updatePost.isPending ||
+									!hasChangedMap.get(openedEntrySlug() ?? "")
+								}
 							>
 								save
 							</button>

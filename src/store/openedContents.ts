@@ -7,7 +7,8 @@ export const previewRawValue = internalPreviewRawValue;
 
 export const openedEntrySignal = createSignal<string>();
 export const loadedModels = new ReactiveMap<string, editor.ITextModel>();
-export const initialValues = new ReactiveMap<string, string>();
+export const initialValues = new ReactiveMap<string, string | undefined>();
+export const hasChangedMap = new ReactiveMap<string, boolean | undefined>();
 
 export const openedModel = () => {
 	const slug = openedEntrySignal[0]();
@@ -43,26 +44,35 @@ createEffect<IDisposable | undefined>((prevDispose) => {
 	const dispose = model.onDidChangeContent(() => {
 		const content = model.getValue();
 		setPreviewRawValue(content);
+
+		const slug = openedEntrySignal[0]();
+		if (!slug) return;
+		const initialValue = initialValues.get(slug);
+		if (!initialValue) return;
+		const hasChanged = initialValue !== content;
+		hasChangedMap.set(slug, hasChanged);
 	});
 
 	return dispose;
 });
 
-export const hasChanged = () => {
-	const slug = openedEntrySignal[0]();
-	if (!slug) return false;
+export const resetInput = (slug: string) => {
 	const model = loadedModels.get(slug);
-	if (!model) return false;
-	const initialValue = initialValues.get(slug);
-	const content = internalPreviewRawValue();
-	return initialValue !== content;
-};
-
-export const resetInput = () => {
-	const slug = openedEntrySignal[0]();
-	const model = openedModel();
-	if (!slug || !model) return;
+	if (!model) return;
 	const initialValue = initialValues.get(slug);
 	if (!initialValue) return;
 	model.setValue(initialValue);
+};
+
+export const closeModel = (slug: string) => {
+	const model = loadedModels.get(slug);
+	if (!model) return;
+	model.dispose();
+	loadedModels.delete(slug);
+	initialValues.delete(slug);
+	hasChangedMap.delete(slug);
+
+	if (openedEntrySignal[0]() === slug) {
+		openedEntrySignal[1]();
+	}
 };

@@ -1,7 +1,7 @@
-import { type Component, For } from "solid-js";
+import { type Component, For, Show } from "solid-js";
 import { extractFrontmatter } from "../../libs/extractFrontmatter";
 import { createQueryGetPosts } from "../../libs/query";
-import { loadedModels } from "../../store/openedContents";
+import { hasChangedMap, loadedModels } from "../../store/openedContents";
 
 const Entries: Component<{
 	openedSlug?: string;
@@ -24,14 +24,19 @@ const Entries: Component<{
 							data-opened={loadedModels.has(entry.slug) ? "" : undefined}
 							data-active={entry.slug === props.openedSlug ? "" : undefined}
 						>
-							<div class="truncate">{title ?? "no title"}</div>
+							<div class="truncate">
+								<Show when={hasChangedMap.get(entry.slug)}>
+									<span class="vertical-bottom inline-block i-material-symbols:edit-outline-rounded size-1lh" />
+								</Show>
+								{title ?? "no title"}
+							</div>
 							<div class="op-70 truncate">{entry.slug}</div>
 							<div class="flex gap-1">
 								<div
 									class="text-sm op-70 flex items-center gap-0.5"
 									title={`Created at ${entry.createdAt}`}
 								>
-									<span class="shrink-0 inline-block i-material-symbols:edit-outline-rounded size-0.8lh" />
+									<span class="shrink-0 inline-block i-material-symbols:edit-calendar-outline-rounded size-0.8lh" />
 
 									<span class="truncate">
 										{new Date(entry.createdAt).toLocaleDateString()}
