@@ -16,12 +16,27 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
+			"correctness": {
+				"noUnusedImports": "error"
+			},
 			"recommended": true
 		}
 	},
 	"organizeImports": {
 		"enabled": true
 	},
+	"overrides": [
+		{
+			"include": ["**/*.astro"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noUnusedImports": "off"
+					}
+				}
+			}
+		}
+	],
 	"vcs": {
 		"clientKind": "git",
 		"enabled": true,

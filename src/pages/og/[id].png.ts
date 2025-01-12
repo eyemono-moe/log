@@ -1,4 +1,4 @@
-import { type CollectionEntry, getCollection, getEntry } from "astro:content";
+import { type CollectionEntry, getEntry } from "astro:content";
 import { Resvg } from "@resvg/resvg-js";
 import type { APIRoute } from "astro";
 import satori from "satori";

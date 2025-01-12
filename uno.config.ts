@@ -3,7 +3,6 @@ import {
 	presetIcons,
 	presetTypography,
 	presetUno,
-	presetWebFonts,
 	transformerVariantGroup,
 } from "unocss";
 

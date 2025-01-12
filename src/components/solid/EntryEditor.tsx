@@ -1,5 +1,4 @@
-import * as monaco from "monaco-editor";
-import { type Component, For, Show, createEffect } from "solid-js";
+import { type Component, Show, createEffect } from "solid-js";
 import { createMutationUpdatePost, fetchPost } from "../../libs/query";
 import {
 	createModel,
