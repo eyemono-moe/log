@@ -41,7 +41,10 @@ const EntryEditor: Component = () => {
 
 	return (
 		<div class="grid grid-cols-subgrid grid-col-span-2 h-full">
-			<Entries handleSelectEntry={(slug) => setOpenedEntry(slug)} />
+			<Entries
+				handleSelectEntry={(slug) => setOpenedEntry(slug)}
+				openedSlug={openedEntry()}
+			/>
 			<div class="grid grid-rows-[auto_minmax(0,1fr)]">
 				<div class="grid grid-cols-[minmax(0,1fr)_auto]">
 					<div class="truncate">{openedEntry()}</div>
