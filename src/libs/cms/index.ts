@@ -13,7 +13,7 @@ export interface CMSClient {
 	}) => Promise<Post[]>;
 	updatePost: (slug: string, content: string) => Promise<Post>;
 	/** create empty post */
-	createPost: (slug: string) => Promise<Post>;
+	createPost: (slug: string, content: string) => Promise<Post>;
 	/**
 	 * upload file to storage
 	 *

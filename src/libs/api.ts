@@ -26,13 +26,13 @@ export const clientUpdatePost = async (slug: string, content: string) => {
 	return data as Post;
 };
 
-export const clientCreatePost = async (slug: string) => {
+export const clientCreatePost = async (slug: string, content: string) => {
 	const response = await fetch("/api/posts", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify({ slug }),
+		body: JSON.stringify({ slug, content }),
 	});
 	const data = await response.json();
 	return data;

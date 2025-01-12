@@ -28,7 +28,7 @@ export const createContentfulClient = (): CMSClient => {
 	);
 
 	return {
-		async createPost(slug) {
+		async createPost(slug, content) {
 			const entry = await client.entry.create<ContentfulEntryFields>(
 				{
 					contentTypeId: CONTENT_TYPE_ID,
@@ -39,7 +39,7 @@ export const createContentfulClient = (): CMSClient => {
 							ja: slug,
 						},
 						postContent: {
-							ja: "",
+							ja: content,
 						},
 					},
 				},

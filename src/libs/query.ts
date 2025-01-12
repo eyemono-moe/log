@@ -48,7 +48,8 @@ export const createMutationUpdatePost = () => {
 export const createMutationCreatePost = () => {
 	const queryClient = useQueryClient();
 	return createMutation(() => ({
-		mutationFn: ({ slug }: { slug: string }) => clientCreatePost(slug),
+		mutationFn: ({ slug, content }: { slug: string; content: string }) =>
+			clientCreatePost(slug, content),
 		onSuccess: () => {
 			queryClient.invalidateQueries({
 				queryKey: ["posts"],

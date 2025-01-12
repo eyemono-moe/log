@@ -12,3 +12,14 @@ export const GET: APIRoute = async ({ locals }) => {
 
 	return new Response(JSON.stringify(posts));
 };
+
+export const POST: APIRoute = async ({ request, locals }) => {
+	if (!locals.auth().userId) {
+		return new Response("Unauthorized", { status: 401 });
+	}
+
+	const { slug, content } = await request.json();
+	const created = await cmsClient().createPost(slug, content);
+
+	return new Response(JSON.stringify(created));
+};

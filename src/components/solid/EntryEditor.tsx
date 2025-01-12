@@ -1,5 +1,11 @@
 import { type Component, Show, createEffect } from "solid-js";
-import { createMutationUpdatePost, fetchPost } from "../../libs/query";
+import { postTemplate } from "../../libs/post";
+import {
+	createMutationCreatePost,
+	createMutationUpdatePost,
+	fetchPost,
+} from "../../libs/query";
+import { isValidSlug, randomSlugWithDatePrefix } from "../../libs/slug";
 import {
 	closeModel,
 	createModel,
@@ -40,12 +46,28 @@ const EntryEditor: Component = () => {
 		}
 	};
 
+	const createPost = createMutationCreatePost();
+	const handleCreatePost = () => {
+		// TODO: use modal
+		const slug = prompt("Enter slug", randomSlugWithDatePrefix());
+		if (!slug || !isValidSlug(slug)) return;
+		createPost.mutateAsync({ slug, content: postTemplate });
+	};
+
 	return (
 		<div class="grid grid-cols-subgrid grid-col-span-2 h-full">
-			<Entries
-				handleSelectEntry={(slug) => setOpenedEntrySlug(slug)}
-				openedSlug={openedEntrySlug()}
-			/>
+			<div class="grid grid-rows-[auto_minmax(0,1fr)]">
+				<div class="p-1">
+					<button type="button" class="button" onClick={handleCreatePost}>
+						<div class="i-material-symbols:add-rounded size-6" />
+						create post
+					</button>
+				</div>
+				<Entries
+					handleSelectEntry={(slug) => setOpenedEntrySlug(slug)}
+					openedSlug={openedEntrySlug()}
+				/>
+			</div>
 			<div class="grid grid-rows-[auto_minmax(0,1fr)]">
 				<div class="grid grid-cols-[minmax(0,1fr)_auto]">
 					<div class="truncate">{openedEntrySlug()}</div>
