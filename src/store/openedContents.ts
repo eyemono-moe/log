@@ -29,14 +29,13 @@ export const openedModel = (): ITextModel | undefined => {
 const fsProvider = new RegisteredFileSystemProvider(false);
 export const overlayDisposable = registerFileSystemOverlay(1, fsProvider);
 export const createModel = async (slug: string, content: string) => {
-	const uri = Uri.from({ scheme: "file", path: slug });
+	// const uri = Uri.from({ scheme: "file", path: slug });
+	const uri = Uri.file(`/${slug}.md`);
 	fsProvider.registerFile(new RegisteredMemoryFile(uri, content));
 	const modelRef = await editor.createModelReference(uri);
-	modelRef;
 	const model = modelRef.object.textEditorModel;
 	if (!model) return;
 	editor.setModelLanguage(model, "markdown");
-	console.log("model", model.getLanguageId());
 
 	loadedModelRefs.set(slug, modelRef);
 	initialValues.set(slug, content);

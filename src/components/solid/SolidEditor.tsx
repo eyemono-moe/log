@@ -13,6 +13,8 @@ const SolidEditor: Component = () => {
 		},
 	});
 
+	console.log("SolidEditor", client);
+
 	return (
 		<QueryClientProvider client={client}>
 			<EntryEditor />

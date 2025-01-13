@@ -43,6 +43,7 @@
 		"@codingame/monaco-vscode-configuration-service-override": "11.1.2",
 		"@codingame/monaco-vscode-extensions-service-override": "11.1.2",
 		"@codingame/monaco-vscode-files-service-override": "11.1.2",
+		"@codingame/monaco-vscode-language-detection-worker-service-override": "11.1.2",
 		"@codingame/monaco-vscode-languages-service-override": "11.1.2",
 		"@codingame/monaco-vscode-markdown-basics-default-extension": "11.1.2",
 		"@codingame/monaco-vscode-markdown-language-features-default-extension": "11.1.2",

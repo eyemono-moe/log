@@ -29,6 +29,9 @@ importers:
       '@codingame/monaco-vscode-files-service-override':
         specifier: 11.1.2
         version: 11.1.2
+      '@codingame/monaco-vscode-language-detection-worker-service-override':
+        specifier: 11.1.2
+        version: 11.1.2
       '@codingame/monaco-vscode-languages-service-override':
         specifier: 11.1.2
         version: 11.1.2
@@ -418,6 +421,9 @@ packages:
 
   '@codingame/monaco-vscode-host-service-override@11.1.2':
     resolution: {integrity: sha512-DLoOM8HcrcoyB8np0CzIN3VJ9pOKuYVOBC1fHzgKBp5i/+akJK5e+5JHj6Au3kUEVSd1cJLjn6dNz58QrbLAhA==}
+
+  '@codingame/monaco-vscode-language-detection-worker-service-override@11.1.2':
+    resolution: {integrity: sha512-Pb0v4+lM8IiE4uIH8bicwNrg1Ba5wFTjwYFkMsj1SwR2Gu/w3ERiuZbjqqdb1Uwri3k0vZz0Pvdce/wC1bpmYQ==}
 
   '@codingame/monaco-vscode-languages-service-override@11.1.2':
     resolution: {integrity: sha512-ETYg5/5tP0Pwuxg31kInUMWQmQIK67PH4craJ+gPS82Hh6/EDMNRV63z/REW4QDqw0QEpkLrow/fWXZpgeHCDQ==}
@@ -1554,6 +1560,10 @@ packages:
 
   '@vscode/iconv-lite-umd@0.7.0':
     resolution: {integrity: sha512-bRRFxLfg5dtAyl5XyiVWz/ZBPahpOpPrNYnnHpOpUZvam4tKH35wdhP4Kj6PbM0+KdliOsPzbGWpkxcdpNB/sg==}
+
+  '@vscode/vscode-languagedetection@1.0.21':
+    resolution: {integrity: sha512-zSUH9HYCw5qsCtd7b31yqkpaCU6jhtkKLkvOOA8yTrIRfBSOFb8PPhgmMicD7B/m+t4PwOJXzU1XDtrM9Fd3/g==}
+    hasBin: true
 
   '@vue/compiler-core@3.5.13':
     resolution: {integrity: sha512-oOdAkwqUfW1WqpwSYJce06wvt6HljgY3fGeM9NcVA1HaYOij3mZG9Rkysn0OHuyUAGMbEbARIpsG+LPVlBJ5/Q==}
@@ -4045,6 +4055,11 @@ snapshots:
     dependencies:
       vscode: '@codingame/monaco-vscode-api@11.1.2'
 
+  '@codingame/monaco-vscode-language-detection-worker-service-override@11.1.2':
+    dependencies:
+      '@vscode/vscode-languagedetection': 1.0.21
+      vscode: '@codingame/monaco-vscode-api@11.1.2'
+
   '@codingame/monaco-vscode-languages-service-override@11.1.2':
     dependencies:
       '@codingame/monaco-vscode-files-service-override': 11.1.2
@@ -4973,6 +4988,8 @@ snapshots:
       - supports-color
 
   '@vscode/iconv-lite-umd@0.7.0': {}
+
+  '@vscode/vscode-languagedetection@1.0.21': {}
 
   '@vue/compiler-core@3.5.13':
     dependencies:

@@ -1,3 +1,4 @@
+import * as monaco from "monaco-editor";
 import {
 	type Component,
 	createEffect,
@@ -6,32 +7,12 @@ import {
 	onCleanup,
 	onMount,
 } from "solid-js";
-import "../../setupMonaco";
-import getConfigurationServiceOverride, {
-	updateUserConfiguration,
-} from "@codingame/monaco-vscode-configuration-service-override";
-import getExtensionServiceOverride, {
-	type WorkerConfig,
-} from "@codingame/monaco-vscode-extensions-service-override";
-import getLanguagesServiceOverride from "@codingame/monaco-vscode-languages-service-override";
-import getModelServiceOverride from "@codingame/monaco-vscode-model-service-override";
-import getTextmateServiceOverride from "@codingame/monaco-vscode-textmate-service-override";
-import getThemeServiceOverride from "@codingame/monaco-vscode-theme-service-override";
-import * as monaco from "monaco-editor";
-import { initialize } from "vscode/services";
-import vscodeSetting from "../../assets/vscode-settings.json?raw";
 import { getClipboardItems } from "../../libs/clipboard";
+import { initMonaco } from "../../libs/monaco/init";
+import { uploadAndInsertURL } from "../../libs/monaco/uploadFile";
 import { addActions } from "../../libs/monacoActions";
 import { createMutationUploadFile } from "../../libs/query";
 import { overlayDisposable } from "../../store/openedContents";
-
-const workerConfig: WorkerConfig = {
-	url: new URL(
-		"vscode/workers/extensionHost.worker",
-		import.meta.url,
-	).toString(),
-	options: { type: "module" },
-};
 
 const MonacoEditor: Component<{
 	openedModel?: monaco.editor.ITextModel;
@@ -42,23 +23,17 @@ const MonacoEditor: Component<{
 	let editor: import("monaco-editor").editor.IStandaloneCodeEditor | null =
 		null;
 
+	const uploadFile = createMutationUploadFile();
+
 	onMount(async () => {
 		const _container = container();
 		if (!_container) return;
 
-		await initialize({
-			...getModelServiceOverride(),
-			...getExtensionServiceOverride(workerConfig),
-			...getConfigurationServiceOverride(),
-			...getThemeServiceOverride(),
-			...getTextmateServiceOverride(),
-			...getLanguagesServiceOverride(),
-		});
-
-		updateUserConfiguration(vscodeSetting);
+		await initMonaco();
 
 		editor = monaco.editor.create(_container, {
 			language: "markdown",
+			wordBasedSuggestions: "currentDocument",
 			theme: "Monoeye",
 			automaticLayout: true,
 			minimap: {
@@ -75,7 +50,6 @@ const MonacoEditor: Component<{
 
 		addActions(editor);
 
-		const uploadFile = createMutationUploadFile();
 		const d = editor.onDidPaste(async () => {
 			if (!editor) return;
 			const currentModel = editor.getModel();
@@ -96,38 +70,12 @@ const MonacoEditor: Component<{
 				const blob = await item.getType(imageType);
 				if (!blob) return;
 
-				const fileId = crypto.randomUUID();
-				const magicString = `<!-- uploading file: ${fileId} -->`;
-
-				currentModel.applyEdits([
-					{
-						range: new monaco.Range(
-							selection.endLineNumber,
-							selection.endColumn,
-							selection.endLineNumber,
-							selection.endColumn,
-						),
-						text: magicString,
-					},
-				]);
-
-				const uploadedFile = await uploadFile.mutateAsync({
-					file: new File([blob], fileId),
-				});
-				const url = uploadedFile.url;
-
-				const insertRange = currentModel
-					.findMatches(magicString, true, false, false, null, true)
-					.at(0)?.range;
-
-				if (!insertRange) return;
-
-				currentModel.applyEdits([
-					{
-						range: insertRange,
-						text: `![](${url})`,
-					},
-				]);
+				await uploadAndInsertURL(
+					blob,
+					currentModel,
+					selection,
+					uploadFile.mutateAsync,
+				);
 			});
 
 			await Promise.all(promises);
