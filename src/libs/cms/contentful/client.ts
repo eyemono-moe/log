@@ -119,7 +119,7 @@ export const createContentfulClient = (): CMSClient => {
 			}
 
 			try {
-				await client.entry.update<ContentfulEntryFields>(
+				const updated = await client.entry.update<ContentfulEntryFields>(
 					{ entryId: entry.items[0].sys.id },
 					{
 						fields: {
@@ -131,6 +131,15 @@ export const createContentfulClient = (): CMSClient => {
 							},
 						},
 						sys: entry.items[0].sys,
+					},
+				);
+
+				// publish the entry
+				await client.entry.publish(
+					{ entryId: updated.sys.id },
+					{
+						fields: updated.fields,
+						sys: updated.sys,
 					},
 				);
 			} catch (e) {
@@ -146,22 +155,61 @@ export const createContentfulClient = (): CMSClient => {
 			};
 		},
 		async uploadFile(file) {
-			// const asset = await client.asset.({
-			// 	fields: {
-			// 		title: {
-			// 			ja: file.name,
-			// 		},
-			// 		file: {
-			// 			ja: {
-			// 				contentType: file.type,
-			// 				fileName: file.name,
-			// 				file: file,
-			// 			},
-			// 		},
-			// 	},
-			// });
-			// await asset.processForLocale("ja");
-			// return asset.fields.file.j
+			const arrayBuffer = await file.arrayBuffer();
+			const uploadedFile = await client.upload.create(
+				{},
+				{
+					file: arrayBuffer,
+				},
+			);
+
+			const asset = await client.asset.create(
+				{},
+				{
+					fields: {
+						title: {
+							ja: file.name,
+						},
+						file: {
+							ja: {
+								contentType: file.type,
+								fileName: file.name,
+								uploadFrom: {
+									sys: {
+										type: "Link",
+										linkType: "Upload",
+										id: uploadedFile.sys.id,
+									},
+								},
+							},
+						},
+					},
+				},
+			);
+
+			// process asset
+			const processedAsset = await client.asset.processForAllLocales(
+				{},
+				{
+					fields: asset.fields,
+					sys: asset.sys,
+				},
+			);
+
+			// publish asset
+			const published = await client.asset.publish(
+				{ assetId: processedAsset.sys.id },
+				{
+					fields: processedAsset.fields,
+					sys: processedAsset.sys,
+				},
+			);
+
+			const url = published.fields.file.ja.url;
+			if (!url) {
+				throw new Error("failed to upload file");
+			}
+			return url;
 		},
 	};
 };
