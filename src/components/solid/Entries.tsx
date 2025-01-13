@@ -1,7 +1,7 @@
 import { type Component, For, Show } from "solid-js";
 import { extractFrontmatter } from "../../libs/extractFrontmatter";
 import { createQueryGetPosts } from "../../libs/query";
-import { hasChangedMap, loadedModels } from "../../store/openedContents";
+import { hasChangedMap, loadedModelRefs } from "../../store/openedContents";
 
 const Entries: Component<{
 	openedSlug?: string;
@@ -21,7 +21,7 @@ const Entries: Component<{
 							class="text-sm text-start w-full rounded px-2 py-1 space-y-0.5 hover:not-[[data-active]]:(bg-zinc-2/50 dark:bg-zinc-8/50) data-[opened]:not-[[data-active]]:(bg-zinc-2/40 dark:bg-zinc-8/40) data-[active]:(bg-accent-2/30 dark:bg-accent-8/30)"
 							type="button"
 							onClick={() => props.handleSelectEntry(entry.slug)}
-							data-opened={loadedModels.has(entry.slug) ? "" : undefined}
+							data-opened={loadedModelRefs.has(entry.slug) ? "" : undefined}
 							data-active={entry.slug === props.openedSlug ? "" : undefined}
 						>
 							<div class="truncate">

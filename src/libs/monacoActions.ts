@@ -12,6 +12,33 @@ const actions: monaco.editor.IActionDescriptor[] = [
 		},
 		contextMenuGroupId: "appearance",
 	},
+	// Ctrl+Shift+ +/- でフォントサイズを変更
+	{
+		id: "zoom-in",
+		label: "Zoom In",
+		keybindings: [
+			monaco.KeyMod.CtrlCmd | monaco.KeyCode.Shift | monaco.KeyCode.NumpadAdd,
+		],
+		run: (ed) => {
+			const currentFontSize = ed.getOption(monaco.editor.EditorOption.fontSize);
+			ed.updateOptions({ fontSize: currentFontSize + 1 });
+		},
+		contextMenuGroupId: "zoom",
+	},
+	{
+		id: "zoom-out",
+		label: "Zoom Out",
+		keybindings: [
+			monaco.KeyMod.CtrlCmd |
+				monaco.KeyCode.Shift |
+				monaco.KeyCode.NumpadSubtract,
+		],
+		run: (ed) => {
+			const currentFontSize = ed.getOption(monaco.editor.EditorOption.fontSize);
+			ed.updateOptions({ fontSize: Math.max(1, currentFontSize - 1) });
+		},
+		contextMenuGroupId: "zoom",
+	},
 ];
 
 export const addActions = (editor: monaco.editor.IStandaloneCodeEditor) => {

@@ -1,28 +1,44 @@
+import {
+	RegisteredFileSystemProvider,
+	RegisteredMemoryFile,
+	registerFileSystemOverlay,
+} from "@codingame/monaco-vscode-files-service-override";
 import { ReactiveMap } from "@solid-primitives/map";
 import { type IDisposable, Uri, editor } from "monaco-editor";
 import { createEffect, createSignal } from "solid-js";
+import type { IReference, ITextFileEditorModel } from "vscode/monaco";
+import type { ITextModel } from "vscode/vscode/vs/editor/common/model";
 
 const [internalPreviewRawValue, setPreviewRawValue] = createSignal<string>("");
 export const previewRawValue = internalPreviewRawValue;
 
 export const openedEntrySignal = createSignal<string>();
-export const loadedModels = new ReactiveMap<string, editor.ITextModel>();
+export const loadedModelRefs = new ReactiveMap<
+	string,
+	IReference<ITextFileEditorModel>
+>();
 export const initialValues = new ReactiveMap<string, string | undefined>();
 export const hasChangedMap = new ReactiveMap<string, boolean | undefined>();
 
-export const openedModel = () => {
+export const openedModel = (): ITextModel | undefined => {
 	const slug = openedEntrySignal[0]();
-	return loadedModels.get(slug ?? "");
+	if (!slug) return;
+	return loadedModelRefs.get(slug)?.object.textEditorModel ?? undefined;
 };
 
-export const createModel = (slug: string, content: string) => {
-	const model = editor.createModel(
-		content,
-		"markdown",
-		Uri.from({ scheme: "inmemory", path: slug }),
-	);
+const fsProvider = new RegisteredFileSystemProvider(false);
+export const overlayDisposable = registerFileSystemOverlay(1, fsProvider);
+export const createModel = async (slug: string, content: string) => {
+	const uri = Uri.from({ scheme: "file", path: slug });
+	fsProvider.registerFile(new RegisteredMemoryFile(uri, content));
+	const modelRef = await editor.createModelReference(uri);
+	modelRef;
+	const model = modelRef.object.textEditorModel;
+	if (!model) return;
+	editor.setModelLanguage(model, "markdown");
+	console.log("model", model.getLanguageId());
 
-	loadedModels.set(slug, model);
+	loadedModelRefs.set(slug, modelRef);
 	initialValues.set(slug, content);
 };
 
@@ -57,7 +73,7 @@ createEffect<IDisposable | undefined>((prevDispose) => {
 });
 
 export const resetInput = (slug: string) => {
-	const model = loadedModels.get(slug);
+	const model = loadedModelRefs.get(slug)?.object.textEditorModel;
 	if (!model) return;
 	const initialValue = initialValues.get(slug);
 	if (!initialValue) return;
@@ -65,10 +81,10 @@ export const resetInput = (slug: string) => {
 };
 
 export const closeModel = (slug: string) => {
-	const model = loadedModels.get(slug);
-	if (!model) return;
-	model.dispose();
-	loadedModels.delete(slug);
+	const modelRef = loadedModelRefs.get(slug);
+	if (!modelRef) return;
+	modelRef.dispose();
+	loadedModelRefs.delete(slug);
 	initialValues.delete(slug);
 	hasChangedMap.delete(slug);
 

@@ -11,7 +11,7 @@ import {
 	createModel,
 	hasChangedMap,
 	initialValues,
-	loadedModels,
+	loadedModelRefs,
 	openedEntrySignal,
 	openedModel,
 	resetInput,
@@ -25,10 +25,10 @@ const EntryEditor: Component = () => {
 
 	createEffect(async () => {
 		const slug = openedEntrySlug();
-		if (!slug || loadedModels.has(slug)) return;
+		if (!slug || loadedModelRefs.has(slug)) return;
 		const post = await fetchPost(slug);
 
-		createModel(slug, post.content ?? "");
+		await createModel(slug, post.content ?? "");
 	});
 
 	const updatePost = createMutationUpdatePost();

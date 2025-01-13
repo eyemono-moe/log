@@ -3,6 +3,7 @@ import sitemap from "@astrojs/sitemap";
 import solidJs from "@astrojs/solid-js";
 import vercel from "@astrojs/vercel";
 import clerk from "@clerk/astro";
+import vsixPlugin from "@codingame/monaco-vscode-rollup-vsix-plugin";
 import { defineConfig, envField } from "astro/config";
 import UnoCSS from "unocss/astro";
 import { rehypePlugins } from "./src/plugins/rehypePlugins";
@@ -59,8 +60,6 @@ export default defineConfig({
 	},
 	adapter: vercel(),
 	vite: {
-		optimizeDeps: {
-			include: ["monaco-editor"],
-		},
+		plugins: [vsixPlugin()],
 	},
 });
