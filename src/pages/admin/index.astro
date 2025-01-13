@@ -1,19 +1,10 @@
 ---
 export const prerender = false;
 
-import Post from "../../components/Post.astro";
-import Preview from "../../components/solid/Preview";
 import SolidEditor from "../../components/solid/SolidEditor";
 import AdminLayout from "../../layouts/AdminLayout.astro";
 ---
 
 <AdminLayout>
-  <div class="grid grid-cols-[auto_minmax(0,1fr)_minmax(0,1fr)] h-full">
-    <SolidEditor client:only />
-    <div class="grid-col-start-3 overflow-y-auto h-full">
-      <Post title="" headings={[]}>
-        <Preview client:only />
-      </Post>
-    </div>
-  </div>
+  <SolidEditor client:only />
 </AdminLayout>

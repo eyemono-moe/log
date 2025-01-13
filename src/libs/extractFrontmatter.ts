@@ -11,16 +11,20 @@ function noopCompiler(this: Processor) {
 }
 
 export const extractFrontmatter = (code: string): Record<string, unknown> => {
-	return unified()
-		.use(remarkParse)
-		.use(remarkFrontmatter, {
-			type: "yaml",
-			marker: "-",
-		})
-		.use(remarkExtractFrontmatter, {
-			name: "frontmatter",
-			yaml: yaml.parse,
-		})
-		.use(noopCompiler)
-		.processSync(code).data.frontmatter as Record<string, unknown>;
+	return (
+		(unified()
+			.use(remarkParse)
+			.use(remarkFrontmatter, {
+				type: "yaml",
+				marker: "-",
+			})
+			.use(remarkExtractFrontmatter, {
+				name: "frontmatter",
+				yaml: yaml.parse,
+			})
+			.use(noopCompiler)
+			.processSync(code).data.frontmatter as
+			| Record<string, unknown>
+			| undefined) ?? {}
+	);
 };

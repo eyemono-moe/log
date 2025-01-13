@@ -18,6 +18,7 @@ import {
 } from "../../store/openedContents";
 import Entries from "./Entries";
 import MonacoEditor from "./MonacoEditor";
+import Preview from "./Preview";
 
 const EntryEditor: Component = () => {
 	const [openedEntrySlug, setOpenedEntrySlug] = openedEntrySignal;
@@ -55,7 +56,7 @@ const EntryEditor: Component = () => {
 	};
 
 	return (
-		<div class="grid grid-cols-subgrid grid-col-span-2 h-full">
+		<div class="grid grid-cols-[auto_minmax(0,1fr)_minmax(0,1fr)] h-full">
 			<div class="grid grid-rows-[auto_minmax(0,1fr)]">
 				<div class="p-1">
 					<button type="button" class="button" onClick={handleCreatePost}>
@@ -115,6 +116,9 @@ const EntryEditor: Component = () => {
 					</div>
 				</div>
 				<MonacoEditor openedModel={openedModel()} />
+			</div>
+			<div class="overflow-y-auto h-full">
+				<Preview />
 			</div>
 		</div>
 	);
