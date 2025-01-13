@@ -1,5 +1,4 @@
 ---
-import { render } from "astro:content";
 import PostItem from "../components/PostItem.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getArticles } from "../libs/getArticles";
@@ -15,9 +14,12 @@ const postsWithLstMod = await Promise.all(
 			id: post.id,
 			title: post.data.title,
 			imageUrl: postImageUrl(post, Astro.url.origin),
-			postedAt: new Date(
-				(await render(post)).remarkPluginFrontmatter.lastModified,
-			),
+			createdAt: new Date(post.data.createdAt ?? ""),
+			// @ts-expect-error: updatedAtは後から追加されるため型定義出来ていない
+			updatedAt: post.data.updatedAt
+				? // @ts-expect-error
+					new Date(post.data.updatedAt)
+				: undefined,
 		};
 	}),
 );
@@ -25,7 +27,7 @@ const postsWithLstMod = await Promise.all(
 const thirdPartyPosts = await getArticles();
 const allPosts = [...postsWithLstMod, ...thirdPartyPosts];
 const sortedPosts = allPosts.sort(
-	(a, b) => b.postedAt.getTime() - a.postedAt.getTime(),
+	(a, b) => b.createdAt.getTime() - a.createdAt.getTime(),
 );
 ---
 
@@ -42,7 +44,8 @@ const sortedPosts = allPosts.sort(
             source={post.source}
             title={post.title}
             imageUrl={post.imageUrl}
-            lastmod={post.postedAt}
+            createdAt={post.createdAt}
+            updatedAt={post.updatedAt}
           />
         ))
       }

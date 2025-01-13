@@ -27,6 +27,12 @@ export const parseEntry = async (
 		data,
 	});
 
+	// createdAtとupdatedAtを追加
+	if (parsedData.createdAt === undefined) {
+		parsedData.createdAt = entry.createdAt;
+	}
+	parsedData.updatedAt = entry.updatedAt;
+
 	let rendered: RenderedContent | undefined;
 	try {
 		rendered = await render({

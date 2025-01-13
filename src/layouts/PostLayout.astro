@@ -1,6 +1,6 @@
 ---
 import type { MarkdownHeading } from "astro";
-import Post from "../components/Post.astro";
+import Post from "../components/solid/Post";
 import BaseLayout from "./BaseLayout.astro";
 
 type Props = {
@@ -8,10 +8,12 @@ type Props = {
 	description?: string;
 	headings: MarkdownHeading[];
 	imageUrl?: string;
-	lastmod?: string;
+	createdAt: string;
+	updatedAt?: string;
 };
 
-const { headings, title, description, imageUrl, lastmod } = Astro.props;
+const { headings, title, description, imageUrl, createdAt, updatedAt } =
+	Astro.props;
 ---
 
 <BaseLayout
@@ -20,7 +22,12 @@ const { headings, title, description, imageUrl, lastmod } = Astro.props;
   headings={headings}
   imageUrl={imageUrl}
 >
-  <Post title={title} headings={headings} lastmod={lastmod}>
+  <Post
+    title={title}
+    headings={headings}
+    createdAt={createdAt}
+    updatedAt={updatedAt}
+  >
     <slot />
   </Post>
 </BaseLayout>

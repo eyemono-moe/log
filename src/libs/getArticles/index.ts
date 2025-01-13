@@ -7,7 +7,8 @@ export type Article = {
 	url: string;
 	title: string;
 	imageUrl?: string;
-	postedAt: Date;
+	createdAt: Date;
+	updatedAt?: Date;
 };
 
 export const getArticles = async () => {

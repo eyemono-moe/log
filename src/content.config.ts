@@ -1,17 +1,10 @@
-import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders";
+import { defineCollection } from "astro:content";
+import { cmsClient } from "./libs/cms/client";
+import { CMSLoader } from "./libs/cms/loader";
 
 const postCollection = defineCollection({
-	loader: glob({
-		pattern: "**/*.md",
-		base: "./src/content/posts",
-	}),
-	schema: z.object({
-		title: z.string().nonempty(),
-		summary: z.string().optional(),
-		tags: z.array(z.string()).optional(),
-		draft: z.boolean().optional(),
-		imageUrl: z.string().url().optional(),
+	loader: CMSLoader({
+		cms: cmsClient(),
 	}),
 });
 

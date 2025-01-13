@@ -8,6 +8,7 @@ const zennArticlesSchema = v.object({
 			slug: v.string(),
 			path: v.string(),
 			published_at: v.string(),
+			body_updated_at: v.optional(v.string()),
 		}),
 	),
 });
@@ -45,7 +46,8 @@ export const fetchZennArticles = async (): Promise<Article[]> => {
 			source: "zenn.dev",
 			title: a.title,
 			url: `https://zenn.dev${a.path}`,
-			postedAt: new Date(a.published_at),
+			createdAt: new Date(a.published_at),
+			updateAt: a.body_updated_at ? new Date(a.body_updated_at) : undefined,
 			imageUrl: ogImageUrls[i],
 		}));
 

@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content, headings, remarkPluginFrontmatter } = await render(entry);
+const { Content, headings } = await render(entry);
 
 const description =
 	entry.data.summary ||
@@ -27,7 +27,9 @@ const description =
   title={entry.data.title}
   headings={headings}
   description={description}
-  lastmod={remarkPluginFrontmatter.lastModified}
+  createdAt={entry.data.createdAt!}
+  updatedAt={// @ts-expect-error: updatedAtは後から追加されるため型定義出来ていない
+  entry.data.updatedAt}
   imageUrl={postImageUrl(entry, Astro.url.origin)}
 >
   <Content />

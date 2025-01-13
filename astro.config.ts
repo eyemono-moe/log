@@ -6,7 +6,6 @@ import clerk from "@clerk/astro";
 import { defineConfig, envField } from "astro/config";
 import UnoCSS from "unocss/astro";
 import { rehypePlugins } from "./src/plugins/rehypePlugins";
-import { remarkModifiedTime } from "./src/plugins/remark-modified-time";
 
 // https://astro.build/config
 export default defineConfig({
@@ -56,7 +55,6 @@ export default defineConfig({
 		},
 	},
 	markdown: {
-		remarkPlugins: [remarkModifiedTime],
 		rehypePlugins: rehypePlugins,
 	},
 	adapter: vercel(),

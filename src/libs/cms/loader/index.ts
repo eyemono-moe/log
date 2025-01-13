@@ -31,6 +31,7 @@ export const CMSLoader = (options: Options): Loader => {
 		},
 		schema: z.object({
 			title: z.string().nonempty(),
+			createdAt: z.string().datetime().optional(),
 			summary: z.string().optional(),
 			tags: z.array(z.string()).optional(),
 			draft: z.boolean().optional(),
