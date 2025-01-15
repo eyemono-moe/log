@@ -59,7 +59,7 @@ const EntryEditor: Component = () => {
 		<div class="grid grid-cols-[auto_minmax(0,1fr)_minmax(0,1fr)] h-full">
 			<div class="grid grid-rows-[auto_minmax(0,1fr)]">
 				<div class="p-1">
-					<button type="button" class="button" onClick={handleCreatePost}>
+					<button type="button" class="btn" onClick={handleCreatePost}>
 						<div class="i-material-symbols:add-rounded size-6" />
 						create post
 					</button>
@@ -76,7 +76,7 @@ const EntryEditor: Component = () => {
 						<Show when={openedEntrySlug()}>
 							<button
 								type="button"
-								class="button"
+								class="btn"
 								onClick={() => {
 									const slug = openedEntrySlug();
 									if (!slug) return;
@@ -90,7 +90,7 @@ const EntryEditor: Component = () => {
 							</button>
 							<button
 								type="button"
-								class="button"
+								class="btn"
 								onClick={() => {
 									confirm("reset?") && resetInput(openedEntrySlug() ?? "");
 								}}
@@ -103,7 +103,7 @@ const EntryEditor: Component = () => {
 							</button>
 							<button
 								type="button"
-								class="button"
+								class="btn"
 								onClick={handleSave}
 								disabled={
 									updatePost.isPending ||

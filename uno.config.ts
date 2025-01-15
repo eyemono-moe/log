@@ -59,8 +59,7 @@ export default defineConfig({
 			"bg-primary": "bg-white dark:bg-zinc-900",
 			"text-link":
 				"text-blue-7 visited:text-blue-9 dark:text-blue-4 dark:visited:text-blue-3 hover:underline",
-			button:
-				"w-full flex items-center justify-center gap-1 rounded-2 px-2 py-0.5 bg-accent-6 enabled:not-active:hover:bg-accent-7 enabled:active:bg-accent-8 disabled:op-50 text-white font-bold",
+			btn: "w-full flex items-center justify-center gap-1 rounded-2 px-2 py-0.5 bg-accent-6 enabled:not-active:hover:bg-accent-7 enabled:active:bg-accent-8 disabled:op-50 text-white font-bold",
 		},
 	],
 	theme: {
