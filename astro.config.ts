@@ -3,11 +3,11 @@ import sitemap from "@astrojs/sitemap";
 import solidJs from "@astrojs/solid-js";
 import vercel from "@astrojs/vercel";
 import clerk from "@clerk/astro";
+import importMetaUrlPlugin from "@codingame/esbuild-import-meta-url-plugin";
 import vsixPlugin from "@codingame/monaco-vscode-rollup-vsix-plugin";
 import { defineConfig, envField } from "astro/config";
 import UnoCSS from "unocss/astro";
 import { rehypePlugins } from "./src/plugins/rehypePlugins";
-
 // https://astro.build/config
 export default defineConfig({
 	site: "https://log.eyemono.moe",
@@ -61,5 +61,11 @@ export default defineConfig({
 	adapter: vercel(),
 	vite: {
 		plugins: [vsixPlugin()],
+		optimizeDeps: {
+			esbuildOptions: {
+				plugins: [importMetaUrlPlugin],
+			},
+
+		},
 	},
 });

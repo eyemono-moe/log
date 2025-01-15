@@ -1,12 +1,12 @@
-import "vscode/localExtensionHost";
+// import "vscode/localExtensionHost";
 import "./extensions";
 
 import getConfigurationServiceOverride, {
 	initUserConfiguration,
 } from "@codingame/monaco-vscode-configuration-service-override";
-import getExtensionServiceOverride, {
-	type WorkerConfig,
-} from "@codingame/monaco-vscode-extensions-service-override";
+// import getExtensionServiceOverride, {
+// 	type WorkerConfig,
+// } from "@codingame/monaco-vscode-extensions-service-override";
 import getLanguagesServiceOverride from "@codingame/monaco-vscode-languages-service-override";
 import getModelServiceOverride from "@codingame/monaco-vscode-model-service-override";
 import getTextmateServiceOverride from "@codingame/monaco-vscode-textmate-service-override";
@@ -33,6 +33,7 @@ const workerLoaders: Partial<Record<string, WorkerLoader>> = {
 
 window.MonacoEnvironment = {
 	getWorker: (moduleId, label): Worker => {
+		console.log(moduleId, label);
 		const workerFactory = workerLoaders[label];
 		if (workerFactory != null) {
 			return workerFactory();
@@ -42,22 +43,22 @@ window.MonacoEnvironment = {
 };
 
 export const initMonaco = async () => {
-	const workerConfig: WorkerConfig = {
-		url: new URL(
-			"vscode/workers/extensionHost.worker",
-			import.meta.url,
-		).toString(),
-		options: { type: "module" },
-	};
+	// const workerConfig: WorkerConfig = {
+	// 	url: new URL(
+	// 		"vscode/workers/extensionHost.worker",
+	// 		import.meta.url,
+	// 	).toString(),
+	// 	options: { type: "module" },
+	// };
 
 	await initUserConfiguration(vscodeSetting);
 
 	await initialize({
-		...getModelServiceOverride(),
-		...getExtensionServiceOverride(workerConfig),
-		...getConfigurationServiceOverride(),
+		// ...getExtensionServiceOverride(workerConfig),
+		...getLanguagesServiceOverride(),
 		...getThemeServiceOverride(),
 		...getTextmateServiceOverride(),
-		...getLanguagesServiceOverride(),
+		...getModelServiceOverride(),
+		...getConfigurationServiceOverride(),
 	});
 };

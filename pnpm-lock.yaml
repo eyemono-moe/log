@@ -17,16 +17,25 @@ importers:
       '@clerk/astro':
         specifier: ^2.1.5
         version: 2.1.5(astro@5.1.1(@types/node@22.10.3)(jiti@2.4.2)(rollup@4.29.1)(sass-embedded@1.83.0)(sass@1.83.0)(tsx@4.19.2)(typescript@5.7.2)(yaml@2.7.0))(react@19.0.0)
+      '@codingame/esbuild-import-meta-url-plugin':
+        specifier: 1.0.2
+        version: 1.0.2
       '@codingame/monaco-vscode-chat-extensions-notebook-task-terminal-testing-common':
         specifier: 11.1.2
         version: 11.1.2
       '@codingame/monaco-vscode-configuration-service-override':
         specifier: 11.1.2
         version: 11.1.2
+      '@codingame/monaco-vscode-css-default-extension':
+        specifier: 11.1.2
+        version: 11.1.2
       '@codingame/monaco-vscode-extensions-service-override':
         specifier: 11.1.2
         version: 11.1.2
       '@codingame/monaco-vscode-files-service-override':
+        specifier: 11.1.2
+        version: 11.1.2
+      '@codingame/monaco-vscode-html-default-extension':
         specifier: 11.1.2
         version: 11.1.2
       '@codingame/monaco-vscode-language-detection-worker-service-override':
@@ -39,6 +48,9 @@ importers:
         specifier: 11.1.2
         version: 11.1.2
       '@codingame/monaco-vscode-markdown-language-features-default-extension':
+        specifier: 11.1.2
+        version: 11.1.2
+      '@codingame/monaco-vscode-markdown-math-default-extension':
         specifier: 11.1.2
         version: 11.1.2
       '@codingame/monaco-vscode-model-service-override':
@@ -54,6 +66,12 @@ importers:
         specifier: 11.1.2
         version: 11.1.2
       '@codingame/monaco-vscode-theme-service-override':
+        specifier: 11.1.2
+        version: 11.1.2
+      '@codingame/monaco-vscode-typescript-basics-default-extension':
+        specifier: 11.1.2
+        version: 11.1.2
+      '@codingame/monaco-vscode-yaml-default-extension':
         specifier: 11.1.2
         version: 11.1.2
       '@solid-primitives/map':
@@ -383,6 +401,9 @@ packages:
     resolution: {integrity: sha512-YjwFKDcEpUggQ4XH+LH7RuqlXJQlM05/zBuGRuj5ot9Y0LJfZxA/R9Gq9SycLk7VvsQYPAsCe3sfHohr8bskeA==}
     engines: {node: '>=18.17.0'}
 
+  '@codingame/esbuild-import-meta-url-plugin@1.0.2':
+    resolution: {integrity: sha512-b1PjH6DVdTQd0WLO2R+b9oMlO7REyiAVbcx8weN1ZYiBSROuAy9MJ/j2NI4sxmFv9GK0wM9HRrBg6J2CBZ1xzQ==}
+
   '@codingame/monaco-vscode-api@11.1.2':
     resolution: {integrity: sha512-8UHz2uH103P+8eXDRAWo1e1PRfMN5F5dR4s/Mb9fX18Qzr8+/GkpWJHhT1t1cd5xY8XwIiH7YyMz6pL0aDOikw==}
 
@@ -407,6 +428,9 @@ packages:
   '@codingame/monaco-vscode-configuration-service-override@11.1.2':
     resolution: {integrity: sha512-dzsl3q4i9AsTSIH7nA8N6VjrXyZlCsuAMz5wL9dqbDy06ddfU9nUm/kVYFeAO3ueCEH7xt5R0uV3YZtLhqh3xw==}
 
+  '@codingame/monaco-vscode-css-default-extension@11.1.2':
+    resolution: {integrity: sha512-8bw+7T5bqykU1XNxszDIlQxm8C0Kq49af11dFJ1Uq/sPu3U4fghalPUBbwRQQbnUiYOEgx67jSGkXomWWVUWyA==}
+
   '@codingame/monaco-vscode-editor-api@11.1.2':
     resolution: {integrity: sha512-RYnk0VpL0uSvrFD9k1Oka+K4dP3rhptBzIFVKwjlvCxL0n/mdbECbrcTLKn7wpR11wfMMWvFDHqlNH7ri3rsXg==}
 
@@ -422,6 +446,9 @@ packages:
   '@codingame/monaco-vscode-host-service-override@11.1.2':
     resolution: {integrity: sha512-DLoOM8HcrcoyB8np0CzIN3VJ9pOKuYVOBC1fHzgKBp5i/+akJK5e+5JHj6Au3kUEVSd1cJLjn6dNz58QrbLAhA==}
 
+  '@codingame/monaco-vscode-html-default-extension@11.1.2':
+    resolution: {integrity: sha512-WbMtgjOaDpMDUrySmWlM3sI1Q+LQQdmjfBRbfknkk2p2PByiAJPd0a4PaDDOSCaqTJHidUPbH8dW4dbGFvOdWg==}
+
   '@codingame/monaco-vscode-language-detection-worker-service-override@11.1.2':
     resolution: {integrity: sha512-Pb0v4+lM8IiE4uIH8bicwNrg1Ba5wFTjwYFkMsj1SwR2Gu/w3ERiuZbjqqdb1Uwri3k0vZz0Pvdce/wC1bpmYQ==}
 
@@ -436,6 +463,9 @@ packages:
 
   '@codingame/monaco-vscode-markdown-language-features-default-extension@11.1.2':
     resolution: {integrity: sha512-HbV/y3VZJppAnYYsyI4a/H5S0skAHfdG9O2VArDC55XDctz5CGcsenvn8YgViRAev0pGFnzUw0xGGqsLco/0HA==}
+
+  '@codingame/monaco-vscode-markdown-math-default-extension@11.1.2':
+    resolution: {integrity: sha512-0jAnm1mj8vp/kHMjk4ktaDFUK2blQnzNhWn+QG9ib8NaeFqa9l/jvDga4aJiVIR5TRJ3Io/Hbec1kgSPhEUDPQ==}
 
   '@codingame/monaco-vscode-model-service-override@11.1.2':
     resolution: {integrity: sha512-jFH2VvAiAK7Ytyzl4RMhOdARxrm/LOQFurXBtNhpTcimz3nINgixxh2+e0bviIe0BBs7ATsc9M//g6dA7S/FvQ==}
@@ -454,6 +484,12 @@ packages:
 
   '@codingame/monaco-vscode-theme-service-override@11.1.2':
     resolution: {integrity: sha512-6b1EmAiPiRc4JNxKbyJh13RSdLNxsAaaAwAaRXZb2IacYbHFxW2ThlYiZqJMoJHTisNlx2QDLrLq34hG3FTJ2Q==}
+
+  '@codingame/monaco-vscode-typescript-basics-default-extension@11.1.2':
+    resolution: {integrity: sha512-0tlkT8b4L+4U2RobfTcIje/veQgRTtQK57s0Kf8QrB1ZQqnu/3af4juX64NPDxBhepDKI9GUJAOs6ay7rB86HA==}
+
+  '@codingame/monaco-vscode-yaml-default-extension@11.1.2':
+    resolution: {integrity: sha512-P0xZmnKSL6ZbANHpgz+NtpEuOwjd87MXcxnIHHfSpUQ1E5GAryKJyHc3kv+vKAwtpNflRif3Kd3XvlhbM1wBUQ==}
 
   '@contentful/rich-text-types@16.8.5':
     resolution: {integrity: sha512-q18RJuJCOuYveGiCIjE5xLCQc5lZ3L2Qgxrlg/H2YEobDFqdtmklazRi1XwEWaK3tMg6yVXBzKKkQfLB4qW14A==}
@@ -3986,6 +4022,11 @@ snapshots:
     dependencies:
       csstype: 3.1.1
 
+  '@codingame/esbuild-import-meta-url-plugin@1.0.2':
+    dependencies:
+      esbuild: 0.24.2
+      import-meta-resolve: 4.1.0
+
   '@codingame/monaco-vscode-api@11.1.2':
     dependencies:
       '@codingame/monaco-vscode-base-service-override': 11.1.2
@@ -4031,6 +4072,10 @@ snapshots:
       '@codingame/monaco-vscode-files-service-override': 11.1.2
       vscode: '@codingame/monaco-vscode-api@11.1.2'
 
+  '@codingame/monaco-vscode-css-default-extension@11.1.2':
+    dependencies:
+      vscode: '@codingame/monaco-vscode-api@11.1.2'
+
   '@codingame/monaco-vscode-editor-api@11.1.2':
     dependencies:
       vscode: '@codingame/monaco-vscode-api@11.1.2'
@@ -4055,6 +4100,10 @@ snapshots:
     dependencies:
       vscode: '@codingame/monaco-vscode-api@11.1.2'
 
+  '@codingame/monaco-vscode-html-default-extension@11.1.2':
+    dependencies:
+      vscode: '@codingame/monaco-vscode-api@11.1.2'
+
   '@codingame/monaco-vscode-language-detection-worker-service-override@11.1.2':
     dependencies:
       '@vscode/vscode-languagedetection': 1.0.21
@@ -4074,6 +4123,10 @@ snapshots:
       vscode: '@codingame/monaco-vscode-api@11.1.2'
 
   '@codingame/monaco-vscode-markdown-language-features-default-extension@11.1.2':
+    dependencies:
+      vscode: '@codingame/monaco-vscode-api@11.1.2'
+
+  '@codingame/monaco-vscode-markdown-math-default-extension@11.1.2':
     dependencies:
       vscode: '@codingame/monaco-vscode-api@11.1.2'
 
@@ -4109,6 +4162,14 @@ snapshots:
   '@codingame/monaco-vscode-theme-service-override@11.1.2':
     dependencies:
       '@codingame/monaco-vscode-files-service-override': 11.1.2
+      vscode: '@codingame/monaco-vscode-api@11.1.2'
+
+  '@codingame/monaco-vscode-typescript-basics-default-extension@11.1.2':
+    dependencies:
+      vscode: '@codingame/monaco-vscode-api@11.1.2'
+
+  '@codingame/monaco-vscode-yaml-default-extension@11.1.2':
+    dependencies:
       vscode: '@codingame/monaco-vscode-api@11.1.2'
 
   '@contentful/rich-text-types@16.8.5': {}

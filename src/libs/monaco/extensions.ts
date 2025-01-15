@@ -1,5 +1,10 @@
-import "@codingame/monaco-vscode-theme-defaults-default-extension";
 import "@codingame/monaco-vscode-markdown-basics-default-extension";
 import "@codingame/monaco-vscode-markdown-language-features-default-extension";
+import "@codingame/monaco-vscode-theme-defaults-default-extension";
+import "@codingame/monaco-vscode-css-default-extension";
+import "@codingame/monaco-vscode-html-default-extension";
+import "@codingame/monaco-vscode-typescript-basics-default-extension";
+import "@codingame/monaco-vscode-yaml-default-extension";
+import "@codingame/monaco-vscode-markdown-math-default-extension";
 import "../../assets/EyemonoRin.monoeye-0.1.6.vsix";
 // import "../../assets/yzhang.markdown-all-in-one-3.6.2.vsix";
