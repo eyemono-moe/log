@@ -7,4 +7,4 @@ import "@codingame/monaco-vscode-typescript-basics-default-extension";
 import "@codingame/monaco-vscode-yaml-default-extension";
 import "@codingame/monaco-vscode-markdown-math-default-extension";
 import "../../assets/EyemonoRin.monoeye-0.1.6.vsix";
-// import "../../assets/yzhang.markdown-all-in-one-3.6.2.vsix";
+import "../../assets/DavidAnson.vscode-markdownlint-0.58.1.vsix";

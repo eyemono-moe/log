@@ -1,13 +1,15 @@
 {
 	"[markdown]": {
-		"editor.defaultFormatter": "yzhang.markdown-all-in-one"
+		"editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
 	},
 	"editor.acceptSuggestionOnEnter": "off",
 	"editor.accessibilitySupport": "off",
 	"editor.codeActionsOnSave": {
 		"source.fixAll": "explicit",
+		"source.fixAll.markdownlint": true,
 		"source.organizeImports.biome": "explicit"
 	},
+	"editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
 	"editor.fontFamily": "'JetBrainsMono Nerd Font', '源ノ角ゴシック Code JP', monospace",
 	"editor.fontSize": 13,
 	"editor.fontWeight": "300",
@@ -16,7 +18,7 @@
 	"editor.inlineSuggest.enabled": true,
 	"editor.minimap.enabled": false,
 	"editor.suggest.showStatusBar": true,
-	"editor.tabSize": 4,
+	"editor.tabSize": 2,
 	"editor.unicodeHighlight.ambiguousCharacters": false,
 	"editor.wrappingIndent": "none",
 	"workbench.colorTheme": "Monoeye",
