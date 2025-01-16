@@ -5,6 +5,7 @@
 	"compilerOptions": {
 		"jsx": "preserve",
 		"jsxImportSource": "solid-js",
-		"verbatimModuleSyntax": false
+		"verbatimModuleSyntax": false,
+		"isolatedModules": false
 	}
 }

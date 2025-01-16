@@ -1,5 +1,4 @@
-import { type Component, createEffect, createSignal, onMount } from "solid-js";
-import { registerPostsFile } from "../../libs/monaco/loadPosts";
+import { type Component, createSignal, onMount } from "solid-js";
 import initWorkbench from "../../libs/monaco/main.workbench";
 import { createQueryGetPosts } from "../../libs/query";
 
@@ -14,11 +13,11 @@ const Workbench: Component = () => {
 		await initWorkbench(containerElement);
 	});
 
-	createEffect(() => {
-		if (posts.status === "success") {
-			registerPostsFile(posts.data);
-		}
-	});
+	// createEffect(() => {
+	// 	if (posts.status === "success") {
+	// 		registerPostsFile(posts.data);
+	// 	}
+	// });
 
 	return (
 		<div class="w-full h-full">
