@@ -1,6 +1,7 @@
 import getQuickAccessServiceOverride from "@codingame/monaco-vscode-quickaccess-service-override";
 import type { BrowserStorageService } from "@codingame/monaco-vscode-storage-service-override";
 import getWorkbenchServiceOverride from "@codingame/monaco-vscode-workbench-service-override";
+import * as vscode from "vscode";
 import {
 	IStorageService,
 	getService,
@@ -29,6 +30,11 @@ export const initWorkbench = async (container: HTMLElement) => {
 		constructOptions,
 		envOptions,
 	);
+
+	// open workspace
+	vscode.workspace.updateWorkspaceFolders(0, null, {
+		uri: vscode.Uri.file("/posts"),
+	});
 };
 
 // const layoutService = await getService(IWorkbenchLayoutService);
