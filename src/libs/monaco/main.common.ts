@@ -1,0 +1,17 @@
+// import "./features/output";
+// import "./features/search";
+// import "./features/intellisense";
+// import "./features/notifications";
+// import "./features/scm";
+import "@codingame/monaco-vscode-css-default-extension";
+import "@codingame/monaco-vscode-html-default-extension";
+import "@codingame/monaco-vscode-markdown-basics-default-extension";
+import "@codingame/monaco-vscode-typescript-basics-default-extension";
+import "@codingame/monaco-vscode-yaml-default-extension";
+import "@codingame/monaco-vscode-theme-defaults-default-extension";
+import "@codingame/monaco-vscode-references-view-default-extension";
+import "@codingame/monaco-vscode-search-result-default-extension";
+import "@codingame/monaco-vscode-configuration-editing-default-extension";
+import "@codingame/monaco-vscode-markdown-math-default-extension";
+import "../../assets/EyemonoRin.monoeye-0.1.6.vsix";
+import "../../assets/DavidAnson.vscode-markdownlint-0.58.1.vsix";

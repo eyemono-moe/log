@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import type { Component } from "solid-js";
-import EntryEditor from "./EntryEditor";
+import Workbench from "./Workbench";
 
 const SolidEditor: Component = () => {
 	const client = new QueryClient({
@@ -13,11 +13,10 @@ const SolidEditor: Component = () => {
 		},
 	});
 
-	console.log("SolidEditor", client);
-
 	return (
 		<QueryClientProvider client={client}>
-			<EntryEditor />
+			{/* <EntryEditor /> */}
+			<Workbench />
 		</QueryClientProvider>
 	);
 };

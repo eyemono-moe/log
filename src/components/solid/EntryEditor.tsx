@@ -1,127 +1,42 @@
-import { type Component, Show, createEffect } from "solid-js";
-import { postTemplate } from "../../libs/post";
-import {
-	createMutationCreatePost,
-	createMutationUpdatePost,
-	fetchPost,
-} from "../../libs/query";
-import { isValidSlug, randomSlugWithDatePrefix } from "../../libs/slug";
-import {
-	closeModel,
-	createModel,
-	hasChangedMap,
-	initialValues,
-	loadedModelRefs,
-	openedEntrySignal,
-	openedModel,
-	resetInput,
-} from "../../store/openedContents";
-import Entries from "./Entries";
+import type { Component } from "solid-js";
 import MonacoEditor from "./MonacoEditor";
-import Preview from "./Preview";
 
 const EntryEditor: Component = () => {
-	const [openedEntrySlug, setOpenedEntrySlug] = openedEntrySignal;
+	// const [openedEntrySlug, setOpenedEntrySlug] = openedEntrySignal;
 
-	createEffect(async () => {
-		const slug = openedEntrySlug();
-		if (!slug || loadedModelRefs.has(slug)) return;
-		const post = await fetchPost(slug);
+	// createEffect(async () => {
+	// 	const slug = openedEntrySlug();
+	// 	if (!slug || loadedModelRefs.has(slug)) return;
+	// 	const post = await fetchPost(slug);
 
-		await createModel(slug, post.content ?? "");
-	});
+	// 	await createModel(slug, post.content ?? "");
+	// });
 
-	const updatePost = createMutationUpdatePost();
-	const handleSave = async () => {
-		const slug = openedEntrySlug();
-		const model = openedModel();
-		if (!slug || !model) return;
-		const content = model.getValue();
-		try {
-			const updated = await updatePost.mutateAsync({ slug, content });
-			initialValues.set(slug, updated.content);
-			// TODO: use toast
-			alert("保存しました");
-		} catch (e) {
-			console.error(e);
-		}
-	};
+	// const updatePost = createMutationUpdatePost();
+	// const handleSave = async () => {
+	// 	const slug = openedEntrySlug();
+	// 	const model = openedModel();
+	// 	if (!slug || !model) return;
+	// 	const content = model.getValue();
+	// 	try {
+	// 		const updated = await updatePost.mutateAsync({ slug, content });
+	// 		initialValues.set(slug, updated.content);
+	// 		// TODO: use toast
+	// 		alert("保存しました");
+	// 	} catch (e) {
+	// 		console.error(e);
+	// 	}
+	// };
 
-	const createPost = createMutationCreatePost();
-	const handleCreatePost = () => {
-		// TODO: use modal
-		const slug = prompt("Enter slug", randomSlugWithDatePrefix());
-		if (!slug || !isValidSlug(slug)) return;
-		createPost.mutateAsync({ slug, content: postTemplate });
-	};
+	// const createPost = createMutationCreatePost();
+	// const handleCreatePost = () => {
+	// 	// TODO: use modal
+	// 	const slug = prompt("Enter slug", randomSlugWithDatePrefix());
+	// 	if (!slug || !isValidSlug(slug)) return;
+	// 	createPost.mutateAsync({ slug, content: postTemplate });
+	// };
 
-	return (
-		<div class="grid grid-cols-[auto_minmax(0,1fr)_minmax(0,1fr)] h-full">
-			<div class="grid grid-rows-[auto_minmax(0,1fr)]">
-				<div class="p-1">
-					<button type="button" class="btn" onClick={handleCreatePost}>
-						<div class="i-material-symbols:add-rounded size-6" />
-						create post
-					</button>
-				</div>
-				<Entries
-					handleSelectEntry={(slug) => setOpenedEntrySlug(slug)}
-					openedSlug={openedEntrySlug()}
-				/>
-			</div>
-			<div class="grid grid-rows-[auto_minmax(0,1fr)]">
-				<div class="grid grid-cols-[minmax(0,1fr)_auto]">
-					<div class="truncate">{openedEntrySlug()}</div>
-					<div class="flex gap-1 items-center">
-						<Show when={openedEntrySlug()}>
-							<button
-								type="button"
-								class="btn"
-								onClick={() => {
-									const slug = openedEntrySlug();
-									if (!slug) return;
-									(hasChangedMap.has(slug)
-										? confirm("content has changed. close?")
-										: true) && closeModel(slug);
-								}}
-								disabled={updatePost.isPending}
-							>
-								close
-							</button>
-							<button
-								type="button"
-								class="btn"
-								onClick={() => {
-									confirm("reset?") && resetInput(openedEntrySlug() ?? "");
-								}}
-								disabled={
-									updatePost.isPending ||
-									!hasChangedMap.get(openedEntrySlug() ?? "")
-								}
-							>
-								reset
-							</button>
-							<button
-								type="button"
-								class="btn"
-								onClick={handleSave}
-								disabled={
-									updatePost.isPending ||
-									!hasChangedMap.get(openedEntrySlug() ?? "")
-								}
-							>
-								save
-							</button>
-						</Show>
-					</div>
-				</div>
-				<MonacoEditor openedModel={openedModel()} />
-			</div>
-			<div class="overflow-y-auto h-full">
-				<Preview />
-			</div>
-		</div>
-	);
+	return <MonacoEditor />;
 };
 
 export default EntryEditor;

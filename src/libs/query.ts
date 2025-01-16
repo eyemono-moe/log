@@ -31,6 +31,13 @@ export const createQueryGetPosts = () =>
 		queryKey: ["posts"],
 		queryFn: () => clientGetPosts(),
 	}));
+export const fetchPosts = () => {
+	const queryClient = useQueryClient();
+	return queryClient.fetchQuery({
+		queryKey: ["posts"],
+		queryFn: () => clientGetPosts(),
+	});
+};
 
 export const createMutationUpdatePost = () => {
 	const queryClient = useQueryClient();

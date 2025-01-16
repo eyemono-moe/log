@@ -11,12 +11,12 @@ import BaseHtml from "./BaseHtml.astro";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </Fragment>
   <SignedIn isStatic={false}>
-    <div class="grid grid-rows-[auto_minmax(0,1fr)] h-screen">
+    <div class="grid grid-rows-[auto_minmax(0,1fr)] h-screen w-screen">
       <div class="flex items-center gap-2 py-1 px-2">
         <a class="mr-auto" href="/">sudo eyemono.log</a>
         <UserButton />
       </div>
-      <div>
+      <div class="overflow-hidden">
         <slot />
       </div>
     </div>
