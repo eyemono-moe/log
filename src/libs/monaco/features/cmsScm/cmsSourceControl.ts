@@ -30,25 +30,30 @@ export class CmsSourceControl implements vscode.Disposable {
 		);
 
 		const fileSystemWatcher =
-			vscode.workspace.createFileSystemWatcher("**/*.*");
+			vscode.workspace.createFileSystemWatcher("/posts/**/*.*");
 
-		fileSystemWatcher.onDidChange((uri) => this.onResourceChange(uri));
-		fileSystemWatcher.onDidCreate((uri) => this.onResourceChange(uri));
-		fileSystemWatcher.onDidDelete((uri) => this.onResourceChange(uri));
+		fileSystemWatcher.onDidChange((uri) => this.onResourceChange([uri]));
+		fileSystemWatcher.onDidCreate((uri) => this.onResourceChange([uri]));
+		fileSystemWatcher.onDidDelete((uri) => this.onResourceChange([uri]));
 
 		this.cloneRemoteContents();
 	}
 
 	async cloneRemoteContents() {
-		return cloneRemoteContents();
+		await cloneRemoteContents();
+		// 全てのファイルの変更を検知する
+		const uris = await vscode.workspace.findFiles("/posts/**/*.*");
+		this.onResourceChange(uris);
 	}
 
 	refresh() {
 		this.cloneRemoteContents();
 	}
 
-	onResourceChange(uri: vscode.Uri): void {
-		this.changedUris.add(uri);
+	onResourceChange(uris: vscode.Uri[]): void {
+		const newUris = new Set(uris);
+		this.changedUris = this.changedUris.union(newUris);
+
 		if (this.timeout) {
 			clearTimeout(this.timeout);
 		}

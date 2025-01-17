@@ -28,7 +28,7 @@ const registerOrUpdateOriginalFile = async (post: Post) => {
 	try {
 		await fileSystemProvider.stat(originalFileUri);
 		// 既に存在したら更新
-		fileSystemProvider.writeFile(
+		await fileSystemProvider.writeFile(
 			originalFileUri,
 			new TextEncoder().encode(post.content),
 			{ create: true, overwrite: true, unlock: true, atomic: false },
