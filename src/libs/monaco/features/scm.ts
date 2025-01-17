@@ -28,24 +28,11 @@ const { getApi } = registerExtension(
 						dark: "resources/icons/dark/refresh.svg",
 					},
 				},
-				{
-					command: "extension.source-control.discard",
-					title: "Discards local changes to CMS",
-					icon: {
-						light: "resources/icons/light/discard.svg",
-						dark: "resources/icons/dark/discard.svg",
-					},
-				},
 			],
 			menus: {
 				"scm/title": [
 					{
 						command: "extension.source-control.commit",
-						group: "navigation",
-						when: "scmProvider == cms",
-					},
-					{
-						command: "extension.source-control.discard",
 						group: "navigation",
 						when: "scmProvider == cms",
 					},
@@ -71,13 +58,16 @@ const { getApi } = registerExtension(
 void getApi().then(async (vscode) => {
 	const scm = new CmsSourceControl(vscode);
 
-	vscode.commands.registerCommand("extension.source-control.commit", () => {
-		console.log("Committing changes");
-	});
-	vscode.commands.registerCommand("extension.source-control.refresh", () => {
-		scm.refresh();
-	});
-	vscode.commands.registerCommand("extension.source-control.discard", () => {
-		console.log("Discarding changes");
-	});
+	vscode.commands.registerCommand(
+		"extension.source-control.commit",
+		async () => {
+			await scm.commitAll();
+		},
+	);
+	vscode.commands.registerCommand(
+		"extension.source-control.refresh",
+		async () => {
+			await scm.refresh();
+		},
+	);
 });

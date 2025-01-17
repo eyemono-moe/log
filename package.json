@@ -7,6 +7,7 @@
 		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
+		"test": "vitest",
 		"fmt": "biome check --write",
 		"new": "zx ./scripts/create-post/index.mjs"
 	},
@@ -33,6 +34,7 @@
 		"sharp": "0.33.5",
 		"unocss": "0.65.3",
 		"valibot": "1.0.0-beta.9",
+		"vitest": "^3.0.1",
 		"zx": "8.3.0"
 	},
 	"dependencies": {

@@ -1,6 +1,5 @@
 import { RegisteredMemoryFile } from "@codingame/monaco-vscode-files-service-override";
 import type { FileSystemError } from "vscode";
-import { clientGetPosts } from "../api";
 import type { Post } from "../cms";
 import { fileSystemProvider } from "./setup.common";
 import { createMemoryFileUri, createOriginalFileUri } from "./util/uri";
@@ -45,8 +44,10 @@ const registerOrUpdateOriginalFile = async (post: Post) => {
 	}
 };
 
-export const cloneRemoteContents = async () => {
-	const posts = await clientGetPosts();
+/**
+ * MemoryFileとして編集用ファイルとオリジナルファイルを登録または更新する
+ */
+export const updateFiles = async (posts: Post[]) => {
 	// memoryFileとoriginalFileを更新
 	return Promise.all(
 		posts.map((post) => {

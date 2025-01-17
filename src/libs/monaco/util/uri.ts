@@ -8,14 +8,17 @@ export const createMemoryFileUri = (post: Post) =>
 	});
 export const createOriginalFileUri = (post: Post) =>
 	vscode.Uri.from({
-		scheme: "cms",
+		scheme: "file",
 		path: `${post.slug}.md`,
 	});
 
 export const toOriginalFileUri = (uri: vscode.Uri) => {
-	// TODO: ちゃんと書く
 	return vscode.Uri.from({
 		scheme: "file",
 		path: uri.path.replace(/^\/posts\//, ""),
 	});
+};
+
+export const getSlugFromUri = (uri: vscode.Uri) => {
+	return uri.path.replace(/^\/posts\//, "").replace(/\.md$/, "");
 };
