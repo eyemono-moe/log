@@ -3,6 +3,7 @@ import getConfigurationServiceOverride, {
 } from "@codingame/monaco-vscode-configuration-service-override";
 import getDialogsServiceOverride from "@codingame/monaco-vscode-dialogs-service-override";
 import getExplorerServiceOverride from "@codingame/monaco-vscode-explorer-service-override";
+// import getExtensionServiceOverride from "@codingame/monaco-vscode-extensions-service-override";
 import {
 	RegisteredFileSystemProvider,
 	registerFileSystemOverlay,
@@ -123,7 +124,6 @@ export const envOptions: EnvironmentOverride = {
 };
 
 export const commonServices: IEditorOverrideServices = {
-	// ...getExtensionServiceOverride(workerConfig),
 	...getLogServiceOverride(),
 	...getModelServiceOverride(),
 	...getNotificationServiceOverride(),
@@ -155,4 +155,5 @@ export const commonServices: IEditorOverrideServices = {
 	...getRelauncherServiceOverride(),
 	...getUpdateServiceOverride(),
 	...getExplorerServiceOverride(),
+	// ...getExtensionServiceOverride(workerConfig),
 };

@@ -3,9 +3,11 @@
 // import "./features/intellisense";
 // import "./features/notifications";
 import "./features/scm";
+import "./features/customView/customView";
 import "@codingame/monaco-vscode-css-default-extension";
 import "@codingame/monaco-vscode-html-default-extension";
 import "@codingame/monaco-vscode-markdown-basics-default-extension";
+import "@codingame/monaco-vscode-markdown-language-features-default-extension";
 import "@codingame/monaco-vscode-typescript-basics-default-extension";
 import "@codingame/monaco-vscode-yaml-default-extension";
 import "@codingame/monaco-vscode-theme-defaults-default-extension";
