@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
-import { clientGetPosts } from "../../../api";
-import { registerPostsFile } from "../../loadPosts";
+import { cloneRemoteContents } from "../../loadPosts";
 import { toOriginalFileUri } from "../../util/uri";
 import { CmsRepository } from "./cmsRepository";
 
@@ -41,8 +40,11 @@ export class CmsSourceControl implements vscode.Disposable {
 	}
 
 	async cloneRemoteContents() {
-		const posts = await clientGetPosts();
-		return registerPostsFile(posts);
+		return cloneRemoteContents();
+	}
+
+	refresh() {
+		this.cloneRemoteContents();
 	}
 
 	onResourceChange(uri: vscode.Uri): void {

@@ -8,14 +8,14 @@ export const createMemoryFileUri = (post: Post) =>
 	});
 export const createOriginalFileUri = (post: Post) =>
 	vscode.Uri.from({
-		scheme: "file",
-		path: `/cms/${post.slug}.md`,
+		scheme: "cms",
+		path: `${post.slug}.md`,
 	});
 
 export const toOriginalFileUri = (uri: vscode.Uri) => {
-	// TODO:  workspace.asRelativePath(uri.fsPath) など使う
+	// TODO: ちゃんと書く
 	return vscode.Uri.from({
 		scheme: "file",
-		path: uri.path.replace(/^\/posts/, "/cms"),
+		path: uri.path.replace(/^\/posts\//, ""),
 	});
 };
