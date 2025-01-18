@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import type { Post } from "../../cms";
+import type { Post } from "../../libs/cms";
 
 export const createMemoryFileUri = (post: Post) =>
 	vscode.Uri.from({
