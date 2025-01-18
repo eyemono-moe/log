@@ -1,6 +1,6 @@
 import { type Component, createSignal, onMount } from "solid-js";
-import initWorkbench from "../../libs/monaco/main.workbench";
 import { createQueryGetPosts } from "../../libs/query";
+import { init } from "../../workspace/init";
 
 const Workbench: Component = () => {
 	const [container, setContainer] = createSignal<HTMLDivElement>();
@@ -10,7 +10,8 @@ const Workbench: Component = () => {
 		const containerElement = container();
 		if (!containerElement) return;
 
-		await initWorkbench(containerElement);
+		// await initWorkbench(containerElement);
+		await init(containerElement);
 	});
 
 	// createEffect(() => {

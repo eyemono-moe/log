@@ -8,6 +8,7 @@ import vsixPlugin from "@codingame/monaco-vscode-rollup-vsix-plugin";
 import { defineConfig, envField } from "astro/config";
 import UnoCSS from "unocss/astro";
 import { rehypePlugins } from "./src/plugins/rehypePlugins";
+
 // https://astro.build/config
 export default defineConfig({
 	site: "https://log.eyemono.moe",
@@ -60,7 +61,17 @@ export default defineConfig({
 	},
 	adapter: vercel(),
 	vite: {
+		worker: {
+			format: "es",
+		},
 		plugins: [vsixPlugin()],
+		server: {
+			headers: {
+				"Cross-Origin-Embedder-Policy": "credentialless",
+				"Cross-Origin-Opener-Policy": "same-origin",
+				"Cross-Origin-Resource-Policy": "cross-origin",
+			},
+		},
 		optimizeDeps: {
 			esbuildOptions: {
 				plugins: [importMetaUrlPlugin],

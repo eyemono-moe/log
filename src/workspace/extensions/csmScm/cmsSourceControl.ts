@@ -1,12 +1,18 @@
+import { RegisteredMemoryFile } from "@codingame/monaco-vscode-files-service-override";
 import * as vscode from "vscode";
 import {
 	clientCreatePost,
 	clientGetPosts,
 	clientUpdatePost,
-} from "../../../api";
-import { updateFiles } from "../../loadPosts";
-import { fileSystemProvider } from "../../setup.common";
-import { getSlugFromUri, toOriginalFileUri } from "../../util/uri";
+} from "../../../libs/api";
+import type { Post } from "../../../libs/cms";
+import { fileSystemProvider } from "../../fileSystem";
+import {
+	createMemoryFileUri,
+	createOriginalFileUri,
+	getSlugFromUri,
+	toOriginalFileUri,
+} from "../../util/uri";
 import { CmsRepository } from "./cmsRepository";
 
 export class CmsSourceControl implements vscode.Disposable {
@@ -191,6 +197,59 @@ const getIsExist = async (uri: vscode.Uri) => {
 	} catch (error) {
 		return false;
 	}
+};
+
+const registerMemoryFile = async (post: Post) => {
+	const memoryFileUri = createMemoryFileUri(post);
+	try {
+		await fileSystemProvider.stat(memoryFileUri);
+		// 既に存在したら何もしない
+		return;
+	} catch (error) {
+		if ((error as vscode.FileSystemError).code === "EntryNotFound") {
+			// 存在しなかったら作成
+			fileSystemProvider.registerFile(
+				new RegisteredMemoryFile(memoryFileUri, post.content),
+			);
+			return;
+		}
+		console.error("Error registering memory file", error);
+	}
+};
+
+const registerOrUpdateOriginalFile = async (post: Post) => {
+	const originalFileUri = createOriginalFileUri(post);
+	try {
+		await fileSystemProvider.stat(originalFileUri);
+		// 既に存在したら更新
+		await fileSystemProvider.writeFile(
+			originalFileUri,
+			new TextEncoder().encode(post.content),
+			{ create: true, overwrite: true, unlock: true, atomic: false },
+		);
+	} catch (error) {
+		if ((error as vscode.FileSystemError).code === "EntryNotFound") {
+			// 存在しなかったら作成
+			fileSystemProvider.registerFile(
+				new RegisteredMemoryFile(originalFileUri, post.content),
+			);
+			return;
+		}
+		console.error("Error updating original file", error);
+	}
+};
+
+/**
+ * MemoryFileとして編集用ファイルとオリジナルファイルを登録または更新する
+ */
+export const updateFiles = async (posts: Post[]) => {
+	// memoryFileとoriginalFileを更新
+	return Promise.all(
+		posts.map((post) => {
+			registerMemoryFile(post);
+			registerOrUpdateOriginalFile(post);
+		}),
+	);
 };
 
 interface Resource extends vscode.SourceControlResourceState {
