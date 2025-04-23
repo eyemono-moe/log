@@ -53,7 +53,7 @@ def lorem_ipsum():
 [Markdown Guide](https://www.markdownguide.org) を参照してください。  
 
 画像の例:  
-![Placeholder](https://via.placeholder.com/150)
+![Placeholder](https://placehold.jp/150x150.png)
 
 ---
 
