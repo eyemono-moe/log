@@ -60,6 +60,10 @@ export default defineConfig({
 			"bg-primary": "bg-white dark:bg-zinc-900",
 			"text-link":
 				"text-blue-7 visited:text-blue-9 dark:text-blue-4 dark:visited:text-blue-3 hover:underline",
+			"toc-link":
+				"line-clamp-3 decoration-none op-70 hover:op-100 transition-color-200",
+			"toc-link-active": "dark:c-accent c-accent-7 op-100",
+			"toc-is-collapsed": "hidden",
 		},
 	],
 	theme: {

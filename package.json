@@ -32,5 +32,8 @@
 		"unocss": "66.1.0-beta.12",
 		"valibot": "1.0.0",
 		"zx": "8.5.3"
+	},
+	"dependencies": {
+		"tocbot": "^4.36.2"
 	}
 }
