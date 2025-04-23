@@ -42,11 +42,12 @@ const { source, title, imageUrl, lastmod, href } = Astro.props;
         )
       }
     </h2>
-    <div class="text-sm">
+    <div class="text-sm text-zinc-5">
+      -rw-r--r--
       {
         lastmod && (
           <time datetime={lastmod.toISOString()}>
-            {format(lastmod, "yyyy/MM/dd")}
+            {format(lastmod, "yyyy/MM/dd HH:mm")}
           </time>
         )
       }
