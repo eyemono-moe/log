@@ -1,6 +1,6 @@
 ---
 import type { MarkdownHeading } from "astro";
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
 import Toc from "../components/Toc.astro";
 import BaseLayout from "./BaseLayout.astro";
 
@@ -9,12 +9,10 @@ type Props = {
 	description?: string;
 	headings: MarkdownHeading[];
 	imageUrl?: string;
-	lastmod?: string;
+	lastmod?: Date;
 };
 
 const { headings, title, description, imageUrl, lastmod } = Astro.props;
-
-const strLastMod = lastmod && format(parseISO(lastmod), "yyyy/MM/dd");
 ---
 
 <BaseLayout
@@ -30,11 +28,15 @@ const strLastMod = lastmod && format(parseISO(lastmod), "yyyy/MM/dd");
           {title}
         </span>
       </h1>
-      <div class="max-w-1200px mx-auto px-4 md:px-8 text-sm">
-        <time datetime={lastmod}>
-          Last modified: {strLastMod}
-        </time>
-      </div>
+      {
+        lastmod && (
+          <div class="max-w-1200px mx-auto px-4 md:px-8 text-sm">
+            <time datetime={lastmod.toISOString()}>
+              Last modified: {format(lastmod, "yyyy/MM/dd HH:mm")}
+            </time>
+          </div>
+        )
+      }
     </header>
     <div
       class="max-w-1200px mx-auto px-4 md:px-8 grid grid-cols-[minmax(0,1fr)_0] lg:(grid-cols-[minmax(0,1fr)_16rem] justify-center gap-4)"

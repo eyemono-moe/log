@@ -1,5 +1,6 @@
 ---
 import { render } from "astro:content";
+import { parseISO } from "date-fns";
 import PostLayout from "../../layouts/PostLayout.astro";
 import { extractText } from "../../utils/extractText";
 import { getPosts } from "../../utils/getPost";
@@ -30,7 +31,7 @@ const description =
   title={entry.data.title}
   headings={headings}
   description={description}
-  lastmod={remarkPluginFrontmatter.lastModified}
+  lastmod={parseISO(remarkPluginFrontmatter.lastModified)}
   imageUrl={postImageUrl(entry, Astro.url.origin)}
 >
   <Content />

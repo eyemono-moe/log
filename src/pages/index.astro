@@ -1,5 +1,6 @@
 ---
 import { render } from "astro:content";
+import { parseISO } from "date-fns";
 import PostItem from "../components/PostItem.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getArticles } from "../utils/getArticles";
@@ -10,20 +11,14 @@ const postEntries = await getPosts();
 
 const postsWithLstMod = await Promise.all(
 	postEntries.map(async (post) => {
-		const serverDate = new Date(
-			(await render(post)).remarkPluginFrontmatter.lastModified,
-		);
-
-		const jstDate = new Date(
-			serverDate.toLocaleString("en-US", { timeZone: "Asia/Tokyo" }),
-		);
-
 		return {
 			source: "eyemono.log" as const,
 			id: post.id,
 			title: post.data.title,
 			imageUrl: postImageUrl(post, Astro.url.origin),
-			postedAt: jstDate,
+			postedAt: parseISO(
+				(await render(post)).remarkPluginFrontmatter.lastModified,
+			),
 		};
 	}),
 );
