@@ -1,8 +1,8 @@
+import presetWind3 from "@unocss/preset-wind3";
 import {
 	defineConfig,
 	presetIcons,
 	presetTypography,
-	presetUno,
 	presetWebFonts,
 	transformerVariantGroup,
 } from "unocss";
@@ -48,26 +48,42 @@ export default defineConfig({
 		filesystem: ["astro.config.ts"],
 	},
 	presets: [
-		presetUno(),
+		presetWind3(),
 		presetIcons({
 			autoInstall: true,
 		}),
 		presetTypography(),
+		presetWebFonts(),
 	],
 	transformers: [transformerVariantGroup()],
 	shortcuts: [
 		{
 			"bg-primary": "bg-white dark:bg-zinc-900",
 			"text-link":
-				"text-blue-7 visited:text-blue-9 dark:text-blue-4 dark:visited:text-blue-3 hover:underline",
+				"text-blue-7 visited:text-blue-9 dark:text-blue-4 dark:visited:text-blue-3 underline",
 			"toc-link":
 				"line-clamp-3 decoration-none op-70 hover:op-100 transition-color-200",
 			"toc-link-active": "dark:c-accent c-accent-7 op-100",
 			"toc-is-collapsed": "hidden",
+			"rlc-container":
+				"decoration-none c-zinc-950 dark:c-zinc-1 w-full b-1 b-zinc-2 dark:b-zinc-7 rounded-2 flex h-30 justify-between overflow-hidden hover:bg-zinc-50 dark:hover:bg-zinc-8/50 transition-[background-color] @container my-2",
+			"rlc-info":
+				"flex flex-col justify-between px-2 md:px-4 py-2 overflow-hidden",
+			"rlc-title": "truncate text-lg",
+			"rlc-description": "line-clamp-2 text-sm c-zinc-5 dark:c-zinc-4",
+			"rlc-url-container": "flex items-center gap-1",
+			"rlc-favicon": "w-16px h-auto aspect-square shrink-0",
+			"rlc-url": "truncate text-sm text-link",
+			"rlc-image-container":
+				"flex h-full w-auto max-w-50cqw shrink-0 overflow-hidden",
+			"rlc-image": "object-cover w-full h-full",
 		},
 	],
 	theme: {
 		colors,
+		font: {
+			sans: '"Noto Sans JP",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
+		},
 	},
 	preflights: [
 		{

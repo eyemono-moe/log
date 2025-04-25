@@ -8,7 +8,10 @@ import rehypeExternalLinks, {
 	type Options as ExternalLinkOptions,
 } from "rehype-external-links";
 import rehypeSlug from "rehype-slug";
+// @ts-ignore
+import rlc from "remark-link-card";
 import UnoCSS from "unocss/astro";
+import Unfonts from "unplugin-fonts/astro";
 import { remarkModifiedTime } from "./src/plugins/remark-modified-time";
 
 // https://astro.build/config
@@ -27,6 +30,16 @@ export default defineConfig({
 				forward: ["dataLayer.push"],
 			},
 		}),
+		Unfonts({
+			google: {
+				families: [
+					{
+						name: "Noto Sans JP",
+						styles: "wght@400;700",
+					},
+				],
+			},
+		}),
 	],
 	env: {
 		schema: {
@@ -38,7 +51,7 @@ export default defineConfig({
 		},
 	},
 	markdown: {
-		remarkPlugins: [remarkModifiedTime],
+		remarkPlugins: [remarkModifiedTime, [rlc, { cache: false }]],
 		rehypePlugins: [
 			rehypeSlug,
 			[

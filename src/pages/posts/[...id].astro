@@ -5,6 +5,9 @@ import { extractText } from "../../utils/extractText";
 import { getPosts } from "../../utils/getPost";
 import { postImageUrl } from "../../utils/ogImageUrl";
 
+// @unocss-include: remark-link-cardをunocssでスタイリングするために書き込んでおく
+("rlc-container rlc-info rlc-title rlc-description rlc-url-container rlc-favicon rlc-url rlc-image-container rlc-image");
+
 export async function getStaticPaths() {
 	const blogEntries = await getPosts();
 	return blogEntries.map((entry) => ({
