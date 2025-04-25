@@ -1,6 +1,7 @@
 ---
 import type { MarkdownHeading } from "astro";
-import { format } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
+import { ja } from "date-fns/locale";
 import Toc from "../components/Toc.astro";
 import BaseLayout from "./BaseLayout.astro";
 
@@ -13,6 +14,9 @@ type Props = {
 };
 
 const { headings, title, description, imageUrl, lastmod } = Astro.props;
+const lastModStr = lastmod
+	? formatInTimeZone(lastmod, "Asia/Tokyo", "yyyy/MM/dd HH:mm", { locale: ja })
+	: "";
 ---
 
 <BaseLayout
@@ -29,11 +33,9 @@ const { headings, title, description, imageUrl, lastmod } = Astro.props;
         </span>
       </h1>
       {
-        lastmod && (
+        lastModStr && (
           <div class="max-w-1200px mx-auto px-4 md:px-8 text-sm">
-            <time datetime={lastmod.toISOString()}>
-              Last modified: {format(lastmod, "yyyy/MM/dd HH:mm")}
-            </time>
+            Last modified: {lastModStr}
           </div>
         )
       }

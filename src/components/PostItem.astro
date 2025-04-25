@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import { format } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
+import { ja } from "date-fns/locale";
 import type { Article } from "../utils/getArticles";
 
 type Props = {
@@ -12,6 +13,9 @@ type Props = {
 };
 
 const { source, title, imageUrl, lastmod, href } = Astro.props;
+const lastModStr = lastmod
+	? formatInTimeZone(lastmod, "Asia/Tokyo", "yyyy/MM/dd HH:mm", { locale: ja })
+	: "";
 ---
 
 <a
@@ -45,10 +49,10 @@ const { source, title, imageUrl, lastmod, href } = Astro.props;
     <div class="text-sm text-zinc-5">
       -rw-r--r--
       {
-        lastmod && (
-          <time datetime={lastmod.toISOString()}>
-            {format(lastmod, "yyyy/MM/dd HH:mm")}
-          </time>
+        lastModStr && (
+          <div class="max-w-1200px mx-auto px-4 md:px-8 text-sm">
+            Last modified: {lastModStr}
+          </div>
         )
       }
     </div>
