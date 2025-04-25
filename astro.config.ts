@@ -1,5 +1,6 @@
 import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
+import solidJs from "@astrojs/solid-js";
 import { defineConfig, envField } from "astro/config";
 import rehypeAutolinkHeadings, {
 	type Options as AutoLinkOptions,
@@ -37,6 +38,7 @@ export default defineConfig({
 				],
 			},
 		}),
+		solidJs(),
 	],
 	env: {
 		schema: {

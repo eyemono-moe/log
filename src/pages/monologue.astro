@@ -1,0 +1,25 @@
+---
+import Monologue from "../components/solid/Monologue";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <div class="w-full max-w-600px mx-auto px-4 md:px-8 space-y-4">
+    <span>
+      <h2 class="inline">monologue</h2>
+      <span>
+        on
+        <a
+          href="https://njump.me/npub1m0n0eyetgrflxghneeckkv95ukrn0fdpzyysscy4vha3gm64739qxn23sk"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Nostr
+        </a>
+      </span>
+    </span>
+    <div>
+      <Monologue client:only />
+    </div>
+  </div>
+</BaseLayout>
