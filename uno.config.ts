@@ -65,12 +65,15 @@ export default defineConfig({
 				"line-clamp-3 decoration-none op-70 hover:op-100 transition-color-200",
 			"toc-link-active": "dark:c-accent c-accent-7 op-100",
 			"toc-is-collapsed": "hidden",
+			"b-zinc-auto": "b-zinc-2 dark:b-zinc-7",
+			"c-primary": "c-zinc-950 dark:c-zinc-1",
+			"c-secondary": "c-zinc-5 dark:c-zinc-4",
 			"rlc-container":
-				"decoration-none c-zinc-950 dark:c-zinc-1 w-full b-1 b-zinc-2 dark:b-zinc-7 rounded-2 flex h-30 justify-between overflow-hidden hover:bg-zinc-50 dark:hover:bg-zinc-8/50 transition-[background-color] @container my-2",
+				"decoration-none c-primary w-full b-1 b-zinc-auto rounded-2 flex h-30 justify-between overflow-hidden hover:bg-zinc-50 dark:hover:bg-zinc-8/50 transition-[background-color] @container my-2",
 			"rlc-info":
 				"flex flex-col justify-between px-2 md:px-4 py-2 overflow-hidden",
 			"rlc-title": "truncate text-lg",
-			"rlc-description": "line-clamp-2 text-sm c-zinc-5 dark:c-zinc-4",
+			"rlc-description": "line-clamp-2 text-sm c-secondary",
 			"rlc-url-container": "flex items-center gap-1",
 			"rlc-favicon": "w-16px h-auto aspect-square shrink-0",
 			"rlc-url": "truncate text-sm text-link",
