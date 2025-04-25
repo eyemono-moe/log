@@ -8,9 +8,11 @@ import rehypeAutolinkHeadings, {
 import rehypeExternalLinks, {
 	type Options as ExternalLinkOptions,
 } from "rehype-external-links";
+import rehypeRaw from "rehype-raw";
 import rehypeSlug from "rehype-slug";
 // @ts-ignore
 import rlc from "remark-link-card";
+import { e } from "unocss";
 import UnoCSS from "unocss/astro";
 import Unfonts from "unplugin-fonts/astro";
 import { remarkModifiedTime } from "./src/plugins/remark-modified-time";
@@ -69,20 +71,31 @@ export default defineConfig({
 					},
 				} satisfies AutoLinkOptions,
 			],
+			rehypeRaw,
 			[
 				rehypeExternalLinks,
 				{
 					target: "_blank",
 					rel: ["noopener", "noreferrer"],
-					content: {
-						type: "element",
-						tagName: "span",
-						properties: {
-							// @unocss-include
-							class:
-								"inline-block h-0.5lh w-auto aspect-square i-material-symbols:open-in-new-rounded",
-						},
-						children: [],
+					// リンクカードでなければ外部リンクマークを付与
+					content: (el) => {
+						if (
+							(el.properties?.className as string[] | undefined)?.includes(
+								"rlc-container",
+							)
+						) {
+							return;
+						}
+						return {
+							type: "element",
+							tagName: "span",
+							properties: {
+								// @unocss-include
+								class:
+									"inline-block h-0.5lh w-auto aspect-square i-material-symbols:open-in-new-rounded",
+							},
+							children: [],
+						};
 					},
 				} satisfies ExternalLinkOptions,
 			],

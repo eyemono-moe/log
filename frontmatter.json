@@ -29,9 +29,14 @@
 					"type": "string"
 				},
 				{
+					"title": "CreatedAt",
+					"name": "createdAt",
+					"type": "datetime"
+				},
+				{
 					"title": "Tags",
 					"name": "tags",
-					"type": "tags"
+					"type": "datetime"
 				},
 				{
 					"title": "Content preview",

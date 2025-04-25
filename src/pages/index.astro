@@ -16,9 +16,10 @@ const postsWithLstMod = await Promise.all(
 			id: post.id,
 			title: post.data.title,
 			imageUrl: postImageUrl(post, Astro.url.origin),
-			postedAt: parseISO(
+			updatedAt: parseISO(
 				(await render(post)).remarkPluginFrontmatter.lastModified,
 			),
+			createdAt: post.data.createdAt,
 		};
 	}),
 );
@@ -26,7 +27,7 @@ const postsWithLstMod = await Promise.all(
 const thirdPartyPosts = await getArticles();
 const allPosts = [...postsWithLstMod, ...thirdPartyPosts];
 const sortedPosts = allPosts.sort(
-	(a, b) => b.postedAt.getTime() - a.postedAt.getTime(),
+	(a, b) => b.createdAt.getTime() - a.createdAt.getTime(),
 );
 ---
 
@@ -43,7 +44,8 @@ const sortedPosts = allPosts.sort(
             source={post.source}
             title={post.title}
             imageUrl={post.imageUrl}
-            lastmod={post.postedAt}
+            lastmod={post.updatedAt}
+            createdAt={post.createdAt}
           />
         ))
       }

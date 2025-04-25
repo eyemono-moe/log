@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { isSameDay } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { ja } from "date-fns/locale";
 import type { Article } from "../utils/getArticles";
@@ -8,14 +9,23 @@ type Props = {
 	source: Article["source"] | "eyemono.log";
 	title: string;
 	imageUrl?: string;
+	createdAt: Date;
 	lastmod?: Date;
 	href: string;
 };
 
-const { source, title, imageUrl, lastmod, href } = Astro.props;
+const { source, title, imageUrl, lastmod, createdAt, href } = Astro.props;
 const lastModStr = lastmod
 	? formatInTimeZone(lastmod, "Asia/Tokyo", "yyyy/MM/dd HH:mm", { locale: ja })
 	: "";
+const createdAtStr = formatInTimeZone(
+	createdAt,
+	"Asia/Tokyo",
+	"yyyy/MM/dd HH:mm",
+	{ locale: ja },
+);
+// lastmodがある && 更新日と作成日が異なる場合は更新日を表示
+const showLastMod = lastmod && !isSameDay(lastmod, createdAt);
 ---
 
 <a
@@ -46,12 +56,22 @@ const lastModStr = lastmod
         )
       }
     </h2>
-    <div class="text-sm text-zinc-5">
-      -rw-r--r--
+    <div class="text-sm text-zinc-5 flex flex-wrap gap-2">
+      <div class="flex items-center gap-1" title={`created at ${createdAtStr}`}>
+        <div
+          class="i-material-symbols:schedule-outline-rounded inline-block h-0.8lh w-auto aspect-square"
+        >
+        </div>
+        {createdAtStr}
+      </div>
       {
-        lastModStr && (
-          <div class="max-w-1200px mx-auto px-4 md:px-8 text-sm">
-            Last modified: {lastModStr}
+        showLastMod && (
+          <div
+            class="flex items-center gap-1"
+            title={`updated at ${lastModStr}`}
+          >
+            <div class="i-material-symbols:sync-rounded inline-block h-0.8lh w-auto aspect-square" />
+            {lastModStr}
           </div>
         )
       }

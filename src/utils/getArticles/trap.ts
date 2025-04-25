@@ -45,7 +45,7 @@ export const fetchTrapArticles = async (apiKey: string) => {
 		url: post.url,
 		title: post.title,
 		imageUrl: post.feature_image ?? undefined,
-		postedAt: new Date(post.published_at),
+		createdAt: new Date(post.published_at),
 	}));
 
 	return articles;

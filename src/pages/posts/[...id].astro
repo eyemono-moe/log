@@ -32,6 +32,7 @@ const description =
   headings={headings}
   description={description}
   lastmod={parseISO(remarkPluginFrontmatter.lastModified)}
+	createdAt={entry.data.createdAt}
   imageUrl={postImageUrl(entry, Astro.url.origin)}
 >
   <Content />

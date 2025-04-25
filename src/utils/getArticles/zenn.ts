@@ -45,7 +45,7 @@ export const fetchZennArticles = async (): Promise<Article[]> => {
 			source: "zenn.dev",
 			title: a.title,
 			url: `https://zenn.dev${a.path}`,
-			postedAt: new Date(a.published_at),
+			createdAt: new Date(a.published_at),
 			imageUrl: ogImageUrls[i],
 		}));
 

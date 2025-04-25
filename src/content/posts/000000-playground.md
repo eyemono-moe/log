@@ -1,7 +1,9 @@
 ---
 title: Playground (do not publish), lorem ipsum dolor sit amet
-tags: ["Markdown"]
+tags:
+  - Markdown
 draft: true
+createdAt: 2024-12-30T15:00:00.000Z
 ---
 
 # 見出し 1 (Header 1)

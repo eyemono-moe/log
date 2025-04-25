@@ -21,7 +21,6 @@ export const GET: APIRoute<{ entry: CollectionEntry<"posts"> }> = async ({
 	params,
 	props,
 }) => {
-	console.log(params);
 	const { id } = params;
 	if (!id) {
 		return new Response("Not Found", { status: 404 });
