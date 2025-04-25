@@ -1,0 +1,6 @@
+{
+	"markdown.copyFiles.destination": {
+		"/src/content/posts/**/*": "${documentWorkspaceFolder}/public/media/${documentBaseName}/${unixTime}-${fileName}"
+	},
+	"[markdown]": {}
+}
