@@ -59,15 +59,16 @@ export default defineConfig({
 	shortcuts: [
 		{
 			"bg-primary": "bg-white dark:bg-zinc-900",
-			"text-link":
-				"text-blue-7 visited:text-blue-9 dark:text-blue-4 dark:visited:text-blue-3 underline",
-			"toc-link":
-				"line-clamp-3 decoration-none op-70 hover:op-100 transition-color-200",
-			"toc-link-active": "dark:c-accent c-accent-7 op-100",
-			"toc-is-collapsed": "hidden",
 			"b-zinc-auto": "b-zinc-2 dark:b-zinc-7",
 			"c-primary": "c-zinc-950 dark:c-zinc-1",
 			"c-secondary": "c-zinc-5 dark:c-zinc-4",
+			btn: "rounded bg-transparent enabled:hover:(bg-zinc-50 dark:bg-zinc-8/50) transition-[background-color] disabled:opacity-50 data-[loading='true']:cursor-progress",
+			"text-link":
+				"text-blue-7 visited:text-blue-9 dark:text-blue-4 dark:visited:text-blue-3 underline",
+			"toc-link":
+				"line-clamp-3 decoration-none c-secondary hover:c-primary transition-color-200",
+			"toc-link-active": "dark:c-accent c-accent-7",
+			"toc-is-collapsed": "hidden",
 			"rlc-container":
 				"decoration-none c-primary w-full b-1 b-zinc-auto rounded-2 flex h-30 justify-between overflow-hidden hover:bg-zinc-50 dark:hover:bg-zinc-8/50 transition-[background-color] @container my-2",
 			"rlc-info":

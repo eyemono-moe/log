@@ -75,7 +75,7 @@ const Monologue: Component = () => {
 				}}
 			/> */}
 			<button
-				class="rounded w-full text-center bg-transparent p-6 enabled:hover:(bg-zinc-50 dark:bg-zinc-8/50) transition-[background-color] disabled:opacity-50 data-[loading='true']:cursor-progress"
+				class="btn w-full text-center p-6 "
 				type="button"
 				onClick={fetchNextPage}
 				disabled={!hasNextPage() || isFetching()}
