@@ -12,6 +12,14 @@ const postEntries = await getPosts();
 
 const postsWithLstMod = await Promise.all(
 	postEntries.map(async (post) => {
+		// 一度もpushしていない編集中記事はundefinedになる
+		const updatedAtStr = (await render(post)).remarkPluginFrontmatter
+			.lastModified;
+		let updatedAt: Date | undefined;
+		if (updatedAtStr) {
+			updatedAt = parseISO(updatedAtStr);
+		}
+
 		return {
 			source: "eyemono.log" as const,
 			url: `/posts/${post.id}`,
@@ -19,9 +27,7 @@ const postsWithLstMod = await Promise.all(
 			summary: post.data.summary,
 			title: post.data.title,
 			imageUrl: postImageUrl(post, Astro.url.origin),
-			updatedAt: parseISO(
-				(await render(post)).remarkPluginFrontmatter.lastModified,
-			),
+			updatedAt,
 			createdAt: post.data.createdAt,
 			tags: post.data.tags,
 		} satisfies PostEntry;
