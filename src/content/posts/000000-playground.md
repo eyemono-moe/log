@@ -1,9 +1,20 @@
 ---
 title: Playground (do not publish), lorem ipsum dolor sit amet
 tags:
+  - code examples
+  - content structure
+  - Front Matter
+  - inline code
+  - lists
+  - lorem ipsum
   - Markdown
+  - Markdown Guide
+  - Python
+  - tables
+  - writing tips
 draft: true
 createdAt: 2024-12-30T15:00:00.000Z
+category: tech
 ---
 
 # 見出し 1 (Header 1)

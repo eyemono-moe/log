@@ -1,7 +1,10 @@
 ---
 title: ブログエディタを作ろうとしてやっぱりやめた
-tags: []
+tags:
+  - Astro
+  - Front Matter CMS
 createdAt: 2025-04-25T18:13:00.502Z
+category: tech
 ---
 
 タイトルの通りですが、ブログエディタを作ろうとしてやっぱりやめました。

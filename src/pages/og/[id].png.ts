@@ -1,8 +1,9 @@
-import { type CollectionEntry, getCollection, getEntry } from "astro:content";
+import { getEntry } from "astro:content";
 import { Resvg } from "@resvg/resvg-js";
 import type { APIRoute } from "astro";
 import satori from "satori";
 import { html } from "satori-html";
+import type { AstroPostEntry } from "../../content.config";
 import { fetchGoogleFont } from "../../utils/fetchGoogleFont";
 import { getPosts } from "../../utils/getPost";
 
@@ -17,7 +18,7 @@ export async function getStaticPaths() {
 const height = 630;
 const width = 1200;
 
-export const GET: APIRoute<{ entry: CollectionEntry<"posts"> }> = async ({
+export const GET: APIRoute<{ entry: AstroPostEntry }> = async ({
 	params,
 	props,
 }) => {

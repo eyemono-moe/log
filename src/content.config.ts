@@ -1,4 +1,4 @@
-import { defineCollection, z } from "astro:content";
+import { type CollectionEntry, defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
 const postCollection = defineCollection({
@@ -13,8 +13,22 @@ const postCollection = defineCollection({
 		draft: z.boolean().optional(),
 		imageUrl: z.string().url().optional(),
 		createdAt: z.date(),
+		updatedAt: z.date().optional(),
+		category: z.union([z.literal("tech"), z.literal("idea")]),
 	}),
 });
+
+// Astroのcontent内のpostエントリー
+export type AstroPostEntry = CollectionEntry<"posts">;
+
+type PostSource = "trap.jp" | "zenn.dev" | "eyemono.log";
+
+// 外部投稿を含めた全てのエントリーが持つべき型
+export type PostEntry<T extends PostSource = PostSource> =
+	AstroPostEntry["data"] & {
+		source: T;
+		url: string;
+	};
 
 export const collections = {
 	posts: postCollection,
