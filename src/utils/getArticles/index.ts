@@ -2,15 +2,6 @@ import { GHOST_API_KEY } from "astro:env/server";
 import { fetchTrapArticles } from "./trap";
 import { fetchZennArticles } from "./zenn";
 
-export type Article = {
-	source: "zenn.dev" | "trap.jp";
-	url: string;
-	title: string;
-	imageUrl?: string;
-	createdAt: Date;
-	updatedAt?: Date;
-};
-
 export const getArticles = async () => {
 	const ghostApiKey = GHOST_API_KEY;
 

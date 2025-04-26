@@ -12,15 +12,17 @@ type Props = {
 	headings: MarkdownHeading[];
 	imageUrl?: string;
 	createdAt: Date;
-	lastmod?: Date;
+	updatedAt?: Date;
 };
 
-const { headings, title, description, imageUrl, createdAt, lastmod } =
+const { headings, title, description, imageUrl, createdAt, updatedAt } =
 	Astro.props;
-const lastModStr = lastmod
-	? formatInTimeZone(lastmod, "Asia/Tokyo", "yyyy/MM/dd HH:mm", { locale: ja })
+const lastModStr = updatedAt
+	? formatInTimeZone(updatedAt, "Asia/Tokyo", "yyyy/MM/dd HH:mm", {
+			locale: ja,
+		})
 	: "";
-const showLastMod = lastmod && !isSameDay(lastmod, createdAt);
+const showLastMod = updatedAt && !isSameDay(updatedAt, createdAt);
 ---
 
 <BaseLayout

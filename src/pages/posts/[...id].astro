@@ -25,14 +25,20 @@ const description =
 	(entry.rendered?.html &&
 		extractText(entry.rendered.html).substring(0, 140).replace(/\n/g, " ")) ||
 	entry.body?.substring(0, 140).replace(/\n/g, "");
+
+// 一度もpushしていない編集中記事はundefinedになる
+let updatedAt: Date | undefined;
+if (remarkPluginFrontmatter.lastModified) {
+	updatedAt = parseISO(remarkPluginFrontmatter.lastModified);
+}
 ---
 
 <PostLayout
   title={entry.data.title}
   headings={headings}
   description={description}
-  lastmod={parseISO(remarkPluginFrontmatter.lastModified)}
-	createdAt={entry.data.createdAt}
+  updatedAt={updatedAt}
+  createdAt={entry.data.createdAt}
   imageUrl={postImageUrl(entry, Astro.url.origin)}
 >
   <Content />

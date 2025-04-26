@@ -2,6 +2,7 @@
 import { render } from "astro:content";
 import { parseISO } from "date-fns";
 import PostItem from "../components/PostItem.astro";
+import type { PostEntry } from "../content.config";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getArticles } from "../utils/getArticles";
 import { getPosts } from "../utils/getPost";
@@ -11,21 +12,30 @@ const postEntries = await getPosts();
 
 const postsWithLstMod = await Promise.all(
 	postEntries.map(async (post) => {
+		// 一度もpushしていない編集中記事はundefinedになる
+		const updatedAtStr = (await render(post)).remarkPluginFrontmatter
+			.lastModified;
+		let updatedAt: Date | undefined;
+		if (updatedAtStr) {
+			updatedAt = parseISO(updatedAtStr);
+		}
+
 		return {
 			source: "eyemono.log" as const,
-			id: post.id,
+			url: `/posts/${post.id}`,
+			category: post.data.category,
+			summary: post.data.summary,
 			title: post.data.title,
 			imageUrl: postImageUrl(post, Astro.url.origin),
-			updatedAt: parseISO(
-				(await render(post)).remarkPluginFrontmatter.lastModified,
-			),
+			updatedAt,
 			createdAt: post.data.createdAt,
-		};
+			tags: post.data.tags,
+		} satisfies PostEntry;
 	}),
 );
 
 const thirdPartyPosts = await getArticles();
-const allPosts = [...postsWithLstMod, ...thirdPartyPosts];
+const allPosts: PostEntry[] = [...postsWithLstMod, ...thirdPartyPosts];
 const sortedPosts = allPosts.sort(
 	(a, b) => b.createdAt.getTime() - a.createdAt.getTime(),
 );
@@ -38,14 +48,14 @@ const sortedPosts = allPosts.sort(
       {
         sortedPosts.map((post) => (
           <PostItem
-            href={
-              post.source === "eyemono.log" ? `/posts/${post.id}` : post.url
-            }
+            url={post.url}
             source={post.source}
             title={post.title}
             imageUrl={post.imageUrl}
-            lastmod={post.updatedAt}
+            updatedAt={post.updatedAt}
             createdAt={post.createdAt}
+            category={post.category}
+            tags={post.tags}
           />
         ))
       }

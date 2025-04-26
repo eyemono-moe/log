@@ -36,7 +36,13 @@
 				{
 					"title": "Tags",
 					"name": "tags",
-					"type": "datetime"
+					"type": "tags"
+				},
+				{
+					"title": "Category",
+					"name": "category",
+					"type": "choice",
+					"choices": ["tech", "idea"]
 				},
 				{
 					"title": "Content preview",
