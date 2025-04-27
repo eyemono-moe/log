@@ -8,10 +8,7 @@ import {
 import { map } from "rxjs";
 import { createSignal } from "solid-js";
 import { createStore } from "solid-js/store";
-import {
-	type ParsedEventPacket,
-	parseEventPacket,
-} from "./parser/1_shortTextNote";
+import { type ParsedEventPacket, parseEventPacket } from "./parser";
 
 export const createInfiniteEvent = (
 	rxNostr: RxNostr,

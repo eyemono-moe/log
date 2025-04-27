@@ -20,6 +20,9 @@ importers:
       '@solid-primitives/intersection-observer':
         specifier: ^2.2.0
         version: 2.2.0(solid-js@1.9.5)
+      '@tanstack/solid-query':
+        specifier: ^5.74.7
+        version: 5.74.7(solid-js@1.9.5)
       '@unocss/preset-wind3':
         specifier: 66.1.0-beta.12
         version: 66.1.0-beta.12
@@ -29,6 +32,9 @@ importers:
       date-fns-tz:
         specifier: ^3.2.0
         version: 3.2.0(date-fns@4.1.0)
+      linkifyjs:
+        specifier: ^4.2.0
+        version: 4.2.0
       nostr-tools:
         specifier: ^2.12.0
         version: 2.12.0(typescript@5.7.2)
@@ -1221,6 +1227,14 @@ packages:
     resolution: {integrity: sha512-4BAffykYOgO+5nzBWYwE3W90sBgLJoUPRWWcL8wlyiM8IB8ipJz3UMJ9KXQd1RKQXpKp8Tutn80HZtWsu2u76w==}
     engines: {node: '>=10'}
 
+  '@tanstack/query-core@5.74.7':
+    resolution: {integrity: sha512-X3StkN/Y6KGHndTjJf8H8th7AX4bKfbRpiVhVqevf0QWlxl6DhyJ0TYG3R0LARa/+xqDwzU9mA4pbJxzPCI29A==}
+
+  '@tanstack/solid-query@5.74.7':
+    resolution: {integrity: sha512-SJVwum8JQOt3f6V2yjdBwpu1IRBLUQ+t4a0DQWaxJKoCPmFdYzsr1qCUYVhn99r/WA4PC081qjKh4Yb3vB5Lwg==}
+    peerDependencies:
+      solid-js: ^1.6.0
+
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
 
@@ -2060,6 +2074,9 @@ packages:
 
   linebreak@1.1.0:
     resolution: {integrity: sha512-MHp03UImeVhB7XZtjd0E4n6+3xr5Dq/9xI/5FptGk5FrbDR3zagPa2DS6U8ks/3HjbKWG9Q1M2ufOzxV2qLYSQ==}
+
+  linkifyjs@4.2.0:
+    resolution: {integrity: sha512-pCj3PrQyATaoTYKHrgWRF3SJwsm61udVh+vuls/Rl6SptiDhgE7ziUIudAedRY9QEfynmM7/RmLEfPUyw1HPCw==}
 
   local-pkg@1.1.1:
     resolution: {integrity: sha512-WunYko2W1NcdfAFpuLUoucsgULmgDBRkdxHxWQ7mK0cQqwPiy8E1enjuRBrhLtZkB5iScJ1XIPdhVEFK8aOLSg==}
@@ -4067,6 +4084,13 @@ snapshots:
     dependencies:
       defer-to-connect: 2.0.1
 
+  '@tanstack/query-core@5.74.7': {}
+
+  '@tanstack/solid-query@5.74.7(solid-js@1.9.5)':
+    dependencies:
+      '@tanstack/query-core': 5.74.7
+      solid-js: 1.9.5
+
   '@types/babel__core@7.20.5':
     dependencies:
       '@babel/parser': 7.27.0
@@ -5148,6 +5172,8 @@ snapshots:
     dependencies:
       base64-js: 0.0.8
       unicode-trie: 2.0.0
+
+  linkifyjs@4.2.0: {}
 
   local-pkg@1.1.1:
     dependencies:

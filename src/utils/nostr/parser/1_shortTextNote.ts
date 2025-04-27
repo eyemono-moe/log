@@ -81,7 +81,7 @@ export const parseTextNoteTags = (input: string[][]) => {
 	);
 };
 
-const parseShortTextNote = (input: NostrEvent) => {
+export const parseShortTextNote = (input: NostrEvent) => {
 	if (input.kind !== kinds.ShortTextNote) {
 		throw new Error(`kind is not ShortTextNote: ${input.kind}`);
 	}
@@ -111,10 +111,4 @@ const parseShortTextNote = (input: NostrEvent) => {
 	);
 };
 
-export const parseEventPacket = (e: EventPacket) => ({
-	from: e.from,
-	raw: e.event,
-	parsed: parseShortTextNote(e.event),
-});
-
-export type ParsedEventPacket = ReturnType<typeof parseEventPacket>;
+export type ShortTextNote = ReturnType<typeof parseShortTextNote>;
