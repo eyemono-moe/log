@@ -10,10 +10,10 @@ export const RxNostrProvider: ParentComponent = (props) => {
 	});
 
 	rxNostr.setDefaultRelays([
-		// "wss://yabu.me/",
-		// "wss://nos.lol/",
-		// "wss://nostr.compile-error.net/",
-		"ws://localhost:8080",
+		"wss://yabu.me/",
+		"wss://nos.lol/",
+		"wss://nostr.compile-error.net/",
+		// "ws://localhost:8080",
 	]);
 
 	return (
