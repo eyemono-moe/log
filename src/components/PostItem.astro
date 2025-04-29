@@ -83,10 +83,10 @@ const _imageUrl = imageUrl ?? postImageUrl(id, Astro.url.origin);
         </li>
         {
           tags.map((tag) => (
-            <li>
+            <li class="z-1">
               <a
                 href={`/tags/${tag}`}
-                class="rounded-full b-1 px-1 text-xs c-secondary b-zinc-auto z-1 hover:bg-zinc-50 dark:hover:bg-zinc-8/50 transition-[background-color]"
+                class="rounded-full b-1 px-1 text-xs c-secondary b-zinc-auto hover:bg-zinc-50 dark:hover:bg-zinc-8/50 transition-[background-color]"
               >
                 {tag}
               </a>
