@@ -1,64 +1,16 @@
 ---
-import { render } from "astro:content";
-import { parseISO } from "date-fns";
 import PostItem from "../components/PostItem.astro";
-import type { PostEntry } from "../content.config";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getArticles } from "../utils/getArticles";
-import { getPosts } from "../utils/getPost";
-import { postImageUrl } from "../utils/ogImageUrl";
+import { getAllPosts } from "../utils/getPost";
 
-const postEntries = await getPosts();
-
-const postsWithLstMod = await Promise.all(
-	postEntries.map(async (post) => {
-		// 一度もpushしていない編集中記事はundefinedになる
-		const updatedAtStr = (await render(post)).remarkPluginFrontmatter
-			.lastModified;
-		let updatedAt: Date | undefined;
-		if (updatedAtStr) {
-			updatedAt = parseISO(updatedAtStr);
-		}
-
-		return {
-			source: "eyemono.log" as const,
-			url: `/posts/${post.id}`,
-			category: post.data.category,
-			summary: post.data.summary,
-			title: post.data.title,
-			imageUrl: postImageUrl(post, Astro.url.origin),
-			updatedAt,
-			createdAt: post.data.createdAt,
-			tags: post.data.tags,
-		} satisfies PostEntry;
-	}),
-);
-
-const thirdPartyPosts = await getArticles();
-const allPosts: PostEntry[] = [...postsWithLstMod, ...thirdPartyPosts];
-const sortedPosts = allPosts.sort(
-	(a, b) => b.createdAt.getTime() - a.createdAt.getTime(),
-);
+const sortedPosts = await getAllPosts(Astro.url.origin);
 ---
 
 <BaseLayout>
   <div class="w-full max-w-1200px mx-auto px-4 md:px-8">
     <h2>ls -l logs</h2>
     <div class="grid grid-cols-minmax-250px gap-x-4 gap-y-8">
-      {
-        sortedPosts.map((post) => (
-          <PostItem
-            url={post.url}
-            source={post.source}
-            title={post.title}
-            imageUrl={post.imageUrl}
-            updatedAt={post.updatedAt}
-            createdAt={post.createdAt}
-            category={post.category}
-            tags={post.tags}
-          />
-        ))
-      }
+      {sortedPosts.map((post) => <PostItem post={post} />)}
     </div>
   </div>
 </BaseLayout>

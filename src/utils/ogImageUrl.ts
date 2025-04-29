@@ -1,5 +1,3 @@
-import type { DataEntryMap } from "astro:content";
-
 /**
  * Get the URL for an Open Graph image for a post
  *
@@ -7,9 +5,6 @@ import type { DataEntryMap } from "astro:content";
  * @param origin The origin of the site
  * @returns The URL for the Open Graph image
  */
-export const postImageUrl = (
-	post: DataEntryMap["posts"][string],
-	origin: string,
-) => {
-	return post.data.imageUrl ?? new URL(`/og/${post.id}.png`, origin).toString();
+export const postImageUrl = (postId: string, origin: string) => {
+	return new URL(`/og/${postId}.png`, origin).toString();
 };

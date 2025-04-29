@@ -1,21 +1,24 @@
 ---
-import type { MarkdownHeading } from "astro";
 import { isSameDay } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { ja } from "date-fns/locale";
+import Tag from "../components/Tag.astro";
 import Toc from "../components/Toc.astro";
+import type { PostEntry } from "../content.config";
+import { categoryText } from "../utils/category";
 import BaseLayout from "./BaseLayout.astro";
 
 type Props = {
 	title: string;
 	description?: string;
-	headings: MarkdownHeading[];
 	imageUrl?: string;
 	createdAt: Date;
 	updatedAt?: Date;
+	tags: string[];
+	category: PostEntry["category"];
 };
 
-const { headings, title, description, imageUrl, createdAt, updatedAt } =
+const { title, description, imageUrl, createdAt, updatedAt, tags, category } =
 	Astro.props;
 const lastModStr = updatedAt
 	? formatInTimeZone(updatedAt, "Asia/Tokyo", "yyyy/MM/dd HH:mm", {
@@ -25,33 +28,48 @@ const lastModStr = updatedAt
 const showLastMod = updatedAt && !isSameDay(updatedAt, createdAt);
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  headings={headings}
-  imageUrl={imageUrl}
->
-  <article>
+<BaseLayout title={title} description={description} imageUrl={imageUrl}>
+  <article class="space-y-4">
     <header>
       <h1 class="max-w-800px mx-auto px-4 text-left w-fit">
         <span>
           {title}
         </span>
       </h1>
-      <div class="max-w-1200px mx-auto px-4 md:px-8 text-sm">
-        Created At: {
-          formatInTimeZone(createdAt, "Asia/Tokyo", "yyyy/MM/dd HH:mm", {
-            locale: ja,
-          })
-        }
-      </div>
-      {
-        showLastMod && (
-          <div class="max-w-1200px mx-auto px-4 md:px-8 text-sm">
-            Updated At: {lastModStr}
+      <div class="max-w-1200px mx-auto px-4 md:px-8 text-sm space-y-2">
+        <div>
+          <div>
+            Created At: {
+              formatInTimeZone(createdAt, "Asia/Tokyo", "yyyy/MM/dd HH:mm", {
+                locale: ja,
+              })
+            }
           </div>
-        )
-      }
+          {showLastMod && <div>Updated At: {lastModStr}</div>}
+        </div>
+        <ul class="not-prose list-none flex flex-wrap gap-1">
+          <li>
+            <span
+              class:list={[
+                "rounded-full b-1 px-2",
+                {
+                  "c-orange b-orange": category === "idea",
+                  "c-blue b-blue": category === "tech",
+                },
+              ]}
+            >
+              {categoryText(category)}
+            </span>
+          </li>
+          {
+            tags.map((tag) => (
+              <li>
+                <Tag tag={tag} />
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </header>
     <div
       class="max-w-1200px mx-auto px-4 md:px-8 grid grid-cols-[minmax(0,1fr)_0] lg:(grid-cols-[minmax(0,1fr)_16rem] justify-center gap-4)"
@@ -62,7 +80,7 @@ const showLastMod = updatedAt && !isSameDay(updatedAt, createdAt);
       <aside class="hidden lg:block">
         <div class="sticky top-[calc(3.5rem)]">
           <div class="max-h-[calc(100vh-3.5rem)] flex">
-            <Toc headings={headings} />
+            <Toc />
           </div>
         </div>
       </aside>

@@ -26,6 +26,7 @@ type PostSource = "trap.jp" | "zenn.dev" | "eyemono.log";
 // 外部投稿を含めた全てのエントリーが持つべき型
 export type PostEntry<T extends PostSource = PostSource> =
 	AstroPostEntry["data"] & {
+		id: string;
 		source: T;
 		url: string;
 	};

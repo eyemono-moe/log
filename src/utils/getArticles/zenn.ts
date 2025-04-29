@@ -50,6 +50,7 @@ export const fetchZennArticles = async (): Promise<PostEntry[]> => {
 		);
 
 		const articles: PostEntry[] = zennArticles.map((a, i) => ({
+			id: a.slug,
 			source: "zenn.dev",
 			title: a.title,
 			url: `https://zenn.dev${a.path}`,

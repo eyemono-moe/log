@@ -1,5 +1,4 @@
 ---
-import type { MarkdownHeading } from "astro";
 import Unfont from "unplugin-fonts/astro/component.astro";
 import BaseMeta from "../components/BaseMeta.astro";
 import Footer from "../components/Footer.astro";
@@ -8,11 +7,10 @@ import Header from "../components/Header.astro";
 type Props = {
 	title?: string;
 	description?: string;
-	headings?: MarkdownHeading[];
 	imageUrl?: string;
 };
 
-const { headings, title, description, imageUrl } = Astro.props;
+const { title, description, imageUrl } = Astro.props;
 const currentUrl = Astro.url;
 ---
 
@@ -30,7 +28,7 @@ const currentUrl = Astro.url;
   <body
     class="font-sans prose prose-zinc dark:prose-invert max-w-unset! bg-primary grid grid-rows-[auto_minmax(0,1fr)_auto] min-h-screen max-w-screen"
   >
-    <Header headings={headings} />
+    <Header />
     <slot />
     <Footer />
   </body>

@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content, headings, remarkPluginFrontmatter } = await render(entry);
+const { Content, remarkPluginFrontmatter } = await render(entry);
 
 const description =
 	entry.data.summary ||
@@ -35,11 +35,12 @@ if (remarkPluginFrontmatter.lastModified) {
 
 <PostLayout
   title={entry.data.title}
-  headings={headings}
+  category={entry.data.category}
   description={description}
   updatedAt={updatedAt}
   createdAt={entry.data.createdAt}
-  imageUrl={postImageUrl(entry, Astro.url.origin)}
+  imageUrl={postImageUrl(entry.id, Astro.url.origin)}
+  tags={entry.data.tags ?? []}
 >
   <Content />
 </PostLayout>

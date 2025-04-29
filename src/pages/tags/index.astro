@@ -1,0 +1,27 @@
+---
+import Tag from "../../components/Tag.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getAllPosts } from "../../utils/getPost";
+
+const allPosts = await getAllPosts(Astro.url.origin);
+const tags = [
+	...new Set(
+		allPosts.flatMap((post) => post.tags).filter((tag) => tag !== undefined),
+	),
+].sort((a, b) => a.localeCompare(b));
+---
+
+<BaseLayout title="Tags" description="記事のタグ一覧">
+  <div class="max-w-1200px w-full mx-auto px-4 md:px-8">
+    <h1 class="text-2xl font-bold mb-4">Tags</h1>
+    <ul class="not-prose list-none flex flex-wrap gap-2">
+      {
+        tags.map((tag) => (
+          <li>
+            <Tag tag={tag} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</BaseLayout>

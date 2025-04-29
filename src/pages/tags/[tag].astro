@@ -1,0 +1,30 @@
+---
+import PostItem from "../../components/PostItem.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getAllPosts } from "../../utils/getPost";
+
+export async function getStaticPaths() {
+	const allPosts = await getAllPosts();
+	const allTags = allPosts
+		.flatMap((post) => post.tags)
+		.filter((tag) => tag !== undefined);
+	return allTags.map((tag) => ({
+		params: { tag },
+		props: {
+			posts: allPosts.filter((post) => post.tags?.includes(tag)),
+		},
+	}));
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<BaseLayout title={`タグ: ${tag}`} description={`タグ: ${tag}の記事一覧`}>
+  <div class="w-full max-w-1200px mx-auto px-4 md:px-8">
+    <h2>ls -l logs</h2>
+    <div class="grid grid-cols-minmax-250px gap-x-4 gap-y-8">
+      {posts.map((post) => <PostItem post={post} />)}
+    </div>
+  </div>
+</BaseLayout>

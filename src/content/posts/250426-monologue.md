@@ -1,8 +1,8 @@
 ---
 title: ブログにつぶやき表示機能を付けた
 tags:
-  - Nostr
-  - SolidJS
+  - nostr
+  - solidjs
 createdAt: 2025-04-26T17:16:00.778Z
 category: tech
 ---

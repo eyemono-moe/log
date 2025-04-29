@@ -4,11 +4,22 @@ import { isSameDay } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import { ja } from "date-fns/locale";
 import type { PostEntry } from "../content.config";
+import { categoryText } from "../utils/category";
+import { postImageUrl } from "../utils/ogImageUrl";
 
-type Props = PostEntry;
+type Props = { post: PostEntry };
 
-const { source, title, imageUrl, updatedAt, createdAt, url, tags } =
-	Astro.props;
+const {
+	id,
+	source,
+	title,
+	imageUrl,
+	updatedAt,
+	createdAt,
+	url,
+	tags = [],
+	category,
+} = Astro.props.post;
 const lastModStr = updatedAt
 	? formatInTimeZone(updatedAt, "Asia/Tokyo", "yyyy/MM/dd HH:mm", {
 			locale: ja,
@@ -22,19 +33,22 @@ const createdAtStr = formatInTimeZone(
 );
 // updatedAtがある && 更新日と作成日が異なる場合は更新日を表示
 const showLastMod = updatedAt && !isSameDay(updatedAt, createdAt);
+const _imageUrl = imageUrl ?? postImageUrl(id, Astro.url.origin);
 ---
 
-<a
-  class="group not-prose flex flex-col gap-2"
-  href={url}
-  rel="noopener noreferrer"
-  target={source === "eyemono.log" ? "_self" : "_blank"}
->
-  <div class="overflow-hidden rounded">
+<article class="group not-prose flex flex-col gap-2 relative h-fit">
+  <a
+    aria-hidden="true"
+    tabindex="-1"
+    class="inset-0 absolute"
+    href={url}
+    rel="noopener noreferrer"
+    target={source === "eyemono.log" ? "_self" : "_blank"}></a>
+  <div class="overflow-hidden rounded z--1">
     {
-      imageUrl && (
+      _imageUrl && (
         <Image
-          src={imageUrl}
+          src={_imageUrl}
           alt={title}
           width={500}
           height={500 * (630 / 1200)}
@@ -53,19 +67,35 @@ const showLastMod = updatedAt && !isSameDay(updatedAt, createdAt);
       }
     </h2>
     <div>
-      {
-        tags && (
-          <div class="flex flex-wrap gap-1">
-            {tags.map((tag) => (
-              <span class="rounded-full b-1 px-1 text-xs c-secondary b-zinc-auto">
+      <ul class="not-prose list-none flex flex-wrap gap-1">
+        <li>
+          <span
+            class:list={[
+              "rounded-full b-1 px-1 text-xs",
+              {
+                "c-orange b-orange": category === "idea",
+                "c-blue b-blue": category === "tech",
+              },
+            ]}
+          >
+            {categoryText(category)}
+          </span>
+        </li>
+        {
+          tags.map((tag) => (
+            <li>
+              <a
+                href={`/tags/${tag}`}
+                class="rounded-full b-1 px-1 text-xs c-secondary b-zinc-auto z-1 hover:bg-zinc-50 dark:hover:bg-zinc-8/50 transition-[background-color]"
+              >
                 {tag}
-              </span>
-            ))}
-          </div>
-        )
-      }
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
-    <div class="text-sm text-zinc-5 flex flex-wrap gap-2">
+    <div class="text-sm text-zinc-5 flex flex-wrap gap-x-2">
       <div class="flex items-center gap-1" title={`created at ${createdAtStr}`}>
         <div
           class="i-material-symbols:schedule-outline-rounded inline-block h-0.8lh w-auto aspect-square"
@@ -75,10 +105,7 @@ const showLastMod = updatedAt && !isSameDay(updatedAt, createdAt);
       </div>
       {
         showLastMod && (
-          <div
-            class="flex items-center gap-1"
-            title={`updated at ${lastModStr}`}
-          >
+          <div class="flex items-center gap-1">
             <div class="i-material-symbols:sync-rounded inline-block h-0.8lh w-auto aspect-square" />
             {lastModStr}
           </div>
@@ -86,4 +113,4 @@ const showLastMod = updatedAt && !isSameDay(updatedAt, createdAt);
       }
     </div>
   </div>
-</a>
+</article>

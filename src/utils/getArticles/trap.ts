@@ -13,6 +13,7 @@ const traqPostTagSchema = v.object({
 const getPostsResponseSchema = v.object({
 	posts: v.array(
 		v.object({
+			id: v.string(),
 			title: v.string(),
 			url: v.string(),
 			feature_image: v.nullable(v.string()),
@@ -49,6 +50,7 @@ export const fetchTrapArticles = async (apiKey: string) => {
 	const posts = await getPosts(apiKey);
 
 	const articles: PostEntry[] = posts.map((post) => ({
+		id: post.id,
 		source: "trap.jp",
 		url: post.url,
 		title: post.title,
