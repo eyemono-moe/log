@@ -2,7 +2,6 @@
 title: AstroでURL末尾に.mdを付けた時にMarkdownを表示させる
 tags:
   - astro
-draft: true
 createdAt: 2025-05-03T14:59:40.727Z
 category: tech
 ---
