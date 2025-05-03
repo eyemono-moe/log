@@ -3,8 +3,6 @@ title: ブログエディタを作ろうとしてやっぱりやめた
 tags:
   - astro
   - frontmattercms
-  - 日本語
-  - モノヅクリ
 createdAt: 2025-04-25T18:13:00.502Z
 category: tech
 ---
