@@ -4,8 +4,8 @@ tags:
   - astro
 createdAt: 2025-05-03T14:59:40.727Z
 category: tech
+lastModified: 2025-05-04T00:06:01+09:00
 ---
-
 Twitterで見かけたやつを本ブログに実装しました。
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">関係ない (ちょっとある) けど、Qiitaが記事のURL末尾に .md をつけると Markdown を返してくれたり、GitHub の Pull Request の URL 末尾に .diff をつけると diff を返してくれるのめっちゃ好き</p>&mdash; Yuya Takeyama (@yuya_takeyama) <a href="https://twitter.com/yuya_takeyama/status/1918243540792230245?ref_src=twsrc%5Etfw">May 2, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

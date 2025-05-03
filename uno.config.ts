@@ -1,3 +1,4 @@
+import fs from "node:fs/promises";
 import presetWind3 from "@unocss/preset-wind3";
 import {
 	defineConfig,
@@ -51,6 +52,12 @@ export default defineConfig({
 		presetWind3(),
 		presetIcons({
 			autoInstall: true,
+			collections: {
+				source: {
+					trap: () => fs.readFile("./src/assets/trap.svg", "utf-8"),
+					zenn: () => fs.readFile("./src/assets/zenn.svg", "utf-8"),
+				},
+			},
 		}),
 		presetTypography(),
 		presetWebFonts(),

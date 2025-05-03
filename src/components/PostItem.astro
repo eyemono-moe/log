@@ -67,11 +67,19 @@ const _imageUrl = imageUrl ?? postImageUrl(id, Astro.url.origin);
       }
     </h2>
     <div>
-      <ul class="not-prose list-none flex flex-wrap gap-1">
-        <li>
-          <span
+      <ul class="not-prose list-none flex flex-wrap items-center gap-1">
+        {
+          source === "trap.jp" ? (
+            <li class="i-source:trap inline-block h-0.8lh w-auto aspect-square" />
+          ) : source === "zenn.dev" ? (
+            <li class="i-source:zenn inline-block h-0.8lh w-auto aspect-square" />
+          ) : null
+        }
+        <li class="z-1">
+          <a
+            href={`/categories/${category}`}
             class:list={[
-              "rounded-full b-1 px-1 text-xs",
+              "rounded-full b-1 px-1 text-xs hover:bg-zinc-50 dark:hover:bg-zinc-8/50 transition-[background-color]",
               {
                 "c-orange b-orange": category === "idea",
                 "c-blue b-blue": category === "tech",
@@ -79,7 +87,7 @@ const _imageUrl = imageUrl ?? postImageUrl(id, Astro.url.origin);
             ]}
           >
             {categoryText(category)}
-          </span>
+          </a>
         </li>
         {
           tags.map((tag) => (

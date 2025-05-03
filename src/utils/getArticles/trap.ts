@@ -23,6 +23,29 @@ const getPostsResponseSchema = v.object({
 	),
 });
 
+// traPブログのタグをzenn/log.eyemono.moeのタグに変換するためのマップ
+const normalizeTagMap = new Map(
+	Object.entries({
+		SolidJS: "solidjs",
+		Solid: "solidjs",
+		Nostr: "nostr",
+		TypeScript: "typescript",
+		javascript: "javascript",
+		CSS: "css",
+		UnoCSS: "unocss",
+	}),
+);
+
+const ideaPosts = [
+	"662cc1b872cf190001078817", // 科学大デジタル創作同好会traPでの6年間実際どうだったのって話
+	"6449e400f835150001ba85a6", // traPの読み方 2024
+	"642ce39ff835150001ba4302", // 情報理工学院/工学院 以外の学生へ
+	"6225a20e2162db0001d595e5", // 部内ショートプレゼン会「らん☆ぷろ」の紹介【新歓ブログリレー12日目】
+	"6225a1be2162db0001d595e0", // traPに入部してくれてありがとう
+	"60d9378185478300011b43b0", // 誕生ッ！3DCG部
+	"605ce152fb6c5f000121a89b", // traPの読み方
+];
+
 const getPosts = async (apiKey: string) => {
 	const token = await sign(apiKey);
 	const headers = { Authorization: `Ghost ${token}` };
@@ -56,10 +79,11 @@ export const fetchTrapArticles = async (apiKey: string) => {
 		title: post.title,
 		imageUrl: post.feature_image ?? undefined,
 		createdAt: new Date(post.published_at),
-		category: "tech",
+		category: ideaPosts.includes(post.id) ? "idea" : "tech",
 		tags:
-			post.tags?.filter((t) => t.visibility === "public").map((t) => t.name) ??
-			[],
+			post.tags
+				?.filter((t) => t.visibility === "public")
+				.map((t) => normalizeTagMap.get(t.name) ?? t.name) ?? [],
 	}));
 
 	return articles;

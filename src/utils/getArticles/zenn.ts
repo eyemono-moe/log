@@ -8,6 +8,7 @@ const zennArticlesSchema = v.object({
 			slug: v.string(),
 			path: v.string(),
 			published_at: v.string(),
+			article_type: v.union([v.literal("tech"), v.literal("idea")]),
 		}),
 	),
 });
@@ -57,7 +58,7 @@ export const fetchZennArticles = async (): Promise<PostEntry[]> => {
 			createdAt: new Date(a.published_at),
 			imageUrl: articleDetails[i].ogImageUrl,
 			tags: articleDetails[i].topics.map((t) => t.name),
-			category: "tech",
+			category: a.article_type,
 		}));
 
 		return articles;
