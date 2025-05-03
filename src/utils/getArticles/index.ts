@@ -10,8 +10,8 @@ export const getArticles = async () => {
 	}
 
 	const articles = await Promise.all([
-		// fetchZennArticles(),
-		// fetchTrapArticles(ghostApiKey),
+		fetchZennArticles(),
+		fetchTrapArticles(ghostApiKey),
 	]).then((articles) => articles.flat());
 
 	return articles;
