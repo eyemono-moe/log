@@ -1,6 +1,7 @@
 import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
 import solidJs from "@astrojs/solid-js";
+import expressiveCode from "astro-expressive-code";
 import { defineConfig, envField } from "astro/config";
 import rehypeAutolinkHeadings, {
 	type Options as AutoLinkOptions,
@@ -12,7 +13,6 @@ import rehypeRaw from "rehype-raw";
 import rehypeSlug from "rehype-slug";
 // @ts-ignore
 import rlc from "remark-link-card";
-import { e } from "unocss";
 import UnoCSS from "unocss/astro";
 import Unfonts from "unplugin-fonts/astro";
 import { remarkModifiedTime } from "./src/plugins/remark-modified-time";
@@ -41,6 +41,15 @@ export default defineConfig({
 			},
 		}),
 		solidJs(),
+		expressiveCode({
+			styleOverrides: {
+				frames: {
+					frameBoxShadowCssValue: "",
+					editorActiveTabIndicatorTopColor: "oklch(0.65 0.24 305)",
+				},
+			},
+			themes: ["github-dark", "github-light"],
+		}),
 	],
 	env: {
 		schema: {

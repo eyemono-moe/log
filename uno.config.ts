@@ -59,6 +59,7 @@ export default defineConfig({
 	shortcuts: [
 		{
 			"bg-primary": "bg-white dark:bg-zinc-900",
+			"bg-secondary": "bg-zinc-50 dark:bg-zinc-8",
 			"text-link":
 				"text-blue-7 visited:text-blue-9 dark:text-blue-4 dark:visited:text-blue-3 underline",
 			"toc-link":

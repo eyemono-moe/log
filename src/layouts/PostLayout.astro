@@ -74,7 +74,9 @@ const showLastMod = updatedAt && !isSameDay(updatedAt, createdAt);
     <div
       class="max-w-1200px mx-auto px-4 md:px-8 grid grid-cols-[minmax(0,1fr)_0] lg:(grid-cols-[minmax(0,1fr)_16rem] justify-center gap-4)"
     >
-      <section class="all-[:not(.rlc-container)_a]:text-link post">
+      <section
+        class="all-[:not(.rlc-container)_a]:text-link all-[code:not(pre_*)]:(bg-secondary before:content-empty after:content-empty rounded px-1 py-0.5 mx-0.5) post isolate"
+      >
         <slot />
       </section>
       <aside class="hidden lg:block">
