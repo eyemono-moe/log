@@ -16,7 +16,7 @@ Twitterで見かけたやつを本ブログに実装しました。
 
 ## 実装方法
 
-本ブログのコンテンツはMarkdwonで管理しており、ビルド時に生Markdownを取得可能なため、[Astroの静的ファイルエンドポイント](https://docs.astro.build/en/guides/endpoints/#params-and-dynamic-routing)として実装しました。
+本ブログのコンテンツはMarkdownで管理しており、ビルド時に生Markdownを取得可能なため、[Astroの静的ファイルエンドポイント](https://docs.astro.build/en/guides/endpoints/#params-and-dynamic-routing)として実装しました。
 
 ```ts
 // src/pages/api/posts/[id].md.ts
@@ -86,7 +86,7 @@ export const GET: APIRoute<{ entry: AstroPostEntry }> = async ({
 3. Markdown内のローカル画像参照をフルパスに変換
 4. FrontmatterをYAMLに変換してMarkdownの先頭に結合
 5. `text/markdown`としてレスポンスを返す
-   - 参考元のQiitaでは`text/x-markdown`を返しているようですが、2016年3月に`text/markdwon`が[RFC 7763](https://datatracker.ietf.org/doc/html/rfc7763)として登録されています。
+   - 参考元のQiitaでは`text/x-markdown`を返しているようですが、2016年3月に`text/markdown`が[RFC 7763](https://datatracker.ietf.org/doc/html/rfc7763)として登録されています。
 
 案外スッと実装できました。これでURL末尾に`.md`をつけるとMarkdownが返ってきます。
 ローカル画像パスの変換処理周り見落としがありそうなのでちゃんとテストしないといけなさそうですが一旦動いているのでヨシ！
