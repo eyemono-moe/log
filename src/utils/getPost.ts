@@ -40,6 +40,7 @@ export const getAllPosts = async (origin?: string) => {
 				title: post.data.title,
 				updatedAt,
 				createdAt: post.data.createdAt,
+				imageUrl: post.data.imageUrl,
 				tags: post.data.tags,
 			} satisfies PostEntry;
 		}),

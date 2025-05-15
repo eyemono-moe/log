@@ -49,6 +49,11 @@
 					"name": "imageUrl",
 					"type": "image",
 					"isPreviewImage": true
+				},
+				{
+					"title": "draft",
+					"name": "draft",
+					"type": "draft"
 				}
 			]
 		}
