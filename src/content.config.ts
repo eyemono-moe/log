@@ -11,7 +11,7 @@ const postCollection = defineCollection({
 		summary: z.string().optional(),
 		tags: z.array(z.string()).optional(),
 		draft: z.boolean().optional(),
-		imageUrl: z.string().url().optional(),
+		imageUrl: z.string().optional(),
 		createdAt: z.date(),
 		updatedAt: z.date().optional(),
 		category: z.union([z.literal("tech"), z.literal("idea")]),

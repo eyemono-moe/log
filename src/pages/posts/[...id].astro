@@ -39,7 +39,10 @@ if (remarkPluginFrontmatter.lastModified) {
   description={description}
   updatedAt={updatedAt}
   createdAt={entry.data.createdAt}
-  imageUrl={postImageUrl(entry.id, Astro.url.origin)}
+  imageUrl={postImageUrl(
+    { id: entry.id, imageUrl: entry.data.imageUrl },
+    Astro.url.origin
+  )}
   tags={entry.data.tags ?? []}
 >
   <Content />

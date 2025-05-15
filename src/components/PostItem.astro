@@ -10,10 +10,8 @@ import { postImageUrl } from "../utils/ogImageUrl";
 type Props = { post: PostEntry };
 
 const {
-	id,
 	source,
 	title,
-	imageUrl,
 	updatedAt,
 	createdAt,
 	url,
@@ -33,7 +31,7 @@ const createdAtStr = formatInTimeZone(
 );
 // updatedAtがある && 更新日と作成日が異なる場合は更新日を表示
 const showLastMod = updatedAt && !isSameDay(updatedAt, createdAt);
-const _imageUrl = imageUrl ?? postImageUrl(id, Astro.url.origin);
+const imageUrl = postImageUrl(Astro.props.post, Astro.url.origin);
 ---
 
 <article class="group not-prose flex flex-col gap-2 relative h-fit">
@@ -46,9 +44,9 @@ const _imageUrl = imageUrl ?? postImageUrl(id, Astro.url.origin);
     target={source === "eyemono.log" ? "_self" : "_blank"}></a>
   <div class="overflow-hidden rounded z--1">
     {
-      _imageUrl && (
+      imageUrl && (
         <Image
-          src={_imageUrl}
+          src={imageUrl}
           alt={title}
           width={500}
           height={500 * (630 / 1200)}
