@@ -1,7 +1,6 @@
 ---
 title: 春瀬ぽぽがいたから俺は今エンジニアをやっている
-draft: true
-createdAt: 2025-07-18T17:25:49.757Z
+createdAt: 2025-07-18T19:21:52.343Z
 category: idea
 ---
 
