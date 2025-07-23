@@ -21,7 +21,10 @@ export const postImageUrl = (
 		if (originalPostUrl.startsWith("/public/")) {
 			// publicフォルダ内のパスならoriginを付与
 			// [TODO] OGP画像も最適化する
-			return new URL(originalPostUrl.replace(/^\/public/, ""), origin).toString();
+			return new URL(
+				originalPostUrl.replace(/^\/public/, ""),
+				origin,
+			).toString();
 		}
 	}
 
