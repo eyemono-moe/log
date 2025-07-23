@@ -47,3 +47,13 @@ if (remarkPluginFrontmatter.lastModified) {
 >
   <Content />
 </PostLayout>
+
+<style>
+  /* youtube埋め込みのサイズ調整 */
+  :global(iframe[src*="youtube.com/embed/"]) {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+</style>
