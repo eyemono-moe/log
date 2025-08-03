@@ -18,7 +18,9 @@ tags:
 
 お迎えしたもの全部に触れるとキリがないので、特に印象に残ったものをいくつか紹介します。ここに上げてないものも素晴らしいものばかりでした。
 
-### [.C Leather Designs](https://x.com/dotclds)さんのキーケース
+### .C Leather Designsさんのキーケース
+
+<https://x.com/dotclds>
 
 ![.C Leather Designsさんによるレザー製キーケース](../../../public/media/pixel-art-park-8/1754224440063-image.png)
 
@@ -26,7 +28,9 @@ tags:
 
 既に自宅の鍵をセットし、玄関に置いているのですが、毎朝これをインベントリに入れて出勤できるのが嬉しすぎる。事前にTwitterで在庫数が少ないことを伺っており、開場後真っ先に向かいましたが、その時点で既に残り2個とかだったようです。お迎えできて本当に良かった。
 
-### [Muscat](https://x.com/muscat_dot)さんのTシャツ
+### MuscatさんのTシャツ
+
+<https://x.com/muscat_dot>
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">Tシャツちょっとだけ作りました！<a href="https://twitter.com/hashtag/PixelArtPark?src=hash&amp;ref_src=twsrc%5Etfw">#PixelArtPark</a> で販売します🚀🌏 <a href="https://t.co/g9eh6PXyI4">https://t.co/g9eh6PXyI4</a> <a href="https://t.co/k5Cg9VzH5h">pic.twitter.com/k5Cg9VzH5h</a></p>&mdash; Muscat (@muscat_dot) <a href="https://twitter.com/muscat_dot/status/1947998192781705613?ref_src=twsrc%5Etfw">July 23, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
@@ -34,7 +38,9 @@ tags:
 
 冒頭の写真に写ってませんでしたがお迎えしてます。既に着てたので写っていませんでした。マジでデザインが良すぎる。生地もしっかりしてて良き。
 
-### [Rui8bit](https://x.com/Rui8bit)さんのドット絵
+### Rui8bitさんのドット絵
+
+<https://x.com/Rui8bit>
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr"><a href="https://twitter.com/hashtag/PixelartPark?src=hash&amp;ref_src=twsrc%5Etfw">#PixelartPark</a> C-8 のお品書きです！<br>過去作品のポストカードや、アクリルチャームとステッカーを販売します<br>本日は宜しくお願いします...!<a href="https://twitter.com/hashtag/CAPTURETHEGAMES?src=hash&amp;ref_src=twsrc%5Etfw">#CAPTURETHEGAMES</a> <a href="https://t.co/xoEzp2J8xg">pic.twitter.com/xoEzp2J8xg</a></p>&mdash; Rui8bit @PixelArtPark C-8 (@Rui8bit) <a href="https://twitter.com/Rui8bit/status/1951789759233400972?ref_src=twsrc%5Etfw">August 2, 2025</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
@@ -44,7 +50,9 @@ tags:
 
 これが制約と誓約か...
 
-### [中里](https://x.com/nnnakasato)さんの『画素芸術造形哲学』
+### 中里さんの『画素芸術造形哲学』
+
+<https://x.com/nnnakasato>
 
 [Rui8bit](https://x.com/Rui8bit)さんのドット絵は"ドット絵"の歩んできた文化・歴史を背景に持つ作品でしたが、対して中里さんの『画素芸術造形哲学』では、その文化・歴史を**一切考慮しない** "ドット"絵 についての分析・考察が行われていました。
 
@@ -54,7 +62,9 @@ tags:
 
 ![左：中里さんの『画素芸術造形哲学』右：Rui8bitさんの作品](../../../public/media/pixel-art-park-8/1754227335086-image.png)
 
-### [momoQui](https://x.com/_momoQui)さんのサイン貰った
+### momoQuiさんのサイン貰った
+
+<https://x.com/_momoQui>
 
 やった～～。お二人ともサインのご快諾ありがとうございました。
 
