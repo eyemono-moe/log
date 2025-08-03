@@ -1,8 +1,8 @@
 import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
 import solidJs from "@astrojs/solid-js";
-import expressiveCode from "astro-expressive-code";
 import { defineConfig, envField } from "astro/config";
+import expressiveCode from "astro-expressive-code";
 import rehypeAutolinkHeadings, {
 	type Options as AutoLinkOptions,
 } from "rehype-autolink-headings";
@@ -68,6 +68,9 @@ export default defineConfig({
 				rehypeAutolinkHeadings,
 				{
 					behavior: "append",
+					properties: {
+						class: "heading-link",
+					},
 					content: {
 						type: "element",
 						tagName: "span",

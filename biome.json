@@ -1,7 +1,12 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.1.3/schema.json",
+	"assist": {
+		"actions": {
+			"recommended": true
+		},
+		"enabled": true
+	},
 	"files": {
-		"ignore": [],
 		"ignoreUnknown": false
 	},
 	"formatter": {
@@ -18,9 +23,6 @@
 		"rules": {
 			"recommended": true
 		}
-	},
-	"organizeImports": {
-		"enabled": true
 	},
 	"vcs": {
 		"clientKind": "git",
