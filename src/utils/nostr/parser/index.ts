@@ -1,4 +1,4 @@
-import { type NostrEvent, kinds } from "nostr-tools";
+import { kinds, type NostrEvent } from "nostr-tools";
 import type { EventPacket } from "rx-nostr";
 import { parseMetadata } from "./0_metadata";
 import { parseShortTextNote } from "./1_shortTextNote";

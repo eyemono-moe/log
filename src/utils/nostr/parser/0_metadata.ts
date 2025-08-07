@@ -1,4 +1,4 @@
-import { type NostrEvent, kinds } from "nostr-tools";
+import { kinds, type NostrEvent } from "nostr-tools";
 import * as v from "valibot";
 
 const fallbackUnknown = <TIn, TOut, TIssue>(

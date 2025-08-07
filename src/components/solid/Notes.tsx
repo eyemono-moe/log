@@ -1,7 +1,7 @@
 // import { createViewportObserver } from "@solid-primitives/intersection-observer";
 import { createRxForwardReq, now, uniq } from "rx-nostr";
 import { map, scan } from "rxjs";
-import { type Component, For, Match, Switch, from, onMount } from "solid-js";
+import { type Component, For, from, Match, onMount, Switch } from "solid-js";
 import { useRxNostr } from "../../provider/nostr";
 import { createInfiniteEvent } from "../../utils/nostr/createInfiniteEvent";
 import { parseEventPacket } from "../../utils/nostr/parser";

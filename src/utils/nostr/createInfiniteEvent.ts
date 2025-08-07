@@ -1,8 +1,8 @@
 import type { Filter } from "nostr-tools";
 import {
-	type RxNostr,
 	compareEvents,
 	createRxBackwardReq,
+	type RxNostr,
 	uniq,
 } from "rx-nostr";
 import { map } from "rxjs";
