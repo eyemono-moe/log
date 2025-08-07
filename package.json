@@ -31,7 +31,6 @@
 		"satori-html": "0.3.2",
 		"sharp": "^0.34.3",
 		"unocss": "66.4.0",
-		"unplugin-fonts": "^1.4.0",
 		"valibot": "1.1.0",
 		"zx": "8.7.2"
 	},
