@@ -1,24 +1,11 @@
 import * as linkify from "linkifyjs";
 import { decode } from "nostr-tools/nip19";
+import { logger } from "../../../features/error-handling/logger";
+import { isImageUrl, isVideoUrl } from "../../../features/nostr-content/utils";
+import { RICH_LINK } from "../../../features/rich-link/constants";
 import type { ImetaTag, Tag } from "./commonTag";
 
 linkify.registerCustomProtocol("wss");
-
-const imageExtensions = ["jpg", "jpeg", "png", "gif", "webp", "svg"];
-const isImageUrl = (url: string) => {
-	try {
-		const path = new URL(url).pathname;
-		const ext = path.split(".").pop();
-		return ext && imageExtensions.includes(ext.toLowerCase());
-	} catch {
-		return false;
-	}
-};
-const videoExtensions = ["mp4", "webm", "ogg"];
-const isVideoUrl = (url: string) => {
-	const ext = url.split(".").pop();
-	return ext && videoExtensions.includes(ext.toLowerCase());
-};
 
 export type TextContent = {
 	type: "text";
@@ -50,7 +37,6 @@ export type QuoteByIDContent = {
 	type: "quoteByID";
 	id: string;
 };
-// ts-remove-unused-skip
 export type QuoteByAddressContent = {
 	type: "quoteByAddress";
 	d: string;
@@ -274,7 +260,15 @@ export const parseTextContent = (
 		const spitedContent = splitTextByLinks(content, references, imetaTags);
 		return spitedContent;
 	} catch (e) {
-		console.error("failed to parse contents: ", e);
+		logger.error(
+			"Failed to parse text content",
+			{
+				component: "NostrParser",
+				operation: "parseTextContent",
+				data: { content: `${content.substring(0, 100)}...` },
+			},
+			e,
+		);
 		return [
 			{
 				type: "text" as const,
@@ -294,7 +288,7 @@ const splitTextByLinks = (
 		.find(text, {
 			validate: {
 				// schemeを持つURLのみをリンクとして認識する
-				url: (value) => /^(?:https?|wss?):\/\//.test(value),
+				url: (value) => RICH_LINK.URL_WITH_SCHEME.test(value),
 			},
 		})
 		.filter((link) => link.type === "url");

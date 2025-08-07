@@ -1,5 +1,5 @@
 import { neventEncode } from "nostr-tools/nip19";
-import { type Component, For, Match, Show, Switch } from "solid-js";
+import { type Component, For, Match, Switch } from "solid-js";
 import type { ParsedEventPacket } from "../../utils/nostr/parser";
 import type { ShortTextNote } from "../../utils/nostr/parser/1_shortTextNote";
 import { parseTextContent } from "../../utils/nostr/parser/textContent";

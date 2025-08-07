@@ -74,7 +74,7 @@ export const GET: APIRoute<{ entry: AstroPostEntry }> = async ({
 
 	const image = resvg.render();
 
-	return new Response(image.asPng(), {
+	return new Response(new Uint8Array(image.asPng()), {
 		headers: {
 			"Content-Type": "image/png",
 			"Cache-Control": "public, max-age=31536000, immutable",
