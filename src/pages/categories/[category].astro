@@ -6,9 +6,13 @@ import { getAllPosts } from "../../utils/getPost";
 
 export async function getStaticPaths() {
 	const allPosts = await getAllPosts();
-	const allCategories = allPosts
-		.flatMap((post) => post.category)
-		.filter((category) => category !== undefined);
+	const allCategories = Array.from(
+		new Set(
+			allPosts
+				.flatMap((post) => post.category)
+				.filter((category) => category !== undefined),
+		),
+	);
 	return allCategories.map((category) => ({
 		params: { category },
 		props: {

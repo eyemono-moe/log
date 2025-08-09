@@ -1,15 +1,6 @@
 import { type Component, createEffect } from "solid-js";
-
-// hostnameがx.comだとwindow.twttr.widgets.loadによって検知されないためtwitter.comに変換する
-const detectableTwitterUrl = (urlString: string): string => {
-	try {
-		const url = new URL(urlString);
-		url.hostname = "twitter.com";
-		return url.href;
-	} catch {
-		return urlString;
-	}
-};
+import { convertToDetectableTwitterUrl } from "../../features/rich-link/utils";
+import "../../features/rich-link/types";
 
 const TweetEmbed: Component<{ url: string }> = (props) => {
 	let twitterRef: HTMLDivElement | undefined;
@@ -20,13 +11,9 @@ const TweetEmbed: Component<{ url: string }> = (props) => {
 
 	return (
 		<div ref={twitterRef}>
-			<blockquote
-				ref={twitterRef}
-				class="twitter-tweet"
-				data-conversation="none"
-			>
+			<blockquote class="twitter-tweet" data-conversation="none">
 				<a
-					href={detectableTwitterUrl(props.url)}
+					href={convertToDetectableTwitterUrl(props.url)}
 					target="_blank"
 					rel="noopener noreferrer"
 					class="break-anywhere whitespace-pre-wrap text-link"
@@ -39,15 +26,3 @@ const TweetEmbed: Component<{ url: string }> = (props) => {
 };
 
 export default TweetEmbed;
-
-type TwitterWidgetAPI = {
-	widgets: {
-		load(el?: HTMLElement): void;
-	};
-};
-
-declare global {
-	interface Window {
-		twttr?: TwitterWidgetAPI;
-	}
-}

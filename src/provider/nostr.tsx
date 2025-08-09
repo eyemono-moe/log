@@ -1,6 +1,6 @@
 import { verifier } from "@rx-nostr/crypto";
-import { type RxNostr, createRxNostr } from "rx-nostr";
-import { type ParentComponent, createContext, useContext } from "solid-js";
+import { createRxNostr, type RxNostr } from "rx-nostr";
+import { createContext, type ParentComponent, useContext } from "solid-js";
 
 const RxNostrContext = createContext<RxNostr>();
 

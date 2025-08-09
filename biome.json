@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.1.3/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.1.4/schema.json",
 	"assist": {
 		"actions": {
 			"recommended": true
@@ -24,6 +24,23 @@
 			"recommended": true
 		}
 	},
+	"overrides": [
+		{
+			"includes": ["**/*.astro"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noUnusedImports": "off",
+						"noUnusedVariables": "off"
+					},
+					"style": {
+						"useConst": "off",
+						"useImportType": "off"
+					}
+				}
+			}
+		}
+	],
 	"vcs": {
 		"clientKind": "git",
 		"enabled": true,

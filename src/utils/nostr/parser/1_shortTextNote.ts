@@ -1,5 +1,4 @@
-import { type NostrEvent, kinds } from "nostr-tools";
-import type { EventPacket } from "rx-nostr";
+import { kinds, type NostrEvent } from "nostr-tools";
 import * as v from "valibot";
 import {
 	type EventTag,

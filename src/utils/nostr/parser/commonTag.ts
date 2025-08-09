@@ -7,7 +7,6 @@ export const unknownTag = v.pipe(
 	v.transform((input) => ({ kind: "unknown", data: input }) as const),
 );
 
-// ts-remove-unused-skip
 export type UnknownTag = v.InferOutput<typeof unknownTag>;
 
 // https://github.com/nostr-protocol/nips/blob/master/01.md#tags
@@ -52,7 +51,6 @@ export const eventTag = v.pipe(
 	),
 );
 
-// ts-remove-unused-skip
 export type EventTag = v.InferOutput<typeof eventTag>;
 
 export const userTag = v.pipe(
@@ -73,7 +71,6 @@ export const userTag = v.pipe(
 	),
 );
 
-// ts-remove-unused-skip
 export type UserTag = v.InferOutput<typeof userTag>;
 
 // https://github.com/nostr-protocol/nips/blob/master/18.md#nip-18
@@ -93,7 +90,6 @@ export const quoteTag = v.pipe(
 	),
 );
 
-// ts-remove-unused-skip
 export type QuoteTag = v.InferOutput<typeof quoteTag>;
 
 // https://github.com/nostr-protocol/nips/blob/master/92.md
@@ -125,7 +121,6 @@ export const imetaTag = v.pipe(
 	),
 );
 
-// ts-remove-unused-skip
 export type ImetaTag = v.InferOutput<typeof imetaTag>;
 
 // https://github.com/nostr-protocol/nips/blob/master/30.md
@@ -145,7 +140,6 @@ export const emojiTag = v.pipe(
 	),
 );
 
-// ts-remove-unused-skip
 export type EmojiTag = v.InferOutput<typeof emojiTag>;
 
 // https://github.com/nostr-protocol/nips/blob/master/24.md#tags
@@ -163,7 +157,6 @@ export const hashtagTag = v.pipe(
 	),
 );
 
-// ts-remove-unused-skip
 export type HashtagTag = v.InferOutput<typeof hashtagTag>;
 
 // https://github.com/nostr-protocol/nips/blob/master/01.md#tags
@@ -188,7 +181,6 @@ export const addressTag = v.pipe(
 	}),
 );
 
-// ts-remove-unused-skip
 export type AddressTag = v.InferOutput<typeof addressTag>;
 
 // https://github.com/nostr-protocol/nips/blob/master/01.md#tags
@@ -206,10 +198,8 @@ export const identifierTag = v.pipe(
 	),
 );
 
-// ts-remove-unused-skip
 export type IdentifierTag = v.InferOutput<typeof identifierTag>;
 
-// ts-remove-unused-skip
 export type Tag =
 	| UnknownTag
 	| EventTag

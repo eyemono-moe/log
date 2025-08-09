@@ -1,5 +1,5 @@
 import { npubEncode } from "nostr-tools/nip19";
-import { type Component, Show, createMemo } from "solid-js";
+import { type Component, createMemo, Show } from "solid-js";
 import { useProfile } from "../../utils/nostr/query";
 
 const EmbedUser: Component<{

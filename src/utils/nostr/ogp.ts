@@ -1,5 +1,10 @@
 import { useQuery } from "@tanstack/solid-query";
 import * as v from "valibot";
+import {
+	OEMBED_PROVIDERS,
+	RICH_LINK,
+} from "../../features/rich-link/constants";
+import { resolveUrl } from "../../features/rich-link/utils";
 
 const oembedResScheme = v.object({
 	html: v.string(),
@@ -7,30 +12,8 @@ const oembedResScheme = v.object({
 	height: v.optional(v.number()),
 });
 
-const oEmbedProviders: {
-	name: string;
-	patterns: string[];
-	endpoint: string;
-}[] = [
-	{
-		name: "youtube",
-		patterns: [
-			"https?://.*\\.youtube\\.com/watch.*",
-			"https?://.*\\.youtube\\.com/v/.*",
-			"https?://youtu\\.be/.*",
-			"https?://.*\\.youtube\\.com/playlist\\?list=.*",
-		],
-		endpoint: "https://www.youtube.com/oembed",
-	},
-	{
-		name: "spotify",
-		patterns: ["https?://open\\.spotify\\.com/.*", "spotify:.*"],
-		endpoint: "https://open.spotify.com/oembed",
-	},
-];
-
 const getOEmbedProvider = (url: string) => {
-	for (const provider of oEmbedProviders) {
+	for (const provider of OEMBED_PROVIDERS) {
 		for (const pattern of provider.patterns) {
 			if (new RegExp(pattern).test(url)) {
 				return provider;
@@ -69,7 +52,7 @@ const ogpScheme = v.object({
 
 const fetchOgp = async (url: string, proxy = true) => {
 	const res = await fetch(
-		proxy ? `https://corsproxy.io/?url=${encodeURIComponent(url)}` : url,
+		proxy ? `${RICH_LINK.CORS_PROXY}?url=${encodeURIComponent(url)}` : url,
 	);
 	const contentType = res.headers.get("Content-Type");
 	if (
@@ -88,7 +71,7 @@ const fetchOgp = async (url: string, proxy = true) => {
 
 	// check if charset is utf-8
 	if (
-		!/charset=utf-8/i.test(contentType) &&
+		!RICH_LINK.CHARSET_UTF8.test(contentType) &&
 		!metaTags.some((meta) =>
 			meta.getAttribute("charset")?.toLowerCase().includes("utf-8"),
 		)
@@ -117,7 +100,7 @@ const fetchOgp = async (url: string, proxy = true) => {
 	const parseRes = v.safeParse(ogpScheme, ogp);
 	if (parseRes.success) {
 		if (parseRes.output.url?.startsWith("/")) {
-			parseRes.output.url = new URL(parseRes.output.url, url).href;
+			parseRes.output.url = resolveUrl(parseRes.output.url, url);
 		}
 
 		return parseRes.output;
@@ -142,12 +125,6 @@ export const useQueryEmbed = (url: () => string | undefined) => {
 					value: ogp,
 				};
 
-			// const ogpWithoutProxy = await fetchOgp(url() ?? "", false);
-			// if (ogpWithoutProxy)
-			//   return {
-			//     type: "ogp" as const,
-			//     value: ogpWithoutProxy,
-			//   };
 			return null;
 		},
 		enabled: !!url(),

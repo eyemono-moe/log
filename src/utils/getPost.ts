@@ -15,10 +15,10 @@ export const getPosts = () => {
 
 /**
  * Get all posts including third-party posts
- * @param {string} origin - The origin URL of the site
- * @returns {Promise<PostEntry[]>} All posts
+ * @param _origin - The origin URL of the site (currently unused)
+ * @returns All posts
  */
-export const getAllPosts = async (origin?: string) => {
+export const getAllPosts = async (_origin?: string): Promise<PostEntry[]> => {
 	const postEntries = await getPosts();
 
 	const postsWithLstMod = await Promise.all(

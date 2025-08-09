@@ -1,8 +1,8 @@
 import type { Filter } from "nostr-tools";
 import {
-	type RxNostr,
 	compareEvents,
 	createRxBackwardReq,
+	type RxNostr,
 	uniq,
 } from "rx-nostr";
 import { map } from "rxjs";
@@ -24,9 +24,7 @@ export const createInfiniteEvent = (
 	const [hasNextPage, setHasNextPage] = createSignal(false);
 
 	/** 取得済みイベントの中で最も古いイベントのcreated_at */
-	let oldestCreatedAt: number | undefined = Math.floor(
-		new Date().getTime() / 1000,
-	);
+	let oldestCreatedAt: number | undefined = Math.floor(Date.now() / 1000);
 
 	const fetchNextPage = async () => {
 		const rxReq = createRxBackwardReq();

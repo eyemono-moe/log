@@ -1,0 +1,21 @@
+{
+	"mcpServers": {
+		"serena": {
+			"args": [
+				"--from",
+				"git+https://github.com/oraios/serena",
+				"serena",
+				"start-mcp-server",
+				"--context",
+				"ide-assistant",
+				"--project",
+				"/home/eyemono/repos/github.com/eyemono-moe/log",
+				"--enable-web-dashboard",
+				"False"
+			],
+			"command": "uvx",
+			"env": {},
+			"type": "stdio"
+		}
+	}
+}
