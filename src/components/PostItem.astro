@@ -17,6 +17,7 @@ const {
 	url,
 	tags = [],
 	category,
+	size,
 } = Astro.props.post;
 const lastModStr = updatedAt
 	? formatInTimeZone(updatedAt, "Asia/Tokyo", "yyyy/MM/dd HH:mm", {
@@ -34,7 +35,7 @@ const showLastMod = updatedAt && !isSameDay(updatedAt, createdAt);
 const imageUrl = postImageUrl(Astro.props.post, Astro.url.origin);
 ---
 
-<article class="group not-prose flex flex-col gap-2 relative h-fit">
+<article class="group not-prose flex flex-col gap-2 relative h-fit isolate">
   <a
     aria-hidden="true"
     tabindex="-1"
@@ -56,6 +57,32 @@ const imageUrl = postImageUrl(Astro.props.post, Astro.url.origin);
     }
   </div>
   <div class="space-y-1">
+    <div class="text-zinc-5 flex flex-col">
+      <div class="text-xs">-rw-r--r-- 1 eyemono eyemono {size}</div>
+      <div class="text-sm flex items-center gap-2">
+        <div
+          title={`created at ${createdAtStr}`}
+          class="flex items-center gap-1"
+        >
+          <div
+            class="i-material-symbols:schedule-outline-rounded inline-block h-0.8lh w-auto aspect-square"
+          >
+          </div>
+          {createdAtStr}
+        </div>
+        {
+          showLastMod && (
+            <div
+              title={`last modified at ${lastModStr}`}
+              class="flex items-center gap-1"
+            >
+              <div class="i-material-symbols:sync-rounded inline-block h-0.8lh w-auto aspect-square" />
+              {lastModStr}
+            </div>
+          )
+        }
+      </div>
+    </div>
     <h2 class="font-bold">
       {title}
       {
@@ -100,23 +127,6 @@ const imageUrl = postImageUrl(Astro.props.post, Astro.url.origin);
           ))
         }
       </ul>
-    </div>
-    <div class="text-sm text-zinc-5 flex flex-wrap gap-x-2">
-      <div class="flex items-center gap-1" title={`created at ${createdAtStr}`}>
-        <div
-          class="i-material-symbols:schedule-outline-rounded inline-block h-0.8lh w-auto aspect-square"
-        >
-        </div>
-        {createdAtStr}
-      </div>
-      {
-        showLastMod && (
-          <div class="flex items-center gap-1">
-            <div class="i-material-symbols:sync-rounded inline-block h-0.8lh w-auto aspect-square" />
-            {lastModStr}
-          </div>
-        )
-      }
     </div>
   </div>
 </article>

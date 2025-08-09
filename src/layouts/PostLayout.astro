@@ -39,13 +39,13 @@ const showLastMod = updatedAt && !isSameDay(updatedAt, createdAt);
       <div class="max-w-1200px mx-auto px-4 md:px-8 text-sm space-y-2">
         <div>
           <div>
-            Created At: {
+            createdAt: {
               formatInTimeZone(createdAt, "Asia/Tokyo", "yyyy/MM/dd HH:mm", {
                 locale: ja,
               })
             }
           </div>
-          {showLastMod && <div>Updated At: {lastModStr}</div>}
+          {showLastMod && <div>updatedAt: {lastModStr}</div>}
         </div>
         <ul class="not-prose list-none flex flex-wrap gap-1">
           <li>

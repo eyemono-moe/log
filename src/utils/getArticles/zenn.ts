@@ -9,6 +9,7 @@ const zennArticlesSchema = v.object({
 			path: v.string(),
 			published_at: v.string(),
 			article_type: v.union([v.literal("tech"), v.literal("idea")]),
+			body_letters_count: v.number(),
 		}),
 	),
 });
@@ -59,6 +60,7 @@ export const fetchZennArticles = async (): Promise<PostEntry[]> => {
 			imageUrl: articleDetails[i].ogImageUrl,
 			tags: articleDetails[i].topics.map((t) => t.name),
 			category: a.article_type,
+			size: a.body_letters_count * 2, // Approximate size in bytes
 		}));
 
 		return articles;
