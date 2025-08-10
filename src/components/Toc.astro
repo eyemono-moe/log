@@ -1,4 +1,4 @@
-<div class="p-2 max-h-full overflow-y-auto space-y-2">
+<div class="p-2 flex flex-col gap-2">
   <button
     class="text-left appearance-none inline-flex items-center gap-1"
     id="scroll-to-top"
@@ -9,11 +9,41 @@
     </div>
     ページトップへ
   </button>
-  <div>目次</div>
-  <div class="toc ml-2"></div>
+  <div
+    class="toc flex-1 ml-2 overflow-y-auto max-h-full all-[ul]:my-0 [scrollbar-width:thin] scrollbar-thumb-zinc scrollbar-track-transparent"
+  >
+  </div>
+  <div class="flex gap-2 not-prose">
+    <a
+      class="p-2 hover:bg-secondary rounded"
+      id="share-twitter"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="Xでポスト"
+    >
+      <div class="h-1lh w-auto aspect-square i-ri:twitter-x-line"></div>
+    </a>
+    <a
+      class="p-2 hover:bg-secondary rounded"
+      id="share-hatena"
+      target="_blank"
+      rel="noopener noreferrer"
+      title="はてなブックマーク"
+    >
+      <div class="h-1lh w-auto aspect-square i-cib:hatena-bookmark"></div>
+    </a>
+    <button
+      class="p-2 hover:bg-secondary rounded appearance-none"
+      id="share-native"
+      title="共有"
+    >
+      <div class="h-1lh w-auto aspect-square i-material-symbols:share-outline">
+      </div>
+    </button>
+  </div>
 </div>
 
-<script is:inline>
+<script>
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -21,6 +51,51 @@
   document
     .getElementById("scroll-to-top")
     ?.addEventListener("click", scrollToTop);
+
+  // Set href for share links
+  const url = window.location.href;
+  const title = document.title;
+  const text = `${title} | eyemono.log`;
+
+  document
+    .getElementById("share-twitter")
+    ?.setAttribute(
+      "href",
+      `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`
+    );
+
+  document
+    .getElementById("share-hatena")
+    ?.setAttribute(
+      "href",
+      `https://b.hatena.ne.jp/add?mode=confirm&url=${encodeURIComponent(url)}`
+    );
+
+  const shareNative = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: title,
+          text: text,
+          url: window.location.href,
+        });
+      } catch (err) {
+        console.log("Error sharing:", err);
+      }
+    } else {
+      // Fallback: copy to clipboard
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        alert("URLをクリップボードにコピーしました");
+      } catch (err) {
+        console.log("Error copying to clipboard:", err);
+      }
+    }
+  };
+
+  document
+    .getElementById("share-native")
+    ?.addEventListener("click", shareNative);
 </script>
 
 <script>

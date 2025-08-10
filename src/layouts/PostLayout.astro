@@ -29,33 +29,37 @@ const showLastMod = updatedAt && !isSameDay(updatedAt, createdAt);
 ---
 
 <script>
-import { differenceInDays, differenceInMonths, differenceInYears } from "date-fns";
+  import {
+    differenceInDays,
+    differenceInMonths,
+    differenceInYears,
+  } from "date-fns";
 
-document.addEventListener("DOMContentLoaded", () => {
-  const elements = document.querySelectorAll(".relative-time");
-  const now = new Date();
-  
-  elements.forEach((element) => {
-    const dateStr = element.getAttribute("data-date");
-    if (dateStr) {
-      const date = new Date(dateStr);
-      const yearsAgo = differenceInYears(now, date);
-      const monthsAgo = differenceInMonths(now, date);
-      const daysAgo = differenceInDays(now, date);
-      
-      let relativeText;
-      if (yearsAgo >= 1) {
-        relativeText = `(${yearsAgo}年前)`;
-      } else if (monthsAgo >= 1) {
-        relativeText = `(${monthsAgo}か月前)`;
-      } else {
-        relativeText = `(${daysAgo}日前)`;
+  document.addEventListener("DOMContentLoaded", () => {
+    const elements = document.querySelectorAll(".relative-time");
+    const now = new Date();
+
+    elements.forEach((element) => {
+      const dateStr = element.getAttribute("data-date");
+      if (dateStr) {
+        const date = new Date(dateStr);
+        const yearsAgo = differenceInYears(now, date);
+        const monthsAgo = differenceInMonths(now, date);
+        const daysAgo = differenceInDays(now, date);
+
+        let relativeText;
+        if (yearsAgo >= 1) {
+          relativeText = `(${yearsAgo}年前)`;
+        } else if (monthsAgo >= 1) {
+          relativeText = `(${monthsAgo}か月前)`;
+        } else {
+          relativeText = `(${daysAgo}日前)`;
+        }
+
+        element.textContent = relativeText;
       }
-      
-      element.textContent = relativeText;
-    }
+    });
   });
-});
 </script>
 
 <BaseLayout title={title} description={description} imageUrl={imageUrl}>
@@ -73,9 +77,21 @@ document.addEventListener("DOMContentLoaded", () => {
               formatInTimeZone(createdAt, "Asia/Tokyo", "yyyy/MM/dd HH:mm", {
                 locale: ja,
               })
-            } <span class="relative-time" data-date={createdAt.toISOString()}></span>
+            }
+            <span class="relative-time" data-date={createdAt.toISOString()}
+            ></span>
           </div>
-          {showLastMod && <div>updatedAt: {lastModStr} <span class="relative-time" data-date={updatedAt?.toISOString()}></span></div>}
+          {
+            showLastMod && (
+              <div>
+                updatedAt: {lastModStr}{" "}
+                <span
+                  class="relative-time"
+                  data-date={updatedAt?.toISOString()}
+                />
+              </div>
+            )
+          }
         </div>
         <ul class="not-prose list-none flex flex-wrap gap-1">
           <li>
@@ -111,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </section>
       <aside class="hidden lg:block">
         <div class="sticky top-[calc(3.5rem)]">
-          <div class="max-h-[calc(100vh-3.5rem)] flex">
+          <div class="max-h-[calc(100vh-13rem)] flex">
             <Toc />
           </div>
         </div>

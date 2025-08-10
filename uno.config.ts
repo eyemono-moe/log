@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import { colorResolver } from "@unocss/preset-mini/utils";
 import presetWind3 from "@unocss/preset-wind3";
 import {
 	defineConfig,
@@ -70,7 +71,7 @@ export default defineConfig({
 			"text-link":
 				"text-blue-7 visited:text-blue-9 dark:text-blue-4 dark:visited:text-blue-3 underline",
 			"toc-link":
-				"line-clamp-3 decoration-none op-70 hover:op-100 transition-color-200",
+				"line-clamp-3 decoration-none op-70 hover:op-100 transition-200 [transition-property:opacity_color]",
 			"toc-link-active": "dark:c-accent c-accent-7 op-100",
 			"toc-is-collapsed": "hidden",
 			"b-zinc-auto": "b-zinc-2 dark:b-zinc-7",
@@ -99,6 +100,12 @@ export default defineConfig({
 	preflights: [
 		{
 			getCSS: () => `
+		@media (prefers-reduced-motion) {
+			* {
+				animation-duration: 0ms !important;
+				transition-duration: 0ms !important;
+			}
+		}
 		.prose :where(ol,ul) :where(ol,ul):not(:where(.not-prose,.not-prose *)) {
 			margin-block: 0.25em !important;
 		}
@@ -107,5 +114,45 @@ export default defineConfig({
 		}
 		`,
 		},
+	],
+	rules: [
+		[
+			/^scroll(?:bar)?-(track|thumb)-(.+)$/,
+			([s, section, colorMatch], context) => {
+				const varName = `scroll${section}-bg`;
+				const opacityVarName = `--un-${varName}-opacity`;
+				const colorVarName = `--un-${varName}`;
+				// @ts-ignore
+				const res = colorResolver("color", varName)([s, colorMatch], context);
+
+				if (!res) {
+					return;
+				}
+
+				// @ts-ignore
+				const color = res.color;
+				// @ts-ignore
+				const opacity = res[opacityVarName];
+
+				if (!color) {
+					return;
+				}
+
+				if (opacity) {
+					return {
+						[opacityVarName]: opacity,
+						[colorVarName]: color,
+						"scrollbar-color":
+							"var(--un-scrollthumb-bg) var(--un-scrolltrack-bg)",
+					};
+				}
+
+				return {
+					[colorVarName]: color,
+					"scrollbar-color":
+						"var(--un-scrollthumb-bg) var(--un-scrolltrack-bg)",
+				};
+			},
+		],
 	],
 });
