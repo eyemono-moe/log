@@ -3,6 +3,8 @@ import { parseISO } from "date-fns";
 import type { PostEntry } from "../content.config";
 import { getArticles } from "./getArticles";
 
+const encoder = new TextEncoder();
+
 /**
  * Get all posts from the `posts` collection
  */
@@ -42,6 +44,7 @@ export const getAllPosts = async (_origin?: string): Promise<PostEntry[]> => {
 				createdAt: post.data.createdAt,
 				imageUrl: post.data.imageUrl,
 				tags: post.data.tags,
+				size: encoder.encode(post.body ?? "").length,
 			} satisfies PostEntry;
 		}),
 	);

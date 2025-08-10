@@ -29,6 +29,7 @@ export type PostEntry<T extends PostSource = PostSource> =
 		id: string;
 		source: T;
 		url: string;
+		size: number;
 	};
 
 export const collections = {

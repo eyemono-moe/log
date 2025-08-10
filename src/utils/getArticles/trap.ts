@@ -19,6 +19,7 @@ const getPostsResponseSchema = v.object({
 			feature_image: v.nullable(v.string()),
 			published_at: v.string(),
 			tags: v.optional(v.array(traqPostTagSchema)),
+			mobiledoc: v.string(),
 		}),
 	),
 });
@@ -45,6 +46,8 @@ const ideaPosts = [
 	"60d9378185478300011b43b0", // 誕生ッ！3DCG部
 	"605ce152fb6c5f000121a89b", // traPの読み方
 ];
+
+const encoder = new TextEncoder();
 
 const getPosts = async (apiKey: string) => {
 	const token = await sign(apiKey);
@@ -84,6 +87,7 @@ export const fetchTrapArticles = async (apiKey: string) => {
 			post.tags
 				?.filter((t) => t.visibility === "public")
 				.map((t) => normalizeTagMap.get(t.name) ?? t.name) ?? [],
+		size: encoder.encode(post.mobiledoc).length,
 	}));
 
 	return articles;
