@@ -10,25 +10,25 @@ import { postImageUrl } from "../utils/ogImageUrl";
 type Props = { post: PostEntry };
 
 const {
-  source,
-  title,
-  updatedAt,
-  createdAt,
-  url,
-  tags = [],
-  category,
-  size,
+	source,
+	title,
+	updatedAt,
+	createdAt,
+	url,
+	tags = [],
+	category,
+	size,
 } = Astro.props.post;
 const lastModStr = updatedAt
-  ? formatInTimeZone(updatedAt, "Asia/Tokyo", "yyyy/MM/dd HH:mm", {
-      locale: ja,
-    })
-  : "";
+	? formatInTimeZone(updatedAt, "Asia/Tokyo", "yyyy/MM/dd HH:mm", {
+			locale: ja,
+		})
+	: "";
 const createdAtStr = formatInTimeZone(
-  createdAt,
-  "Asia/Tokyo",
-  "yyyy/MM/dd HH:mm",
-  { locale: ja }
+	createdAt,
+	"Asia/Tokyo",
+	"yyyy/MM/dd HH:mm",
+	{ locale: ja },
 );
 // updatedAtがある && 更新日と作成日が異なる場合は更新日を表示
 const showLastMod = updatedAt && !isSameDay(updatedAt, createdAt);
