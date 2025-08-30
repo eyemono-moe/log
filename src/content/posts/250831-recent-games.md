@@ -39,7 +39,7 @@ tags:
 
 <iframe src="https://store.steampowered.com/widget/2343610/" frameborder="0" width="646" height="190" style="width:100%;"></iframe>
 
-Steam版のリンクを貼りましたが自分はSwitch版をプレイしました。中国語版が話題になったときに認知はしていマしたが、[まさかさらっと配信開始されるとは思わなかった](https://www.youtube.com/live/QFiuI4l2KII?si=P68HBbhE-GCbRHSd&t=367)。
+Steam版のリンクを貼りましたが自分はSwitch版をプレイしました。中国語版が話題になったときに認知はしていましたが、[まさかさらっと配信開始されるとは思わなかった](https://www.youtube.com/live/QFiuI4l2KII?si=P68HBbhE-GCbRHSd&t=367)。
 
 ぶっ通しでプレイしちゃったけどぶっ通しでプレイするボリュームではなかった。このテーマでよくそんなにシーンを作れるなと感心する程にはボリュームもあって満足感高め。
 終盤の展開も個人的にはすき。
