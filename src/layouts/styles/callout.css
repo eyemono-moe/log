@@ -17,7 +17,7 @@
 		}
 
 		&::before {
-			@apply mt-1 block h-5 w-5 bg-current content-[""];
+			@apply mt-[calc((1lh-1.25rem)/2)] block h-5 w-5 bg-current content-[""];
 			mask-repeat: no-repeat;
 			mask-size: cover;
 
