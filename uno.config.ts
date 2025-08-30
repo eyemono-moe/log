@@ -6,6 +6,7 @@ import {
 	presetIcons,
 	presetTypography,
 	presetWebFonts,
+	transformerDirectives,
 	transformerVariantGroup,
 } from "unocss";
 
@@ -63,7 +64,7 @@ export default defineConfig({
 		presetTypography(),
 		presetWebFonts(),
 	],
-	transformers: [transformerVariantGroup()],
+	transformers: [transformerVariantGroup(), transformerDirectives()],
 	shortcuts: [
 		{
 			"bg-primary": "bg-white dark:bg-zinc-900",

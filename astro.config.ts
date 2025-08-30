@@ -1,6 +1,7 @@
 import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
 import solidJs from "@astrojs/solid-js";
+import remarkCallout from "@r4ai/remark-callout";
 import { defineConfig, envField } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import rehypeAutolinkHeadings, {
@@ -11,6 +12,7 @@ import rehypeExternalLinks, {
 } from "rehype-external-links";
 import rehypeRaw from "rehype-raw";
 import rehypeSlug from "rehype-slug";
+import emoji from "remark-emoji";
 // @ts-ignore
 import rlc from "remark-link-card";
 import UnoCSS from "unocss/astro";
@@ -50,7 +52,12 @@ export default defineConfig({
 		},
 	},
 	markdown: {
-		remarkPlugins: [remarkModifiedTime, [rlc, { cache: false }]],
+		remarkPlugins: [
+			emoji,
+			remarkCallout,
+			remarkModifiedTime,
+			[rlc, { cache: false }],
+		],
 		rehypePlugins: [
 			rehypeSlug,
 			[
