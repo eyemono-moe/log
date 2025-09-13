@@ -76,10 +76,10 @@ Mod開発/Javaの知識はゼロなので、間違っている可能性があり
      - `ModelLittleMaidBase`クラスを使った実装はLMM用に最適化されているモノっぽいので、基本的には`ModelMultiBase`を使う。`ModelMultiMMMBase`を使うのも様子見。
    - 各メソッドの実行タイミングなどは`ModelMultiBase`の実装を見る。
    - クラス名は`ModelLittleMaid_XXXX`または`ModelMulti_XXX`にする。
-   - `addBox`とか`addChild`は面倒なので多分[Blockbench](https://blockbench.net/)で書き出したコードを編集する?
+   - `addBox`とか`addChild`は面倒なので多分[Blockbench](https://blockbench.net/)とかで書き出したコードを編集するのが一般的?
      - Blockbenchで"Modded Entity"フォーマットでファイルを作成すると`.java`でクラスを書きだせるっぽい。
 2. そのクラスをコンパイルして`/LMMLResources`フォルダに入れる
 
 ## 実際にやってみる
 
-to be continued...
+Javaの環境構築めんどくせ～～～WSLでできる? to be continued...
