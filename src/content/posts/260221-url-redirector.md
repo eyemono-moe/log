@@ -3,6 +3,9 @@ title: 可変URLサービスを自作した
 draft: true
 category: tech
 createdAt: 2026-02-21T05:59:22.635Z
+tags:
+  - Web
+  - typescript
 ---
 
 先日FFの以下のようなツイートを見かけました。
