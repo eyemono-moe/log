@@ -48,25 +48,7 @@ tags:
   - **デプロイ**: Cloudflare Workers (wrangler)
   - **静的アセット配信**: Workers Static Assets
 
-```mermaid
-graph TB
-    Clerk["Clerk Auth (JWT verify)"]
-    subgraph "Cloudflare Workers"
-        subgraph "Hono Application"
-            PublicRoutes["Public Routes GET /r/:id → KV lookup → Redirect"]
-            AdminRoutes["Admin Routes /api/* (Clerk Auth)"]
-            StaticAssets["Workers Static Assets React SPA (/admin/*)"]
-        end
-        KV["KV Storage (Redirects)"]
-    end
-
-    PublicRoutes -->|read| KV
-    AdminRoutes -->|verify| Clerk
-    AdminRoutes -->|read/write| KV
-    User["User"] -->|GET /r/:id| PublicRoutes
-    Admin["Admin"] -->|/admin/*| StaticAssets
-    Admin -->|/api/*| AdminRoutes
-```
+![alt text](../../../public/media/260221-url-redirector/1771654177721-image.png)
 
 実装自体は非常にシンプルで、`/r/:id`でKVからリダイレクト先を取得して302リダイレクトしているだけです。管理用のAPI`/api/*`はClerk認証・認可を付けて、管理画面はWorkers Static AssetsでReact SPAを配信しています。
 
