@@ -61,6 +61,91 @@ def lorem_ipsum():
 
 ---
 
+### コールアウト
+
+> [!note] これはノートのcalloutです (デフォルト)
+> デフォルトのコールアウトタイプです。
+
+> [!info] これは情報のcalloutです
+> 役に立つ情報を提供します。
+
+> [!todo] これはToDoのcalloutです
+> やるべきことをリストアップします。
+
+> [!abstract] これは要約のcalloutです
+> 重要なポイントをまとめます。
+
+> [!summary] これはSummaryのcalloutです
+> abstract と同じスタイルです。
+
+> [!tldr] これはTL;DRのcalloutです
+> 長い文章の要約です。
+
+> [!tip] これはヒントのcalloutです
+> 役立つヒントを提供します。
+
+> [!hint] これはHintのcalloutです
+> tip と同じスタイルです。
+
+> [!important] これは重要のcalloutです
+> 重要な情報を強調します。
+
+> [!success] これは成功のcalloutです
+> 成功を祝います！
+
+> [!check] これはCheckのcalloutです
+> success と同じスタイルです。
+
+> [!done] これはDoneのcalloutです
+> 完了したタスクを示します。
+
+> [!question] これは質問のcalloutです
+> 質問を投げかけます。
+
+> [!help] これはHelpのcalloutです
+> question と同じスタイルです。
+
+> [!faq] これはFAQのcalloutです
+> よくある質問を示します。
+
+> [!warning] これは警告のcalloutです
+> 注意してください！
+
+> [!caution] これはCautionのcalloutです
+> warning と同じスタイルです。
+
+> [!attention] これはAttentionのcalloutです
+> 注意を引きます。
+
+> [!failure] これは失敗のcalloutです
+> 失敗を示します。
+
+> [!fail] これはFailのcalloutです
+> failure と同じスタイルです。
+
+> [!missing] これはMissingのcalloutです
+> 欠けているものを示します。
+
+> [!danger] これは危険のcalloutです
+> 危険な状況を警告します。
+
+> [!error] これはエラーのcalloutです
+> 何かがうまくいかなかったことを示します。
+
+> [!bug] これはバグのcalloutです
+> バグを報告します。
+
+> [!example] これは例のcalloutです
+> 具体例を示します。
+
+> [!quote] これは引用のcalloutです
+> 引用文を示します。
+
+> [!cite] これはCiteのcalloutです
+> 出典を明示します。
+
+---
+
 ### リンクと画像 (Links and Images)
 
 [Markdown Guide](https://www.markdownguide.org) を参照してください。  

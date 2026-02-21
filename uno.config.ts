@@ -70,7 +70,7 @@ export default defineConfig({
 			"bg-primary": "bg-white dark:bg-zinc-900",
 			"bg-secondary": "bg-zinc-50 dark:bg-zinc-8",
 			"text-link":
-				"text-blue-7 visited:text-blue-9 dark:text-blue-4 dark:visited:text-blue-3 underline",
+				"break-anywhere whitespace-pre-wrap text-blue-7 visited:text-blue-9 dark:text-blue-4 dark:visited:text-blue-3 underline",
 			"toc-link":
 				"line-clamp-3 decoration-none op-70 hover:op-100 transition-200 [transition-property:opacity_color]",
 			"toc-link-active": "dark:c-accent c-accent-7 op-100",

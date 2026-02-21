@@ -10,6 +10,7 @@ import rehypeAutolinkHeadings, {
 import rehypeExternalLinks, {
 	type Options as ExternalLinkOptions,
 } from "rehype-external-links";
+import rehypeMermaid from "rehype-mermaid";
 import rehypeRaw from "rehype-raw";
 import rehypeSlug from "rehype-slug";
 import emoji from "remark-emoji";
@@ -52,6 +53,10 @@ export default defineConfig({
 		},
 	},
 	markdown: {
+		syntaxHighlight: {
+			type: "shiki",
+			excludeLangs: ["mermaid"],
+		},
 		remarkPlugins: [
 			emoji,
 			remarkCallout,
@@ -107,6 +112,7 @@ export default defineConfig({
 					},
 				} satisfies ExternalLinkOptions,
 			],
+			rehypeMermaid,
 		],
 	},
 });
