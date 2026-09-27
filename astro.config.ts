@@ -17,6 +17,7 @@ import emoji from "remark-emoji";
 import rlc from "remark-link-card";
 import UnoCSS from "unocss/astro";
 import { mermaidCheck, rehypeMermaidPrerendered } from "./src/plugins/mermaid";
+import { rehypePublicPath } from "./src/plugins/rehype-public-path";
 import { remarkModifiedTime } from "./src/plugins/remark-modified-time";
 
 // https://astro.build/config
@@ -86,6 +87,7 @@ export default defineConfig({
 				} satisfies AutoLinkOptions,
 			],
 			rehypeRaw,
+			rehypePublicPath,
 			[
 				rehypeExternalLinks,
 				{
