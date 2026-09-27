@@ -112,7 +112,13 @@ export default defineConfig({
 					},
 				} satisfies ExternalLinkOptions,
 			],
-			rehypeMermaid,
+			[
+				rehypeMermaid,
+				{
+					strategy: "img-svg",
+					dark: true,
+				},
+			],
 		],
 	},
 });
