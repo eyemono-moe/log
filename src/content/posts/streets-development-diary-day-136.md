@@ -14,6 +14,8 @@ Streetsとは、私が開発している [Nostr](https://welcome.nostr-jp.org)�
 
 <https://streets.eyemono.moe>
 
+![](../../../public/media/streets-development-diary-day-136/streets.png)
+
 2024年の11月にNostrを知ってすぐ開発したクライアントですが、その後数か月で燃え尽きてしまい、約1年以上開発が停止していました。
 
 で、「改めて開発再開するか～」と今年の5月に意気込んで、開発日報を書き始めることにしました。
