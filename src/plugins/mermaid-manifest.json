@@ -1,0 +1,42 @@
+{
+	"04f6fa8d9619fcea": {
+		"light": {
+			"width": 1714,
+			"height": 409
+		},
+		"dark": {
+			"width": 1714,
+			"height": 409
+		}
+	},
+	"46737bb9faadff91": {
+		"light": {
+			"width": 1262,
+			"height": 703
+		},
+		"dark": {
+			"width": 1262,
+			"height": 703
+		}
+	},
+	"47a794d2c0734232": {
+		"light": {
+			"width": 359,
+			"height": 702
+		},
+		"dark": {
+			"width": 359,
+			"height": 702
+		}
+	},
+	"6046738609f2e8ff": {
+		"light": {
+			"width": 966,
+			"height": 675
+		},
+		"dark": {
+			"width": 966,
+			"height": 675
+		}
+	}
+}

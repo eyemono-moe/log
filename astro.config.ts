@@ -10,19 +10,20 @@ import rehypeAutolinkHeadings, {
 import rehypeExternalLinks, {
 	type Options as ExternalLinkOptions,
 } from "rehype-external-links";
-import rehypeMermaid from "rehype-mermaid";
 import rehypeRaw from "rehype-raw";
 import rehypeSlug from "rehype-slug";
 import emoji from "remark-emoji";
 // @ts-ignore
 import rlc from "remark-link-card";
 import UnoCSS from "unocss/astro";
+import { mermaidCheck, rehypeMermaidPrerendered } from "./src/plugins/mermaid";
 import { remarkModifiedTime } from "./src/plugins/remark-modified-time";
 
 // https://astro.build/config
 export default defineConfig({
 	site: "https://log.eyemono.moe",
 	integrations: [
+		mermaidCheck(),
 		UnoCSS({
 			injectReset: true,
 		}),
@@ -112,13 +113,7 @@ export default defineConfig({
 					},
 				} satisfies ExternalLinkOptions,
 			],
-			[
-				rehypeMermaid,
-				{
-					strategy: "img-svg",
-					dark: true,
-				},
-			],
+			rehypeMermaidPrerendered,
 		],
 	},
 });
