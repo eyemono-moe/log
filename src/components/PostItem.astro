@@ -5,7 +5,7 @@ import { ja } from "date-fns/locale";
 import { formatInTimeZone } from "date-fns-tz";
 import type { PostEntry } from "../content.config";
 import { categoryText } from "../utils/category";
-import { postImageUrl } from "../utils/ogImageUrl";
+import { postThumbnailUrl } from "../utils/ogImageUrl";
 
 type Props = { post: PostEntry };
 
@@ -32,7 +32,7 @@ const createdAtStr = formatInTimeZone(
 );
 // updatedAtがある && 更新日と作成日が異なる場合は更新日を表示
 const showLastMod = updatedAt && !isSameDay(updatedAt, createdAt);
-const imageUrl = postImageUrl(Astro.props.post, Astro.url.origin);
+const imageUrl = postThumbnailUrl(Astro.props.post, Astro.url.origin);
 ---
 
 <article class="group not-prose flex flex-col gap-2 relative h-fit isolate">

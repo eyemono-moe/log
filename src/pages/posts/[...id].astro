@@ -4,7 +4,7 @@ import { parseISO } from "date-fns";
 import PostLayout from "../../layouts/PostLayout.astro";
 import { extractText } from "../../utils/extractText";
 import { getPosts } from "../../utils/getPost";
-import { postImageUrl } from "../../utils/ogImageUrl";
+import { postOgImageUrl } from "../../utils/ogImageUrl";
 
 // @unocss-include: remark-link-cardをunocssでスタイリングするために書き込んでおく
 ("rlc-container rlc-info rlc-title rlc-description rlc-url-container rlc-favicon rlc-url rlc-image-container rlc-image");
@@ -39,10 +39,7 @@ if (remarkPluginFrontmatter.lastModified) {
   description={description}
   updatedAt={updatedAt}
   createdAt={entry.data.createdAt}
-  imageUrl={postImageUrl(
-    { id: entry.id, imageUrl: entry.data.imageUrl },
-    Astro.url.origin
-  )}
+  imageUrl={postOgImageUrl(entry.id, Astro.url.origin)}
   tags={entry.data.tags ?? []}
 >
   <Content />
